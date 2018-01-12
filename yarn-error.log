@@ -1,0 +1,59 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Sam\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+
+PATH: 
+  C:\Users\Sam\bin;C:\Users\Sam\AppData\Local\Programs\Git\mingw64\bin;C:\Users\Sam\AppData\Local\Programs\Git\usr\local\bin;C:\Users\Sam\AppData\Local\Programs\Git\usr\bin;C:\Users\Sam\AppData\Local\Programs\Git\usr\bin;C:\Users\Sam\AppData\Local\Programs\Git\mingw64\bin;C:\Users\Sam\AppData\Local\Programs\Git\usr\bin;C:\Users\Sam\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\nodejs;C:\Program Files\MongoDB\Server\3.6\bin;C:\Users\Sam\AppData\Local\Microsoft\WindowsApps;C:\Users\Sam\AppData\Local\Programs\Git\cmd;C:\Users\Sam\AppData\Roaming\npm;C:\Users\Sam\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\Sam\AppData\Local\Programs\Git\usr\bin\vendor_perl;C:\Users\Sam\AppData\Local\Programs\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  8.9.1
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "cashmoney",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "server": "node server.js",
+      "client": "node scripts/start-client.js",
+      "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+      "build": "node scripts/build.js",
+      "test": "echo \"Error: no test specified\" && exit 1",
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/samhkcho/cashMoney.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/samhkcho/cashMoney/issues"
+    },
+    "homepage": "https://github.com/samhkcho/cashMoney#readme",
+    "dependencies": {
+      "concurrently": "^3.5.1",
+      "express": "^4.16.2",
+      "nodemon": "^1.14.11"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  SyntaxError: C:\Users\Sam\apps\cashMoney\package.json: Unexpected token } in JSON at position 353
+      at JSON.parse (<anonymous>)
+      at C:\Users\Sam\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:770:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Sam\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:92:30)
+      at C:\Users\Sam\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:103:13
+      at <anonymous>
