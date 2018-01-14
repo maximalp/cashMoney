@@ -1,6 +1,29 @@
 import React from "react";
+import Input from '../Input';
 
 class Invoices extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      name: "",
+      number: "",
+      amount: ""
+    }
+  }
+
+  handleInputChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleOnClick = (event) => {
+    console.log(this.state);
+  }
+
   render () {
     return (
       <div>
@@ -20,6 +43,13 @@ class Invoices extends React.Component {
           semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
           bibendum turpis dui in sapien.
         </p>
+        <h2>Name</h2>
+        <Input type={"text"} name={"name"} onChange={this.handleInputChange}/>
+        <h2>Number</h2>
+        <Input type={"text"} name={"number"} onChange={this.handleInputChange}/>
+        <h2>Amount</h2>
+        <Input type={"text"} name={"amount"} onChange={this.handleInputChange}/>
+        <button onClick={this.handleOnClick}>Show State</button>
       </div>
     )
   }
