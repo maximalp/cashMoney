@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/test", function(req, res) {
+app.get("/about", function(req, res) {
   console.log("Hi there test")
   res.json("hello");
 })
