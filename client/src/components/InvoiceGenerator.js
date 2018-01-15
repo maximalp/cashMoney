@@ -56,10 +56,13 @@ class InvoiceGenerator extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="row">
+        <div className="col m12">
+          <h1>Invoice Form</h1>
+        </div>
         {/* Header Address */}
         {/* Inject: Hard Coded: US */}
-        <header className="address">
+        <header className="address col m6">
           <h5>Name</h5>
           <Input type={"text"} name={"name"} onChange={this.handleInputChange}/>
           <h5>Number</h5>
@@ -77,10 +80,9 @@ class InvoiceGenerator extends React.Component {
         </header>
 
         {/* Billing Section */}
-        <section>
+        <section className="col m6">
           {/* Billed to section */}
           {/* Inject: Need date, due date, invoice number  */}
-          <h5>Billed To:</h5>
           <h5>First name</h5>
           <Input type={"text"} name={"clientFirstName"} onChange={this.handleInputChange}/>
           <h5>Last Name</h5>
@@ -112,7 +114,7 @@ class InvoiceGenerator extends React.Component {
         </section>
         <hr />
         {/* <line item section */}
-        <section>
+        <section className="col m8">
           <h5>Description</h5>
           <Input type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
           <h5>Rate</h5>

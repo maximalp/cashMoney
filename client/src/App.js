@@ -26,11 +26,13 @@ class App extends Component {
               </div>
 
               {/* These create the HTTP routes  */}
+              <div className="col m12">
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/invoices" component={Invoices} />
               <Route exact path="/clients" component={Clients} />
               <Route path="/expenses" component={Expenses} />
               <Route path="/expenses/learn" component={Contact} />
+              </div>
             </div>
           </Router>
         </div>
