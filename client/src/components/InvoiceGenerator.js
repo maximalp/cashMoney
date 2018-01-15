@@ -42,7 +42,8 @@ class InvoiceGenerator extends React.Component {
     let query = '/make';
     API.get(query)
     .then(res => {
-      this.setState({holder:res.data})
+      let newEntry = res.data;
+      this.setState({holder:newEntry})
     })
     .catch(err => console.log(err));
   }
