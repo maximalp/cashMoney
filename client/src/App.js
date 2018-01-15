@@ -14,27 +14,34 @@ class App extends Component {
   render() {
     return (
       // React leftovers
-      <div className="App">
+      <div className="App container">
 
         {/* Router */}
         <Router>
-          <div>
-            {/* These create physical listings */}
+        <div className="row">
+          <br></br>
+          {/* These create physical listings */}
+          <div className="col-md-12">
             <Navpills />
-
-            {/* These create the HTTP routes  */}
-            <Route exact path="/" component={Dashboard} />
-            <Route exact path="/invoices" component={Invoices} />
-            <Route exact path="/clients" component={Clients} />
-            <Route path="/expenses" component={Expenses} />
-            <Route path="/expenses/learn" component={Contact} />
           </div>
+
+          {/* These create the HTTP routes  */}
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/invoices" component={Invoices} />
+          <Route exact path="/clients" component={Clients} />
+          <Route path="/expenses" component={Expenses} />
+          <Route path="/expenses/learn" component={Contact} />
+        </div>
         </Router>
 
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button />
+        <div className="row">
+          <div className="col-md-12">
+            <p className="App-intro">
+              To get started, edit <code>src/App.js</code> and save to reload.
+            </p>
+            <Button />
+          </div>
+        </div>
       </div>
     );
   }
