@@ -1,5 +1,5 @@
 import React from "react";
-import Input from '../Input';
+import InvoiceGenerator from '../InvoiceGenerator';
 
 class Invoices extends React.Component {
   constructor (props) {
@@ -8,7 +8,23 @@ class Invoices extends React.Component {
     this.state = {
       name: "",
       number: "",
-      amount: ""
+      street: "",
+      city: "",
+      USstate: "",
+      zip:"",
+      country:"United States",
+      clientFirstName:"",
+      clientLastName:"",
+      clientCompanyName:"",
+      clientStreetAddress:"",
+      clientCity:"",
+      clientState:"",
+      clientZip:"",
+      amountDue:"",
+      lineDescription:"",
+      lineRate:"",
+      lineQty:"",
+      lineTotal:""
     }
   }
 
@@ -43,12 +59,7 @@ class Invoices extends React.Component {
           semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
           bibendum turpis dui in sapien.
         </p>
-        <h2>Name</h2>
-        <Input type={"text"} name={"name"} onChange={this.handleInputChange}/>
-        <h2>Number</h2>
-        <Input type={"text"} name={"number"} onChange={this.handleInputChange}/>
-        <h2>Amount</h2>
-        <Input type={"text"} name={"amount"} onChange={this.handleInputChange}/>
+        <InvoiceGenerator onChange={this.handleInputChange}/>
         <button onClick={this.handleOnClick}>Show State</button>
       </div>
     )
