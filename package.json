@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/samhkcho/cashMoney#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
+    "mongoose": "^4.13.9",
     "nodemon": "^1.14.11"
   }
 }

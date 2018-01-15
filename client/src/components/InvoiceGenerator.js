@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from './Input';
+import API from './utils/API';
 
 class InvoiceGenerator extends React.Component {
   constructor (props) {
@@ -24,7 +25,8 @@ class InvoiceGenerator extends React.Component {
       lineDescription:"",
       lineRate:"",
       lineQty:"",
-      lineTotal:""
+      lineTotal:"",
+      holder:{}
     }
   }
 
@@ -37,8 +39,19 @@ class InvoiceGenerator extends React.Component {
   }
 
   handleOnClick = (event) => {
+    let query = '/make';
+    API.get(query)
+    .then(res => {
+      this.setState({holder:res.data})
+    })
+    .catch(err => console.log(err));
+  }
+
+  showState = (event) => {
     console.log(this.state);
   }
+
+
 
   render() {
     return (
@@ -108,7 +121,8 @@ class InvoiceGenerator extends React.Component {
           <h5>Total</h5>
           <Input type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
         </section>
-        <button onClick={this.handleOnClick}>Show State</button>
+        <button onClick={this.handleOnClick}>Add Invoice</button>
+        <button onClick={this.showState}>Show State</button>
       </div>
     )
   }
