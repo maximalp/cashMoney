@@ -59,8 +59,7 @@ class Invoices extends React.Component {
           semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
           bibendum turpis dui in sapien.
         </p>
-        <InvoiceGenerator onChange={this.handleInputChange}/>
-        <button onClick={this.handleOnClick}>Show State</button>
+        <InvoiceGenerator/>
       </div>
     )
   }
