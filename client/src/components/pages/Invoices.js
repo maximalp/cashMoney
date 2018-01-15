@@ -2,6 +2,7 @@ import React from "react";
 import InvoiceGenerator from '../InvoiceGenerator';
 import InvoiceCardListFeature from '../InvoiceCardListFeature';
 import API from '../utils/API';
+import InvoiceModal from '../InvoiceModal';
 
 class Invoices extends React.Component {
   constructor (props) {
@@ -66,6 +67,8 @@ class Invoices extends React.Component {
   render () {
     return (
       <div className="row">
+        <InvoiceModal>
+        </InvoiceModal>
         <div className="col m12">
           <div className="row">
             <div className="col m12">
@@ -90,7 +93,6 @@ class Invoices extends React.Component {
             semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
             bibendum turpis dui in sapien.
           </p>
-          <InvoiceGenerator/>
         </div>
       </div>
     )

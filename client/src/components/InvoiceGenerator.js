@@ -56,7 +56,7 @@ class InvoiceGenerator extends React.Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row card">
         <div className="col m12">
           <h1>Invoice Form</h1>
         </div>

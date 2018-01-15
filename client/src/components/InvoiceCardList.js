@@ -3,17 +3,17 @@ import React from 'react';
 const InvoiceCardList = (props) => {
   let invoices = props.invoice.map((invoice) => {
     return (
-      <li className="col m3">
+      <li className="col m12">
         <div className="card">
           <h2>{invoice.field1}</h2>
-        </div>    
+        </div>
       </li>
     )
   })
   return(
-    <uo className="row">
+    <ul className="row">
       {invoices}
-    </uo>
+    </ul>
   )
 }
 
