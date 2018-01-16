@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const autoIncrement = require('mongoose-auto-increment-fix');
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,17 +32,20 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("good to go");
 });
+autoIncrement.initialize(db);
 
 // End of Boilerplate =========================================================
 
 // Models
 const Invoice = require("./models/invoice");
+const Express = require("./models/expense");
 
 
 
 
 // Routes => Controller
 require('./routes/InvoiceAPI.js')(app);
+require('./routes/ExpenseAPI.js')(app);
 
 
 

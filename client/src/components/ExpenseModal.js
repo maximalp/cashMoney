@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import InvoiceGenerator from './InvoiceGenerator';
+import ExpenseGenerator from './ExpenseGenerator';
 
-class InvoiceModal extends React.Component {
+class ExpenseModal extends React.Component {
   constructor () {
     super();
     this.state = {
@@ -24,18 +24,18 @@ class InvoiceModal extends React.Component {
   render () {
     return (
       <div className="row">
-        <button className="col m4" onClick={this.handleOpenModal}>Trigger Modal</button>
+        <button className="col m4" onClick={this.handleOpenModal}>Add and Expense Report</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
            onRequestClose={this.handleCloseModal}
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
-             <button onClick={this.handleCloseModal}>Close Modal</button>
-             <h1>Create Invoice:</h1>
+             <button onClick={this.handleCloseModal}>Close</button>
+             <h1>Create Expense Report:</h1>
              <div className="row">
-               <div className="col m8 offset-m2">
-                 <InvoiceGenerator/>
+               <div className="col m10 offset-m1">
+                 <ExpenseGenerator/>
                </div>
 
              </div>
@@ -47,7 +47,7 @@ class InvoiceModal extends React.Component {
   }
 }
 
-export default InvoiceModal;
+export default ExpenseModal;
 
 const props = {};
 //

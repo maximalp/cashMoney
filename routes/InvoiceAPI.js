@@ -12,9 +12,24 @@ module.exports = function(app) {
 
   app.get("/make", function(req,res) {
     var data = {
-      title: "razer",
-      author:"razerauthor",
-      synopsis: "hi there"
+      name:"Sam",
+      phoneNumber:"1234",
+      street:"4410 hillyer st",
+      city:"fairfax",
+      USstate:"va",
+      zip:"22032",
+      clientFirstName: "Samuel",
+      clientLastName: "Cho",
+      clientCompanyName: "cashmoney",
+      clientStreetAddress: "950 n glebe rd",
+      clientCity: "arlington",
+      clientState: "va",
+      clientZip: "22032",
+      amountDue: "1000",
+      lineDescription: "food",
+      lineRate: "100",
+      lineQty: "10",
+      lineTotal: "1000"
     };
 
     Invoices.create(data)

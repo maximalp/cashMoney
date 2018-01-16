@@ -2,28 +2,29 @@ import React from 'react';
 import Input from './Input';
 import API from './utils/API';
 
-class InvoiceGenerator extends React.Component {
+class ExpenseGenerator extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
       name:"",
-      phoneNumber: "",
+      number: "",
       street: "",
       city: "",
       USstate: "",
       zip:"",
       country:"",
       clientFirstName:"",
-      clientLastName:"",
+      clientLastName:" ",
       clientCompanyName:"",
       clientStreetAddress:"",
       clientCity:"",
       clientState:"",
       clientZip:"",
       amountDue:"",
+      lineVendor:"",
       lineDescription:"",
-      lineRate:"",
+      lineItem:"",
       lineQty:"",
       lineTotal:"",
       holder:{}
@@ -36,7 +37,7 @@ class InvoiceGenerator extends React.Component {
     street: "Street",
     city: "City",
     USstate: "State",
-    zip:"zip-code",
+    zip:"Zip-Code",
     country:"United States",
     clientFirstName:"Client First Name",
     clientLastName:"Client Last Name",
@@ -46,8 +47,9 @@ class InvoiceGenerator extends React.Component {
     clientState:"Client State",
     clientZip:"Client Zip",
     amountDue:"Amount Due",
+    lineVendor:"Venor Name",
     lineDescription:"Line Description",
-    lineRate:"Rate",
+    lineItem:"Items",
     lineQty:"Quantity",
     lineTotal:"Total",
     holder:{}
@@ -86,7 +88,7 @@ class InvoiceGenerator extends React.Component {
           <div className="col m12">
             <div className="row">
               <div className="col m3">
-                <Input value={this.state.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
+                <Input value={this.props.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
@@ -111,7 +113,7 @@ class InvoiceGenerator extends React.Component {
                 <input readOnly={"United States"} type={"text"} value={"United States"} />
               </div>
               <div className="col m3">
-                <Input value={this.state.phoneNumber} placeholder={this.props.phoneNumber} type={"text"} name={"phoneNumber"} onChange={this.handleInputChange}/>
+                <Input value={this.state.number} placeholder={this.props.number} type={"text"} name={"number"} onChange={this.handleInputChange}/>
               </div>
             </div>
           </div>
@@ -160,19 +162,19 @@ class InvoiceGenerator extends React.Component {
             <div className="row">
               <div className="col m12">
                 <h5>Date of Issue:</h5>
-                <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, invoice number  */}
+                <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, expense number  */}
               </div>
             </div>
             <div className="row">
               <div className="col m12">
                 <h5>Due Date:</h5>
-                <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, invoice number  */}
+                <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, expense number  */}
               </div>
             </div>
             <div className="row">
               <div className="col m12">
                 <h5></h5>
-                <h5>Insert here the invoice number:001</h5> {/* Inject: Need date, due date, invoice number  */}
+                <h5>Insert here the expense number:001</h5> {/* Inject: Need date, due date, expense number  */}
               </div>
             </div>
             <div className="row">
@@ -184,7 +186,7 @@ class InvoiceGenerator extends React.Component {
           </section>
 
             {/* Billed to section */}
-            {/* Inject: Need date, due date, invoice number  */}
+            {/* Inject: Need date, due date, expense number  */}
 
 
 
@@ -193,13 +195,19 @@ class InvoiceGenerator extends React.Component {
 
         <div style={{background:'#ffebee'}} className="row card">
           <section className="col m8">
+            <h5>Vendor</h5>
             <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineRate} value={this.state.lineRate} type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineQty} value={this.state.lineQty}type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineTotal} value={this.state.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
+            <h5>Description</h5>
+            <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
+            <h5>Itemized List</h5>
+            <Input placeholder={this.props.lineItem} value={this.state.lineItem} type={"text"} name={"lineItem"} onChange={this.handleInputChange}/>
+            <h5>Qty</h5>
+            <Input placeholder={this.props.lineQty} type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
+            <h5>Total</h5>
+            <Input placeholder={this.props.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
           </section>
           <div className="col m12">
-            <button onClick={this.handleOnClick}>Add Invoice</button>
+            <button onClick={this.handleOnClick}>Add Expense</button>
             <button onClick={this.showState}>Show State</button>
           </div>
         </div>
@@ -209,4 +217,4 @@ class InvoiceGenerator extends React.Component {
 
 }
 
-export default InvoiceGenerator;
+export default ExpenseGenerator;
