@@ -7,15 +7,15 @@ class InvoiceGenerator extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
+      name:"",
       number: "",
       street: "",
       city: "",
       USstate: "",
       zip:"",
-      country:"United States",
+      country:"",
       clientFirstName:"",
-      clientLastName:"",
+      clientLastName:" ",
       clientCompanyName:"",
       clientStreetAddress:"",
       clientCity:"",
@@ -28,6 +28,29 @@ class InvoiceGenerator extends React.Component {
       lineTotal:"",
       holder:{}
     }
+  }
+
+  static defaultProps = {
+    name:"Company Name",
+    number: "Number",
+    street: "Street",
+    city: "City",
+    USstate: "State",
+    zip:"zip-code",
+    country:"United States",
+    clientFirstName:"Client First Name",
+    clientLastName:"Client Last Name",
+    clientCompanyName:"Client Company Name",
+    clientStreetAddress:"Client Street Address",
+    clientCity:"Client City",
+    clientState:"Client State",
+    clientZip:"Client Zip",
+    amountDue:"Amount Due",
+    lineDescription:"Line Description",
+    lineRate:"Rate",
+    lineQty:"Quantity",
+    lineTotal:"Total",
+    holder:{}
   }
 
   handleInputChange = (event) => {
@@ -56,76 +79,134 @@ class InvoiceGenerator extends React.Component {
 
   render() {
     return (
-      <div className="row card">
-        <div className="col m12">
-          <h1>Invoice Form</h1>
+      <div>
+          {/* Header Address */}
+          {/* Inject: Hard Coded: US */}
+        <div style={{background:'#dcedc8'}} className="row card">
+          <div className="col m12">
+            <div className="row">
+              <div className="col m3">
+                <Input placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m3">
+                <Input placeholder={this.props.street} type={"text"} name={"street"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m3">
+                <Input placeholder={this.props.city} type={"text"} name={"city"} onChange={this.handleInputChange}/>
+              </div>
+              <div className="col m3">
+                <Input placeholder={this.props.USstate} type={"text"} name={"USstate"} onChange={this.handleInputChange}/>
+              </div>
+              <div className="col m3">
+                <Input placeholder={this.props.zip} type={"text"} name={"zip"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m3">
+                <label>United States</label> {/* Inject: Hard Coded: US */}
+                <input readOnly={"United States"} type={"text"} value={"United States"} />
+              </div>
+              <div className="col m3">
+                <Input placeholder={this.props.number} type={"text"} name={"number"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* Header Address */}
-        {/* Inject: Hard Coded: US */}
-        <header className="address col m6">
-          <h5>Name</h5>
-          <Input type={"text"} name={"name"} onChange={this.handleInputChange}/>
-          <h5>Number</h5>
-          <Input type={"text"} name={"number"} onChange={this.handleInputChange}/>
-          <h5>Street</h5>
-          <Input type={"text"} name={"street"} onChange={this.handleInputChange}/>
-          <h5>City</h5>
-          <Input type={"text"} name={"city"} onChange={this.handleInputChange}/>
-          <h5>State</h5>
-          <Input type={"text"} name={"USstate"} onChange={this.handleInputChange}/>
-          <h5>Zip Code</h5>
-          <Input type={"text"} name={"zip"} onChange={this.handleInputChange}/>
-          <h5>United States</h5> {/* Inject: Hard Coded: US */}
-          <input readOnly={"United States"}type={"text"} value={"United States"} />
-        </header>
 
-        {/* Billing Section */}
-        <section className="col m6">
-          {/* Billed to section */}
-          {/* Inject: Need date, due date, invoice number  */}
-          <h5>First name</h5>
-          <Input type={"text"} name={"clientFirstName"} onChange={this.handleInputChange}/>
-          <h5>Last Name</h5>
-          <Input type={"text"} name={"clientLastName"} onChange={this.handleInputChange}/>
-          <h5>Company name</h5>
-          <Input type={"text"} name={"clientCompanyName"} onChange={this.handleInputChange}/>
-          <h5>Street address</h5>
-          <Input type={"text"} name={"clientStreetAddress"} onChange={this.handleInputChange}/>
-          <h5>City</h5>
-          <Input type={"text"} name={"clientCity"} onChange={this.handleInputChange}/>
-          <h5>State</h5>
-          <Input type={"text"} name={"clientState"} onChange={this.handleInputChange}/>
-          <h5>Zip code</h5>
-          <Input type={"text"} name={"clientZip"} onChange={this.handleInputChange}/>
-          <h5>United States</h5>
-          <input readOnly={"United States"}type={"text"} value={"United States"} />
+        <div style={{background:'#e1f5fe'}} className="row card">
+          {/* Billing Section */}
+          <section className="col m8">
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientState} type={"text"} name={"clientState"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input placeholder={this.props.clientZip} type={"text"} name={"clientZip"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <input readOnly={"United States"}type={"text"} value={"United States"} />
+              </div>
+            </div>
+          </section>
+          <section className="col m4">
+            <div className="row">
+              <div className="col m12">
+                <h5>Date of Issue:</h5>
+                <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, invoice number  */}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <h5>Due Date:</h5>
+                <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, invoice number  */}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <h5></h5>
+                <h5>Insert here the invoice number:001</h5> {/* Inject: Need date, due date, invoice number  */}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <h5>Amount Due</h5>
+                <h2><Input placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
+              </div>
+            </div>
+          </section>
 
-          <h5>Date of Issue:</h5>
-          <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, invoice number  */}
+            {/* Billed to section */}
+            {/* Inject: Need date, due date, invoice number  */}
 
-          <h5>Due Date:</h5>
-          <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, invoice number  */}
 
-          <h5></h5>
-          <h5>Insert here the invoice number:001</h5> {/* Inject: Need date, due date, invoice number  */}
 
-          <h5>Amount Due</h5>
-          <h2><Input type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
-        </section>
-        <hr />
-        {/* <line item section */}
-        <section className="col m8">
-          <h5>Description</h5>
-          <Input type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-          <h5>Rate</h5>
-          <Input type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
-          <h5>Qty</h5>
-          <Input type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-          <h5>Total</h5>
-          <Input type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
-        </section>
-        <button onClick={this.handleOnClick}>Add Invoice</button>
-        <button onClick={this.showState}>Show State</button>
+        </div>
+          {/* <line item section */}
+
+        <div style={{background:'#ffebee'}} className="row card">
+          <section className="col m8">
+            <h5>Description</h5>
+            <Input type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
+            <h5>Rate</h5>
+            <Input type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
+            <h5>Qty</h5>
+            <Input type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
+            <h5>Total</h5>
+            <Input type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
+          </section>
+          <div className="col m12">
+            <button onClick={this.handleOnClick}>Add Invoice</button>
+            <button onClick={this.showState}>Show State</button>
+          </div>
+        </div>
       </div>
     )
   }

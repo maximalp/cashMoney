@@ -67,8 +67,10 @@ class Invoices extends React.Component {
   render () {
     return (
       <div className="row">
-        <InvoiceModal>
-        </InvoiceModal>
+        <div className="col m12">
+          <InvoiceModal>
+          </InvoiceModal>
+        </div>
         <div className="col m12">
           <div className="row">
             <div className="col m12">

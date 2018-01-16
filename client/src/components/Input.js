@@ -4,7 +4,7 @@ const Input = props => {
     return (
       <form>
         <label>
-          <input onChange={props.onChange} type={props.type} name={props.name}/>
+          <input placeholder={props.placeholder} onChange={props.onChange} type={props.type} name={props.name}/>
         </label>
       </form>
     )

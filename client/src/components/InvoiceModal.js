@@ -23,17 +23,24 @@ class InvoiceModal extends React.Component {
 
   render () {
     return (
-      <div>
-        <button onClick={this.handleOpenModal}>Trigger Modal</button>
+      <div className="row">
+        <button className="col m4" onClick={this.handleOpenModal}>Trigger Modal</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
            onRequestClose={this.handleCloseModal}
-           shouldCloseOnOverlayClick={false}
-        >
-          <p>Modal text!</p>
-          <button onClick={this.handleCloseModal}>Close Modal</button>
-          <InvoiceGenerator/>
+           shouldCloseOnOverlayClick={false} >
+           <div className="col m12">
+             <button onClick={this.handleCloseModal}>Close Modal</button>
+             <h1>Create Invoice:</h1>
+             <div className="row">
+               <div className="col m10 offset-m1">
+                 <InvoiceGenerator/>
+               </div>
+
+             </div>
+
+           </div>
         </ReactModal>
       </div>
     );
