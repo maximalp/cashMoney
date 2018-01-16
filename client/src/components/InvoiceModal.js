@@ -34,7 +34,7 @@ class InvoiceModal extends React.Component {
              <button onClick={this.handleCloseModal}>Close Modal</button>
              <h1>Create Invoice:</h1>
              <div className="row">
-               <div className="col m10 offset-m1">
+               <div className="col m8 offset-m2">
                  <InvoiceGenerator/>
                </div>
 

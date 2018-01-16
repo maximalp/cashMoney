@@ -25,6 +25,7 @@
     "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "mongoose": "^4.13.9",
+    "mongoose-auto-increment-fix": "^5.0.2",
     "nodemon": "^1.14.11"
   }
 }

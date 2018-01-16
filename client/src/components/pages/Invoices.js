@@ -10,7 +10,7 @@ class Invoices extends React.Component {
 
     this.state = {
       name: "",
-      number: "",
+      phoneNumber: "",
       street: "",
       city: "",
       USstate: "",
@@ -75,7 +75,7 @@ class Invoices extends React.Component {
           <div className="row">
             <div className="col m12">
               <h1>Invoices</h1>
-              <button onClick={this.handleOnClickCreate}>Pull from database</button>
+              <button onClick={this.handleOnClickCreate}>Create dummy invoice</button>
             </div>
           </div>
           <h1>Favorited Invoice</h1>

@@ -8,14 +8,14 @@ class InvoiceGenerator extends React.Component {
 
     this.state = {
       name:"",
-      number: "",
+      phoneNumber: "",
       street: "",
       city: "",
       USstate: "",
       zip:"",
       country:"",
       clientFirstName:"",
-      clientLastName:" ",
+      clientLastName:"",
       clientCompanyName:"",
       clientStreetAddress:"",
       clientCity:"",
@@ -86,7 +86,7 @@ class InvoiceGenerator extends React.Component {
           <div className="col m12">
             <div className="row">
               <div className="col m3">
-                <Input value={this.props.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
+                <Input value={this.state.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
@@ -111,7 +111,7 @@ class InvoiceGenerator extends React.Component {
                 <input readOnly={"United States"} type={"text"} value={"United States"} />
               </div>
               <div className="col m3">
-                <Input value={this.state.number} placeholder={this.props.number} type={"text"} name={"number"} onChange={this.handleInputChange}/>
+                <Input value={this.state.phoneNumber} placeholder={this.props.phoneNumber} type={"text"} name={"phoneNumber"} onChange={this.handleInputChange}/>
               </div>
             </div>
           </div>
@@ -193,14 +193,10 @@ class InvoiceGenerator extends React.Component {
 
         <div style={{background:'#ffebee'}} className="row card">
           <section className="col m8">
-            <h5>Description</h5>
             <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-            <h5>Rate</h5>
             <Input placeholder={this.props.lineRate} value={this.state.lineRate} type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
-            <h5>Qty</h5>
-            <Input placeholder={this.props.lineQty} type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-            <h5>Total</h5>
-            <Input placeholder={this.props.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
+            <Input placeholder={this.props.lineQty} value={this.state.lineQty}type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
+            <Input placeholder={this.props.lineTotal} value={this.state.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
           </section>
           <div className="col m12">
             <button onClick={this.handleOnClick}>Add Invoice</button>
