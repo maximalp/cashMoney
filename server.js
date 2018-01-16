@@ -38,7 +38,7 @@ autoIncrement.initialize(db);
 
 // Models
 const Invoice = require("./models/invoice");
-const Express = require("./models/express");
+const Express = require("./models/expense");
 
 
 
