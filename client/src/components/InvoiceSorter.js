@@ -5,25 +5,25 @@ const InvoiceSorter = (props) => {
     <div className="row">
       <div className="col m3">
         <br/>
-        <button name="clientSwitch" onClick={props.switches}>
+        <button name="clientCompanyNameOrinvoiceId" onClick={props.switches}>
           Client / Invoice Number
         </button>
       </div>
       <div className="col m3">
         <br/>
-        <button name="issuedDateSwitch" onClick={props.switches}>
+        <button name="issuedDateDesc" onClick={props.switches}>
           Issued Date
         </button>
       </div>
       <div className="col m3">
         <br/>
-        <button name="dueDateSwitch" onClick={props.switches}>
+        <button name="dueDateDesc" onClick={props.switches}>
           Due Date
         </button>
       </div>
       <div className="col m3">
         <br/>
-        <button name="amountSwitch" onClick={props.switches}>
+        <button name="AmountOrStatus" onClick={props.switches}>
           Amount / Status
         </button>
       </div>

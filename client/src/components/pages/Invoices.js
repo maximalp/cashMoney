@@ -70,7 +70,7 @@ class Invoices extends React.Component {
 
   handleOnClickSearchSwitches = (event) => {
     let filterSwitch = event.target.name;
-    let query = `/api/filter/${filterSwitch}`
+    let query = `/api/invoice/filter/${filterSwitch}`
 
     // switch(filterSwitch) {
     //   case "clientCompanyNameOrinvoiceId":

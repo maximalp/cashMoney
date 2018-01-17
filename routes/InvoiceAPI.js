@@ -10,6 +10,13 @@ module.exports = function(app) {
       dueDateDesc: true,
       AmountOrStatus: true
     }
+
+  const searchFields = {
+      clientCompanyNameOrinvoiceId:'invoiceId',
+      issuedDateDesc:'dateOfIssue',
+      dueDateDesc: 'dueDate',
+      AmountOrStatus: 'lineTotal'
+    }
     //
     // const s = {
     //     clientCompanyNameOrinvoiceId: {switch:true, field:'invoiceId'},
@@ -18,7 +25,7 @@ module.exports = function(app) {
     //     AmountOrStatus: {switch:true, field: 'lineTotal'}
     //   }
 
-  //Initial Pull for Invoices
+  //Initial Pull for Invoices----------------------------------
   app.get("/api/pullInvoices", function(req, res) {
       Invoices.find({})
       .sort({dateOfIssue:-1})
@@ -26,51 +33,54 @@ module.exports = function(app) {
       .catch(err => res.status(422).json(err));
   }),
 
-  // app.get("/api/filter/:command", function(req,res) {
-  //   let command = req.params.command;
-  //   console.log(command);
+  // Refactored Sort Function----------------------------------
+  app.get("/api/invoice/filter/:command", function(req,res) {
+    let command = req.params.command;
+
+    Invoices.find({})
+    .sort(searchSwitches[command] ? ({[searchFields[command]]:-1}) : ({[searchFields[command]]:1}))
+    .then(dbModel => {
+      res.json(dbModel)
+      searchSwitches[command] = !searchSwitches[command];
+    })
+    .catch(err => res.status(422).json(err))
+  }),
+  //
+  // // Sort functions----------------------------------
+  // app.get("/api/filter/clientSwitch", function(req, res) {
+  //   // (issuedDateDesc)
   //   Invoices.find({})
-  //   .sort((s['`${command}`']['switch']) ? ({[s.command.field]:-1}) : ({[s.command.field]:-1}))
+  //   .sort((searchSwitches.clientCompanyNameOrinvoiceId) ? {invoiceId:-1} : {invoiceId:1})
   //   .then(dbModel => res.json(dbModel))
-  //   .catch(err => res.status(422).json(err))
-  //   s.command = !s.command;
+  //   .catch(err => res.status(422).json(err));
+  //   searchSwitches.clientCompanyNameOrinvoiceId  = !searchSwitches.clientCompanyNameOrinvoiceId;
   // }),
   //
-  // Sort functions----------------------------------
-  app.get("/api/filter/clientSwitch", function(req, res) {
-    // (issuedDateDesc)
-    Invoices.find({})
-    .sort((searchSwitches.clientCompanyNameOrinvoiceId) ? {invoiceId:-1} : {invoiceId:1})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-    searchSwitches.clientCompanyNameOrinvoiceId  = !searchSwitches.clientCompanyNameOrinvoiceId;
-  }),
-
-  app.get("/api/filter/issuedDateSwitch", function(req, res) {
-    // (dueDateDesc)
-    Invoices.find({})
-    .sort((searchSwitches.issuedDateDesc) ? {dateOfIssue:-1} : {dateOfIssue:1})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-    searchSwitches.issuedDateDesc  = !searchSwitches.issuedDateDesc;
-  }),
-
-  app.get("/api/filter/dueDateSwitch", function(req, res) {
-    // (AmountOrStatus)
-    Invoices.find({})
-    .sort((searchSwitches.dueDateDesc) ? {dueDate:-1} : {dueDate:1})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-    searchSwitches.dueDateDesc  = !searchSwitches.dueDateDesc;
-  }),
-
-  app.get("/api/filter/amountSwitch", function(req, res) {
-    Invoices.find({})
-    .sort((searchSwitches.AmountOrStatus) ? {lineTotal:-1} : {lineTotal:1})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-    searchSwitches.AmountOrStatus  = !searchSwitches.AmountOrStatus;
-  }),
+  // app.get("/api/filter/issuedDateSwitch", function(req, res) {
+  //   // (dueDateDesc)
+  //   Invoices.find({})
+  //   .sort((searchSwitches.issuedDateDesc) ? {dateOfIssue:-1} : {dateOfIssue:1})
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err));
+  //   searchSwitches.issuedDateDesc  = !searchSwitches.issuedDateDesc;
+  // }),
+  //
+  // app.get("/api/filter/dueDateSwitch", function(req, res) {
+  //   // (AmountOrStatus)
+  //   Invoices.find({})
+  //   .sort((searchSwitches.dueDateDesc) ? {dueDate:-1} : {dueDate:1})
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err));
+  //   searchSwitches.dueDateDesc  = !searchSwitches.dueDateDesc;
+  // }),
+  //
+  // app.get("/api/filter/amountSwitch", function(req, res) {
+  //   Invoices.find({})
+  //   .sort((searchSwitches.AmountOrStatus) ? {lineTotal:-1} : {lineTotal:1})
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err));
+  //   searchSwitches.AmountOrStatus  = !searchSwitches.AmountOrStatus;
+  // }),
 
   // Create new invoice-------------------------------
   app.post('/api/invoices', function(req,res) {

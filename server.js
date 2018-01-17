@@ -38,8 +38,8 @@ autoIncrement.initialize(db);
 
 // Models
 const Invoice = require("./models/invoice");
-const Express = require("./models/expense");
-const Express = require("./models/dashboard");
+const Expense = require("./models/expense");
+const Dashboard = require("./models/dashboard");
 
 
 
@@ -54,13 +54,14 @@ require('./routes/DashboardAPI.js')(app);
 
 
 
-//Port Setup
+
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+//Port Setup
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
