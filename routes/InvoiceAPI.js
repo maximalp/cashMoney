@@ -3,6 +3,8 @@ var Invoices = require("../models/invoice");
 // Includes Routing and Controller for now...
 
 module.exports = function(app) {
+
+  //Get all invoices
   app.get("/about", function(req, res) {
     Invoices.find({})
     .then(dbModel => res.json(dbModel))
@@ -10,11 +12,19 @@ module.exports = function(app) {
     console.log("Hi there test")
   }),
 
+  // Create new invoice
   app.post('/api/invoices', function(req,res) {
     console.log(req.body);
-    // Invoices.create(req.body)
-    // .then(dbModel => res.json(dbModel))
-    // .catch(err => res.status(422).json(err));
+    const invoiceData = req.body;
+
+    Invoices.create(invoiceData)
+      .then(function(doc) {
+        console.log(doc);
+        res.json(doc);
+      })
+      .catch(function(err) {
+        console.log(err.message)
+      });
   }),
 
   app.get("/make", function(req,res) {

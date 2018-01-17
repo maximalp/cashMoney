@@ -13,7 +13,7 @@ class InvoiceGenerator extends React.Component {
       city: "",
       USstate: "",
       zip:"",
-      country:"",
+      country:"United States",
       clientFirstName:"",
       clientLastName:"",
       clientCompanyName:"",
@@ -70,7 +70,7 @@ class InvoiceGenerator extends React.Component {
       city: this.state.city,
       USstate: this.state.USstate,
       zip:this.state.zip,
-      country:this.state.country,
+      country:"United States",
       clientFirstName:this.state.clientFirstName,
       clientLastName:this.state.clientLastName,
       clientCompanyName:this.state.clientCompanyName,
@@ -85,10 +85,13 @@ class InvoiceGenerator extends React.Component {
       lineTotal:this.state.lineTotal,
     };
 
+    console.log(data);
+
     API.post(data)
     .then(res => {
       let newEntry = res.data;
       this.setState({holder:newEntry})
+      console.log(newEntry);
     })
     .catch(err => console.log(err));
   }
@@ -166,6 +169,11 @@ class InvoiceGenerator extends React.Component {
             <div className="row">
               <div className="col m12">
                 <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} onChange={this.handleInputChange}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12">
+                <Input value={this.state.clientCity} placeholder={this.props.clientCity} type={"text"} name={"clientCity"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
