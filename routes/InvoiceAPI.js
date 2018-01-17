@@ -4,15 +4,58 @@ var Invoices = require("../models/invoice");
 
 module.exports = function(app) {
 
-  //Get all invoices
-  app.get("/about", function(req, res) {
-    Invoices.find({})
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
-    console.log("Hi there test")
+  const searchSwitches = {
+      clientCompanyNameOrinvoiceId:true,
+      issuedDateDesc:true,
+      dueDateDesc: true,
+      AmountOrStatus: true
+    }
+
+  //Initial Pull for Invoices
+  app.get("/api/pullInvoices", function(req, res) {
+      Invoices.find({})
+      .sort({dateOfIssue:-1})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }),
 
-  // Create new invoice
+  // Sort functions----------------------------------
+  app.get("/api/clientSwitch", function(req, res) {
+    // (issuedDateDesc)
+    Invoices.find({})
+    .sort((searchSwitches.clientCompanyNameOrinvoiceId) ? {invoiceId:-1} : {invoiceId:1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    searchSwitches.clientCompanyNameOrinvoiceId  = !searchSwitches.clientCompanyNameOrinvoiceId;
+  }),
+
+  app.get("/api/issuedDateSwitch", function(req, res) {
+    // (dueDateDesc)
+    Invoices.find({})
+    .sort((searchSwitches.issuedDateDesc) ? {dateOfIssue:-1} : {dateOfIssue:1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    searchSwitches.issuedDateDesc  = !searchSwitches.issuedDateDesc;
+  }),
+
+  app.get("/api/dueDateSwitch", function(req, res) {
+    // (AmountOrStatus)
+    Invoices.find({})
+    .sort((searchSwitches.dueDateDesc) ? {dueDate:-1} : {dueDate:1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    searchSwitches.dueDateDesc  = !searchSwitches.dueDateDesc;
+  }),
+
+  app.get("/api/amountSwitch", function(req, res) {
+    Invoices.find({})
+    .sort((searchSwitches.AmountOrStatus) ? {lineTotal:-1} : {lineTotal:1})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+    searchSwitches.AmountOrStatus  = !searchSwitches.AmountOrStatus;
+  }),
+
+  // Create new invoice-------------------------------
   app.post('/api/invoices', function(req,res) {
     console.log(req.body);
     const invoiceData = req.body;

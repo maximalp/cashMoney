@@ -1,18 +1,16 @@
 import React from 'react';
+import InvoiceCard from './InvoiceCard';
 
 const InvoiceCardList = (props) => {
-  let invoices = props.invoice.map((invoice) => {
+  let invoices = props.invoices.map((invoice) => {
     return (
-      <li className="col m12">
-        <div className="card">
-          <h2>{invoice.field1}</h2>
-        </div>
-      </li>
+      <InvoiceCard invoices={invoice}/>
     )
   })
   return(
     <ul className="row">
       {invoices}
+      <h4>1-{invoices.length} of {invoices.length}</h4>
     </ul>
   )
 }

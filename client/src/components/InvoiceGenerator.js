@@ -21,7 +21,7 @@ class InvoiceGenerator extends React.Component {
       clientCity:"",
       clientState:"",
       clientZip:"",
-      amountDue:"",
+      clientCountry:"United States",
       lineDescription:"",
       lineRate:"",
       lineQty:"",
@@ -78,7 +78,6 @@ class InvoiceGenerator extends React.Component {
       clientCity:this.state.clientCity,
       clientState:this.state.clientState,
       clientZip:this.state.clientZip,
-      amountDue:this.state.amountDue,
       lineDescription:this.state.lineDescription,
       lineRate:this.state.lineRate,
       lineQty:this.state.lineQty,
@@ -209,7 +208,7 @@ class InvoiceGenerator extends React.Component {
             <div className="row">
               <div className="col m12">
                 <h5>Amount Due</h5>
-                <h2><Input value={this.state.amountDue} placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
+                <h2><Input value={this.state.lineTotal} type={"text"} name={"amountDue"}/></h2>
               </div>
             </div>
           </section>

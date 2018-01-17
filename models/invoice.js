@@ -18,12 +18,13 @@ const invoiceSchema = new Schema({
   clientCity: { type: String, required: true },
   clientState: { type: String, required: true },
   clientZip: { type: String, required: true },
-  amountDue: { type: String, required: true },
+  clientCountry : { type: String, required: true, default: "United States" },
+  dateOfIssue: { type: Date, default: Date.now },
+  dueDate: { type: Date, default: Date.now },
   lineDescription: { type: String, required: true },
   lineRate: { type: String, required: true },
   lineQty: { type: String, required: true },
-  lineTotal: { type: String, required: true },
-  date: { type: Date, default: Date.now }
+  lineTotal: { type: String, required: true }
 });
 
 // autoincrement plugin

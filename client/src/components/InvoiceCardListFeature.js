@@ -1,5 +1,6 @@
 import React from 'react';
 import InvoiceCardList from './InvoiceCardList';
+import InvoiceSorter from './InvoiceSorter';
 
 class InvoiceCardListFeature extends React.Component {
   constructor(props){
@@ -10,22 +11,18 @@ class InvoiceCardListFeature extends React.Component {
   }
 
   componentDidMount() {
-    let invoices = this.props.invoice;
-    this.setState({
-      invoices:invoices
-    })
   }
 
   render () {
     return (
       <div className="row" style={{background:'pink'}}>
         <div className="col m12">
-          <h1>InvoiceCardListFeature Component</h1>
-          <InvoiceCardList invoices={this.state.invoices}/>
+          <InvoiceSorter switches={this.props.switches}/>
+          <InvoiceCardList invoices={this.props.invoice}/>
         </div>
       </div>
     )
   }
 }
 
-export default InvoiceCardList;
+export default InvoiceCardListFeature;

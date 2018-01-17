@@ -38,8 +38,25 @@ class Invoices extends React.Component {
           {field1:"fish", field2:"swimkins"},
           {field1:"snake", field2:"snekskins"},
           {field1:"dragon", field2:"dragonkins"},
-        ]
+        ],
+      searchSwitches:{
+          clientCompanyNameOrinvoiceId:true,
+          issuedDateDesc:true,
+          dueDateDesc: true,
+          AmountOrStatus: true
+      }
     }
+  }
+
+  componentDidMount() {
+    let query = '/api/pullInvoices';
+    API.get(query)
+      .then(res => {
+        let invoices = res.data;
+        console.log(invoices);
+        this.setState({invoice:invoices})
+      })
+      .catch(err => console.log(err));
   }
 
   handleInputChange = (event) => {
@@ -48,6 +65,33 @@ class Invoices extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleOnClickSearchSwitches = (event) => {
+    let filterSwitch = event.target.name;
+    let query = `/api/${filterSwitch}`
+
+    // switch(filterSwitch) {
+    //   case "clientCompanyNameOrinvoiceId":
+    //     this.state.
+    //     break;
+    //   case "issuedDateDesc":
+    //     Coded
+    //     break;
+    //   case "dueDateDesc":
+    //     Coded
+    //     break;
+    //   case "AmountOrStatus":
+    //     Coded
+    //     break;
+    // }
+
+    API.get(query)
+      .then(res => {
+        console.log(res.data);
+        this.setState({invoice:res.data})
+      })
+      .catch(err => console.log(err));
   }
 
   handleOnClickCreate = (event) => {
@@ -60,7 +104,7 @@ class Invoices extends React.Component {
     .catch(err => console.log(err));
   }
 
-  handleOnClick = (event) => {
+  handleOnClickState = (event) => {
     console.log(this.state);
   }
 
@@ -75,26 +119,20 @@ class Invoices extends React.Component {
           <div className="row">
             <div className="col m12">
               <h1>Invoices</h1>
+              <button onClick={this.handleOnClickState}>Show State</button>
               <button onClick={this.handleOnClickCreate}>Create dummy invoice</button>
             </div>
           </div>
-          <h1>Favorited Invoice</h1>
-          <InvoiceCardListFeature invoice={this.state.invoice}/>
-          <p>
-            Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
-            Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu dictum.
-            Ut vel ante eget massa ornare placerat. Etiam nisl orci, finibus sodales
-            volutpat et, hendrerit ut dolor. Suspendisse porta dictum nunc, sed
-            pretium risus rutrum eget. Nam consequat, ligula in faucibus vestibulum,
-            nisi justo laoreet risus, luctus luctus mi lacus sit amet libero. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Mauris pretium condimentum tellus eget lobortis. Interdum et
-            malesuada fames ac ante ipsum primis in faucibus. Donec placerat accumsan
-            mi, ut congue neque placerat eu. Donec nec ipsum in velit pellentesque
-            vehicula sit amet at augue. Maecenas aliquam bibendum congue. Pellentesque
-            semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
-            bibendum turpis dui in sapien.
-          </p>
+          <div className="row">
+            <div className="col m3">
+              <h5>All Invoices</h5>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m12">
+              <InvoiceCardListFeature switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
+            </div>
+          </div>
         </div>
       </div>
     )

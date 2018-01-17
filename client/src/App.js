@@ -36,15 +36,6 @@ class App extends Component {
             </div>
           </Router>
         </div>
-
-        <div className="row">
-          <div className="col m12">
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-            <Button />
-          </div>
-        </div>
       </div>
     );
   }
