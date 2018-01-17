@@ -61,6 +61,7 @@ class InvoiceGenerator extends React.Component {
     });
   }
 
+  // Adds Invoice
   handleOnClick = (event) => {
     let query = '/make';
     API.get(query)
@@ -71,6 +72,7 @@ class InvoiceGenerator extends React.Component {
     .catch(err => console.log(err));
   }
 
+  // Shows state
   showState = (event) => {
     console.log(this.state);
   }
