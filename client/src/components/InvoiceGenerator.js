@@ -62,8 +62,29 @@ class InvoiceGenerator extends React.Component {
   }
 
   handleOnClick = (event) => {
-    let query = '/make';
-    API.get(query)
+    let data = {
+      name:this.state.name,
+      phoneNumber: this.state.phoneNumber,
+      street: this.state.street,
+      city: this.state.city,
+      USstate: this.state.USstate,
+      zip:this.state.zip,
+      country:this.state.country,
+      clientFirstName:this.state.clientFirstName,
+      clientLastName:this.state.clientLastName,
+      clientCompanyName:this.state.clientCompanyName,
+      clientStreetAddress:this.state.clientStreetAddress,
+      clientCity:this.state.clientCity,
+      clientState:this.state.clientState,
+      clientZip:this.state.clientZip,
+      amountDue:this.state.amountDue,
+      lineDescription:this.state.lineDescription,
+      lineRate:this.state.lineRate,
+      lineQty:this.state.lineQty,
+      lineTotal:this.state.lineTotal,
+    };
+
+    API.post(data)
     .then(res => {
       let newEntry = res.data;
       this.setState({holder:newEntry})
