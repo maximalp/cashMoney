@@ -8,7 +8,14 @@ module.exports = function(app) {
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
     console.log("Hi there test")
-  })
+  }),
+
+  app.post('/api/invoices', function(req,res) {
+    console.log(req.body);
+    // Invoices.create(req.body)
+    // .then(dbModel => res.json(dbModel))
+    // .catch(err => res.status(422).json(err));
+  }),
 
   app.get("/make", function(req,res) {
     var data = {
