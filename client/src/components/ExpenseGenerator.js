@@ -47,7 +47,7 @@ class ExpenseGenerator extends React.Component {
     clientState:"Client State",
     clientZip:"Client Zip",
     amountDue:"Amount Due",
-    lineVendor:"Venor Name",
+    lineVendor:"Vendor Name",
     lineDescription:"Line Description",
     lineItem:"Items",
     lineQty:"Quantity",
