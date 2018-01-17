@@ -10,6 +10,13 @@ module.exports = function(app) {
       dueDateDesc: true,
       AmountOrStatus: true
     }
+    //
+    // const s = {
+    //     clientCompanyNameOrinvoiceId: {switch:true, field:'invoiceId'},
+    //     issuedDateDesc:{switch:true, field: 'dateOfIssue'},
+    //     dueDateDesc: {switch:true, field: 'dueDate'},
+    //     AmountOrStatus: {switch:true, field: 'lineTotal'}
+    //   }
 
   //Initial Pull for Invoices
   app.get("/api/pullInvoices", function(req, res) {
@@ -19,8 +26,18 @@ module.exports = function(app) {
       .catch(err => res.status(422).json(err));
   }),
 
+  // app.get("/api/filter/:command", function(req,res) {
+  //   let command = req.params.command;
+  //   console.log(command);
+  //   Invoices.find({})
+  //   .sort((s['`${command}`']['switch']) ? ({[s.command.field]:-1}) : ({[s.command.field]:-1}))
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err))
+  //   s.command = !s.command;
+  // }),
+  //
   // Sort functions----------------------------------
-  app.get("/api/clientSwitch", function(req, res) {
+  app.get("/api/filter/clientSwitch", function(req, res) {
     // (issuedDateDesc)
     Invoices.find({})
     .sort((searchSwitches.clientCompanyNameOrinvoiceId) ? {invoiceId:-1} : {invoiceId:1})
@@ -29,7 +46,7 @@ module.exports = function(app) {
     searchSwitches.clientCompanyNameOrinvoiceId  = !searchSwitches.clientCompanyNameOrinvoiceId;
   }),
 
-  app.get("/api/issuedDateSwitch", function(req, res) {
+  app.get("/api/filter/issuedDateSwitch", function(req, res) {
     // (dueDateDesc)
     Invoices.find({})
     .sort((searchSwitches.issuedDateDesc) ? {dateOfIssue:-1} : {dateOfIssue:1})
@@ -38,7 +55,7 @@ module.exports = function(app) {
     searchSwitches.issuedDateDesc  = !searchSwitches.issuedDateDesc;
   }),
 
-  app.get("/api/dueDateSwitch", function(req, res) {
+  app.get("/api/filter/dueDateSwitch", function(req, res) {
     // (AmountOrStatus)
     Invoices.find({})
     .sort((searchSwitches.dueDateDesc) ? {dueDate:-1} : {dueDate:1})
@@ -47,7 +64,7 @@ module.exports = function(app) {
     searchSwitches.dueDateDesc  = !searchSwitches.dueDateDesc;
   }),
 
-  app.get("/api/amountSwitch", function(req, res) {
+  app.get("/api/filter/amountSwitch", function(req, res) {
     Invoices.find({})
     .sort((searchSwitches.AmountOrStatus) ? {lineTotal:-1} : {lineTotal:1})
     .then(dbModel => res.json(dbModel))
