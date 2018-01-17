@@ -4,31 +4,27 @@ var Invoices = require("../models/invoice");
 
 module.exports = function(app) {
 
+  // const filterCommands = {
+  //   searchSwitches: {
+  //       clientCompanyNameOrinvoiceId:true,
+  //       issuedDateDesc:true,
+  //       dueDateDesc: true,
+  //       AmountOrStatus: true
+  //     },
+  //   searchFields: {
+  //       clientCompanyNameOrinvoiceId:'invoiceId',
+  //       issuedDateDesc:'dateOfIssue',
+  //       dueDateDesc: 'dueDate',
+  //       AmountOrStatus: 'lineTotal'
+  //     }
+  // }
+
   const filterCommands = {
-    searchSwitches: {
-        clientCompanyNameOrinvoiceId:true,
-        issuedDateDesc:true,
-        dueDateDesc: true,
-        AmountOrStatus: true
-      },
-    searchFields: {
-        clientCompanyNameOrinvoiceId:'invoiceId',
-        issuedDateDesc:'dateOfIssue',
-        dueDateDesc: 'dueDate',
-        AmountOrStatus: 'lineTotal'
-      }
+        clientCompanyNameOrinvoiceId:{switch:true, field:'invoiceId'},
+        issuedDateDesc:{switch:true, field:'dateOfIssue'},
+        dueDateDesc: {switch:true, field:'dueDate'},
+        AmountOrStatus: {switch:true, field:'lineTotal'}
   }
-  //
-  // const searchSwitches =
-  //
-  // const searchFields =
-    //
-    // const s = {
-    //     clientCompanyNameOrinvoiceId: {switch:true, field:'invoiceId'},
-    //     issuedDateDesc:{switch:true, field: 'dateOfIssue'},
-    //     dueDateDesc: {switch:true, field: 'dueDate'},
-    //     AmountOrStatus: {switch:true, field: 'lineTotal'}
-    //   }
 
   //Initial Pull for Invoices----------------------------------
   app.get("/api/pullInvoices", function(req, res) {
@@ -40,13 +36,16 @@ module.exports = function(app) {
 
   // Refactored Sort Function----------------------------------
   app.get("/api/invoice/filter/:command", function(req,res) {
+    // grabs filtercommands from paramsid
     let command = req.params.command;
 
+    // Bracket notation to find
     Invoices.find({})
-    .sort(filterCommands['searchSwitches'][command] ? ({[filterCommands['searchFields'][command]]:-1}) : ({[filterCommands['searchFields'][command]]:1}))
+    .sort(filterCommands[command]['switch'] ? ({[filterCommands[command]['field']]:-1}) : ({[filterCommands[command]['field']]:1}))
     .then(dbModel => {
       res.json(dbModel)
-      filterCommands['searchSwitches'][command] = !filterCommands['searchSwitches'][command];
+      //Flips switch
+      filterCommands[command]['switch'] = !filterCommands[command]['switch'];
     })
     .catch(err => res.status(422).json(err))
   }),
