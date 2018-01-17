@@ -4,19 +4,24 @@ var Invoices = require("../models/invoice");
 
 module.exports = function(app) {
 
-  const searchSwitches = {
-      clientCompanyNameOrinvoiceId:true,
-      issuedDateDesc:true,
-      dueDateDesc: true,
-      AmountOrStatus: true
-    }
-
-  const searchFields = {
-      clientCompanyNameOrinvoiceId:'invoiceId',
-      issuedDateDesc:'dateOfIssue',
-      dueDateDesc: 'dueDate',
-      AmountOrStatus: 'lineTotal'
-    }
+  const filterCommands = {
+    searchSwitches: {
+        clientCompanyNameOrinvoiceId:true,
+        issuedDateDesc:true,
+        dueDateDesc: true,
+        AmountOrStatus: true
+      },
+    searchFields: {
+        clientCompanyNameOrinvoiceId:'invoiceId',
+        issuedDateDesc:'dateOfIssue',
+        dueDateDesc: 'dueDate',
+        AmountOrStatus: 'lineTotal'
+      }
+  }
+  //
+  // const searchSwitches =
+  //
+  // const searchFields =
     //
     // const s = {
     //     clientCompanyNameOrinvoiceId: {switch:true, field:'invoiceId'},
@@ -38,10 +43,10 @@ module.exports = function(app) {
     let command = req.params.command;
 
     Invoices.find({})
-    .sort(searchSwitches[command] ? ({[searchFields[command]]:-1}) : ({[searchFields[command]]:1}))
+    .sort(filterCommands['searchSwitches'][command] ? ({[filterCommands['searchFields'][command]]:-1}) : ({[filterCommands['searchFields'][command]]:1}))
     .then(dbModel => {
       res.json(dbModel)
-      searchSwitches[command] = !searchSwitches[command];
+      filterCommands['searchSwitches'][command] = !filterCommands['searchSwitches'][command];
     })
     .catch(err => res.status(422).json(err))
   }),
