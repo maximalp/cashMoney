@@ -1,8 +1,10 @@
 import React from "react";
 
 class Dashboard extends React.Component {
+
   render () {
     return (
+
       <div>
         <h1>Dashboard</h1>
         <p>
@@ -21,6 +23,11 @@ class Dashboard extends React.Component {
           bibendum turpis dui in sapien.
         </p>
       </div>
+
+
+
+
+
     )
   }
 }
