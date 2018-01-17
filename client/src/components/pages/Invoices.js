@@ -3,6 +3,7 @@ import InvoiceGenerator from '../InvoiceGenerator';
 import InvoiceCardListFeature from '../InvoiceCardListFeature';
 import API from '../utils/API';
 import InvoiceModal from '../InvoiceModal';
+import InvoiceFavoriteFeature from '../InvoiceFavoriteFeature';
 
 class Invoices extends React.Component {
   constructor (props) {
@@ -118,7 +119,8 @@ class Invoices extends React.Component {
         <div className="col m12">
           <div className="row">
             <div className="col m12">
-              <h1>Invoices</h1>
+              <h3>Favorite Invoices</h3>
+              <InvoiceFavoriteFeature />
               <button onClick={this.handleOnClickState}>Show State</button>
               <button onClick={this.handleOnClickCreate}>Create dummy invoice</button>
             </div>
