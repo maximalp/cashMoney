@@ -5,7 +5,7 @@ class BarGraph extends React.Component {
     super(props);
 
     this.state = {
-      value:"Hello",
+      value:"Outstanding Revenue",
       barGraphData: [{
       	name: 'Invoices', 
       	Overdue: 2400, 

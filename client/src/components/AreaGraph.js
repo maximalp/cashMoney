@@ -5,7 +5,7 @@ class AreaGraph extends React.Component {
     super(props);
 
     this.state = {
-      value:"Hello",
+      value:"Total Profit ",
       areaGraphData: [
       {name: 'Jan', Income: 4000, Expenses: 2400, amt: 2400},
       {name: 'Feb', Income: 3000, Expenses: 1398, amt: 2210},
