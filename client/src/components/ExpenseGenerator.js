@@ -88,7 +88,7 @@ class ExpenseGenerator extends React.Component {
           <div className="col m12">
             <div className="row">
               <div className="col m3">
-                <Input value={this.props.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
+                <Input value={this.state.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">

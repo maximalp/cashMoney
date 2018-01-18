@@ -1,5 +1,6 @@
 import React from 'react';
 import InvoiceFavoriteTabs from './InvoiceFavoriteTabs';
+import InvoiceFavoriteCard from './InvoiceFavoriteCard';
 import API from './utils/API';
 
 class InvoiceFavoriteFeature extends React.Component {
@@ -32,7 +33,11 @@ class InvoiceFavoriteFeature extends React.Component {
     return (
       <div>
         <div className="row">
-          <div className="col s12">
+          <div className="col m8">
+            <h1>Hello World</h1>
+          </div>
+          <div className="col m4">
+            <InvoiceFavoriteCard />
             {/* <ul className="tabs row tabs-fixed-width">
               <InvoiceFavoriteTabs invoice={this.props.invoice} onClick={this.handleOnClick} style={{"background":"pink"}}/>
               <li onClick={this.change} style={{"background":"pink"}} className="tab col">button</li>
