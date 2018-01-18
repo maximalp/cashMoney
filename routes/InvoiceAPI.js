@@ -46,6 +46,7 @@ module.exports = function(app) {
     console.log(req.body.id);
     let id = req.body.id;
 
+    // Finds invoice by Id, flips boolean, saves, sends back as json
     Invoices.findById(id)
     .then(dbModel => {
       dbModel.favorite = !dbModel.favorite;
@@ -54,8 +55,8 @@ module.exports = function(app) {
           console.log('error');
         }
       })
+      res.json(dbModel)
     })
-    .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   })
 

@@ -79,6 +79,12 @@ class Invoices extends React.Component {
       .catch(err => console.log(err));
   }
 
+  favoriteSetState = (invoices) => {
+    this.setState({
+      invoice:invoices
+    })
+  }
+
   handleOnClickSearchSwitches = (event) => {
     let filterSwitch = event.target.name;
     let query = `/api/invoice/filter/${filterSwitch}`
@@ -131,7 +137,7 @@ class Invoices extends React.Component {
           <div className="row">
             <div className="col m12">
               <h3>Favorite Invoices</h3>
-              <InvoiceFavoriteFeature />
+              <InvoiceFavoriteFeature invoice={this.state.invoice}/>
               <button onClick={this.handleOnClickState}>Show State</button>
               <button onClick={this.handleOnClickCreate}>Create dummy invoice</button>
             </div>
@@ -143,7 +149,7 @@ class Invoices extends React.Component {
           </div>
           <div className="row">
             <div className="col m12">
-              <InvoiceCardListFeature onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
+              <InvoiceCardListFeature pullInvoices={this.pullInvoices} faveState={this.favoriteSetState} onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
             </div>
           </div>
         </div>
