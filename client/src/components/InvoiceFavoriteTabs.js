@@ -2,7 +2,7 @@ import React from 'react';
 
 const InvoiceFavoriteTabs = (props) => {
   return (
-    <li className="tab col">Invoice Favorite Tabs</li>
+    <li onClick={props.onClick} style={{background:'blue'}}className="tab col m2 card">Invoice Favorite Tabs</li>
   )
 }
 

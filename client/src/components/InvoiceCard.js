@@ -1,13 +1,17 @@
 import React from 'react';
 
 const InvoiceCard = (props) => {
+
+  console.log(props.invoices._id)
+
   return (
-    <li>
+    <li key={props.invoices._id}>
       <div className="col m12 card">
         <div className="row">
           <div className="col m1">
             <br />
             <div className="chip">Select</div>
+            <div style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Favorite</div>
 
           </div>
 
@@ -28,6 +32,7 @@ const InvoiceCard = (props) => {
         <div className="row">
           <div className="col m3 offset-m1">
             <text>Invoice: {props.invoices.invoiceId}</text>
+            <text>Invoice: {props.invoices._id}</text>
           </div>
         </div>
 

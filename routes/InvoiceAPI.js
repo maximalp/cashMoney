@@ -34,11 +34,35 @@ module.exports = function(app) {
       .catch(err => res.status(422).json(err));
   }),
 
+  //Favorite Pull for Invoices---------------------------------
+  app.get("/api/invoice/favorite", function(req, res) {
+    Invoices.find({favorite:true})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  }),
+
+  //PUT, favorite an Invoice!----------------------------------
+  app.put('/api/invoice/favorite', function(req,res) {
+    console.log(req.body.id);
+    let id = req.body.id;
+
+    Invoices.findById(id)
+    .then(dbModel => {
+      dbModel.favorite = !dbModel.favorite;
+      dbModel.save(function(err) {
+        if(err) {
+          console.log('error');
+        }
+      })
+    })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  })
+
   // Refactored Sort Function----------------------------------
   app.get("/api/invoice/filter/:command", function(req,res) {
     // grabs filtercommands from paramsid
     let command = req.params.command;
-
     // Bracket notation to find
     Invoices.find({})
     .sort(filterCommands[command]['switch'] ? ({[filterCommands[command]['field']]:-1}) : ({[filterCommands[command]['field']]:1}))

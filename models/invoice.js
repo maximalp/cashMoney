@@ -24,7 +24,8 @@ const invoiceSchema = new Schema({
   lineDescription: { type: String, required: true },
   lineRate: { type: String, required: true },
   lineQty: { type: String, required: true },
-  lineTotal: { type: String, required: true }
+  lineTotal: { type: String, required: true },
+  favorite: { type: Boolean, required: true, default: false}
 });
 
 // autoincrement plugin

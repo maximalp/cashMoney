@@ -68,6 +68,17 @@ class Invoices extends React.Component {
     });
   }
 
+  pullInvoices = () => {
+    let query = '/api/pullInvoices';
+    API.get(query)
+      .then(res => {
+        let invoices = res.data;
+        console.log(invoices);
+        this.setState({invoice:invoices})
+      })
+      .catch(err => console.log(err));
+  }
+
   handleOnClickSearchSwitches = (event) => {
     let filterSwitch = event.target.name;
     let query = `/api/invoice/filter/${filterSwitch}`
@@ -132,7 +143,7 @@ class Invoices extends React.Component {
           </div>
           <div className="row">
             <div className="col m12">
-              <InvoiceCardListFeature switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
+              <InvoiceCardListFeature onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
             </div>
           </div>
         </div>

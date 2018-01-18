@@ -2,9 +2,10 @@ import React from 'react';
 import InvoiceCard from './InvoiceCard';
 
 const InvoiceCardList = (props) => {
+  console.log(props)
   let invoices = props.invoices.map((invoice) => {
     return (
-      <InvoiceCard invoices={invoice}/>
+      <InvoiceCard key={invoice._id} onClick={props.onClick} invoices={invoice}/>
     )
   })
   return(
