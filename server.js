@@ -39,7 +39,6 @@ autoIncrement.initialize(db);
 // Models
 const Invoice = require("./models/invoice");
 const Expense = require("./models/expense");
-const Dashboard = require("./models/dashboard");
 
 
 
