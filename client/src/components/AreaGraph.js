@@ -31,7 +31,7 @@ class AreaGraph extends React.Component {
   render(){
     return (
       <div>
-        <h1>{this.state.value}</h1>
+        <h3>{this.state.value}</h3>
         <div>
 	       <AreaChart width={600} height={400} data={this.state.areaGraphData}
         margin={{top: 10, right: 30, left: 0, bottom: 0}}>
@@ -39,8 +39,8 @@ class AreaGraph extends React.Component {
         <YAxis/>
         <CartesianGrid strokeDasharray="3 3"/>
         <Tooltip/>
-        <Area type='monotone' dataKey='Income' stroke='#8884d8' fill='#8884d8' />
-        <Area type='monotone' dataKey='Expenses' stroke='#82ca9d' fill='#82ca9d' />
+        <Area type='monotone' dataKey='Income' stroke='#82ca9d' fill='#82ca9d' />
+        <Area type='monotone' dataKey='Expenses' stroke='#f22b59' fill='#f22b59' />
       </AreaChart>
         </div>
       </div>

@@ -23,7 +23,7 @@ class BarGraph extends React.Component {
   render(){
     return (
       <div>
-        <h1>{this.state.value}</h1>
+        <h3>{this.state.value}</h3>
         <div>
 	       <BarChart width={600} height={300} data={this.state.barGraphData}
 	       margin={{top: 20, right: 30, left: 20, bottom: 5}}>
@@ -32,8 +32,8 @@ class BarGraph extends React.Component {
 	       <CartesianGrid strokeDasharray="3 3"/>
 	       <Tooltip/>
 	       <Legend />
-	       <Bar dataKey="Overdue" stackId="a" fill="#8884d8" />
-	       <Bar dataKey="Outstanding" stackId="a" fill="#82ca9d" />
+	       <Bar dataKey="Overdue" stackId="a" fill="#f22b59" />
+	       <Bar dataKey="Outstanding" stackId="a" fill="#d4e06b" />
 	      </BarChart>
         </div>
       </div>
