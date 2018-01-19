@@ -30,14 +30,29 @@ module.exports = function(app) {
   app.get("/api/pullInvoices", function(req, res) {
       Invoices.find({})
       .sort({dateOfIssue:-1})
-      .then(dbModel => res.json(dbModel))
+      .then(dbModelAll => {
+        Invoices.find({favorite:true})
+        .then(dbModelFave =>
+          {
+            // console.log('dbModelAll', dbModelAll)
+            // console.log('dbmodelfave', dbModelFave)
+            (dbModelFave.length > 0) ? res.json({all:dbModelAll, favorite:dbModelFave}) : res.json({all:dbModelAll, favorite:[{invoiceId:"No favorite invoices!", key:1}]})
+            // (dbModelFav.length > 0) ? res.json("hi") : res.json("hi")
+          })
+        .catch(err => res.status(422).json(err));
+      })
       .catch(err => res.status(422).json(err));
   }),
 
   //Favorite Pull for Invoices---------------------------------
   app.get("/api/invoice/favorite", function(req, res) {
     Invoices.find({favorite:true})
-    .then(dbModel => res.json(dbModel))
+    .then(dbModel =>
+      {
+        // console.log(dbModel);
+        (dbModel.length > 0) ? res.json(dbModel) : res.json([{invoiceId:"No favorite invoices!", key:1}])
+
+      })
     .catch(err => res.status(422).json(err));
   }),
 
@@ -48,16 +63,28 @@ module.exports = function(app) {
 
     // Finds invoice by Id, flips boolean, saves, sends back as json
     Invoices.findById(id)
-    .then(dbModel => {
-      dbModel.favorite = !dbModel.favorite;
-      dbModel.save(function(err) {
+    .then(dbModelChanged => {
+      dbModelChanged.favorite = !dbModelChanged.favorite;
+      dbModelChanged.save(function(err) {
         if(err) {
           console.log('error');
         }
+        Invoices.find({favorite:true})
+        .then(dbModelFavorite =>
+          {
+            // console.log(dbModelFavorite);
+            (dbModelFavorite.length > 0) ? res.json({favorite:dbModelFavorite, changed:dbModelChanged}) : res.json({favorite:[{invoiceId:"No favorite invoices!"}], changed:dbModelChanged, key:1})
+
+          })
+        .catch(err => res.status(422).json(err));
+        //
+        //
+        // res.json(dbModelChanged)
       })
-      res.json(dbModel)
+      .catch(err => res.status(422).json(err));
     })
-    .catch(err => res.status(422).json(err));
+
+
   })
 
   // Refactored Sort Function----------------------------------
