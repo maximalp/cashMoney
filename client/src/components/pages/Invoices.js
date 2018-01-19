@@ -29,6 +29,7 @@ class Invoices extends React.Component {
       lineRate:"",
       lineQty:"",
       lineTotal:"",
+      holderEdit:{},
       holder:{},
       invoice:[
           {field1:"cat", field2:"catkins"},
@@ -73,12 +74,17 @@ class Invoices extends React.Component {
     console.log(id);
     let favoriteList = this.state.favoriteInvoices;
     console.log("favoriteList", favoriteList)
-    let theChosenOne = favoriteList.find(invoice => {
-      return invoice._id === id
-    })
-    this.setState({theChosenOne})
 
+    if (id === 'off') {
+      console.log("off")
     }
+    else {
+      let theChosenOne = favoriteList.find(invoice => {
+        return invoice._id === id
+      })
+      this.setState({theChosenOne})
+    }
+  }
 
   handleInputChange = (event) => {
     const name = event.target.name;
@@ -86,6 +92,15 @@ class Invoices extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleInputChangeEdit = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      ['holderEdit'[name]]: value
+    });
+    console.log('HOLDEREDIT',this.state.holderEdit);
   }
 
   pullInvoices = () => {
@@ -144,6 +159,22 @@ class Invoices extends React.Component {
 
   handleOnClickState = (event) => {
     console.log(this.state);
+  }
+
+  handleOnClickEdit = (id) => {
+    // console.log('Edit this invoice!', id)
+    let query = '/api/invoice/'+id;
+    // console.log(query);
+    API.get(query)
+      .then(res => {
+        console.log('HODL', res.data[0])
+        let holderEdit = res.data[0]
+        this.setState({holderEdit})
+        console.log('STATE',this.state.holderEdit)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleOnClickChip = (event) => {
@@ -205,7 +236,7 @@ class Invoices extends React.Component {
           </div> */}
           <div className="row">
             <div className="col m12">
-              <InvoiceCardListFeature handleOnClickChip={this.handleOnClickChip} pullInvoices={this.pullInvoices} faveState={this.favoriteSetState} onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
+              <InvoiceCardListFeature inputChange={this.handleInputChangeEdit} edit={this.state.holderEdit} handleOnClickEdit={this.handleOnClickEdit} handleOnClickChip={this.handleOnClickChip} pullInvoices={this.pullInvoices} faveState={this.favoriteSetState} onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
             </div>
           </div>
         </div>

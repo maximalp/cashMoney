@@ -1,4 +1,5 @@
 import React from 'react';
+import InvoiceModalEdit from './InvoiceModalEdit';
 
 const InvoiceCard = (props) => {
 
@@ -9,9 +10,20 @@ const InvoiceCard = (props) => {
       <div className="col m12 card">
         <div className="row">
           <div className="col m1">
-            <br />
-            <div className="chip">Select</div>
-            <div style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Favorite</div>
+            <div className="row">
+              <div className='col m12'>
+                <button style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Favorite</button>
+
+              </div>
+            </div>
+
+            <div className="row">
+              <div className='col m12'>
+                <InvoiceModalEdit inputChange={props.inputChange} edit={props.edit} handleOnClickEdit={props.handleOnClickEdit} id={props.invoices._id} />
+              </div>
+
+            </div>
+            {/* <div className="chip">Edit</div> */}
 
           </div>
 

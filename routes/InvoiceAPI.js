@@ -36,7 +36,7 @@ module.exports = function(app) {
           {
             // console.log('dbModelAll', dbModelAll)
             // console.log('dbmodelfave', dbModelFave)
-            (dbModelFave.length > 0) ? res.json({all:dbModelAll, favorite:dbModelFave}) : res.json({all:dbModelAll, favorite:[{invoiceId:"No favorite invoices!", key:1}]})
+            (dbModelFave.length > 0) ? res.json({all:dbModelAll, favorite:dbModelFave}) : res.json({all:dbModelAll, favorite:[{invoiceId:"No favorite invoices!", _id:"off", key:1}]})
             // (dbModelFav.length > 0) ? res.json("hi") : res.json("hi")
           })
         .catch(err => res.status(422).json(err));
@@ -47,6 +47,18 @@ module.exports = function(app) {
   //Favorite Pull for Invoices---------------------------------
   app.get("/api/invoice/favorite", function(req, res) {
     Invoices.find({favorite:true})
+    .then(dbModel =>
+      {
+        // console.log(dbModel);
+        (dbModel.length > 0) ? res.json(dbModel) : res.json([{invoiceId:"No favorite invoices!", key:1}])
+
+      })
+    .catch(err => res.status(422).json(err));
+  }),
+
+  //Individual Invoice-----------------------------------------
+  app.get("/api/invoice/:id", function(req, res) {
+    Invoices.find({_id:req.params.id})
     .then(dbModel =>
       {
         // console.log(dbModel);
