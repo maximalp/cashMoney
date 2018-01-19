@@ -24,14 +24,14 @@ class ExpenseModal extends React.Component {
   render () {
     return (
       <div className="row">
-        <button className="col m4" onClick={this.handleOpenModal}>Add and Expense Report</button>
+        <button className="btn btn-large" onClick={this.handleOpenModal}>Add and Expense Report</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
            onRequestClose={this.handleCloseModal}
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
-             <button onClick={this.handleCloseModal}>Close</button>
+             <button className="btn btn-small" onClick={this.handleCloseModal}>Close</button>
              <h1>Create Expense Report:</h1>
              <div className="row">
                <div className="col m10 offset-m1">
