@@ -83,13 +83,14 @@ class Expenses extends React.Component {
           <ExpenseModal>
           </ExpenseModal>
         </div>
-        <div className="col m12">
-          <div className="row">
 
+          <div className="row">
+          <div className="col s6 offset-s6">
+          <h1>Recent:</h1>
           </div>
-          <h1>Recent</h1>
+        </div>
           <ExpenseCardListFeature expense={this.state.expense}/>
-        <p>
+        {/* <p>
           Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
           Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu dictum.
           Ut vel ante eget massa ornare placerat. Etiam nisl orci, finibus sodales
@@ -103,9 +104,8 @@ class Expenses extends React.Component {
           vehicula sit amet at augue. Maecenas aliquam bibendum congue. Pellentesque
           semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
           bibendum turpis dui in sapien.
-        </p>
+        </p> */}
       </div>
-    </div>
     )
   }
 }
