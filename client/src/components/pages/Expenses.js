@@ -9,36 +9,47 @@ class Expenses extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
-      number: "",
-      street: "",
-      city: "",
-      USstate: "",
-      zip:"",
-      country:"United States",
-      clientFirstName:"",
-      clientLastName:"",
-      clientCompanyName:"",
-      clientStreetAddress:"",
-      clientCity:"",
-      clientState:"",
-      clientZip:"",
-      amountDue:"",
-      lineVendor:"",
-      lineDescription:"",
-      lineItem:"",
-      lineQty:"",
-      lineTotal:"",
-      holder:{},
+      category: "",
+      date: "",
+      vendor: "",
+      description:"",
+      total:"",
       expense:[
-          {field1:"cat", field2:"catkins"},
-          {field1:"dog", field2:"dogkins"},
-          {field1:"bunny", field2:"fluffykins"},
-          {field1:"lizard", field2:"scalekins"},
-          {field1:"bird", field2:"featherkins"},
-          {field1:"fish", field2:"swimkins"},
-          {field1:"snake", field2:"snekskins"},
-          {field1:"dragon", field2:"dragonkins"},
+        {
+          field1: "Gas",
+          field2: "",
+          field3: "AutoZone",
+          field4: "Filled the tank",
+          field5:"$25.00"
+        },
+        {
+          field1: "Gas",
+          field2: "",
+          field3: "AutoZone",
+          field4: "Filled the tank",
+          field5:"$28.00"
+        },
+        {
+          field1: "Labor",
+          field2: "",
+          field3: "AutoZone",
+          field5: "Filled the tank",
+          field6:"$26.00"
+        },
+        {
+          field1: "Food",
+          field2: "",
+          field3: "AutoZone",
+          field4: "Filled the tank",
+          field5:"$25.00"
+        },
+        {
+          field1: "Gas",
+          field2: "",
+          field3: "AutoZone",
+          field4: "Filled the tank",
+          field5:"$24.00"
+        },
         ]
     }
   }
@@ -74,10 +85,7 @@ class Expenses extends React.Component {
         </div>
         <div className="col m12">
           <div className="row">
-            <div className="col m12">
-              <h1>Import an Expense Report</h1>
-              <button onClick={this.handleOnClickCreate}>Pull from database</button>
-            </div>
+
           </div>
           <h1>Recent</h1>
           <ExpenseCardListFeature expense={this.state.expense}/>
