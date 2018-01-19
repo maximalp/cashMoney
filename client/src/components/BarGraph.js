@@ -8,9 +8,9 @@ class BarGraph extends React.Component {
       value:"Outstanding Revenue",
       barGraphData: [{
       	name: 'Invoices', 
-      	Overdue: 2400, 
-      	Outstanding: 6000, 
-      	amt: 2400
+      	Overdue: 300, 
+      	Outstanding: 600, 
+      	amt: 200
       }]
     }
   }
