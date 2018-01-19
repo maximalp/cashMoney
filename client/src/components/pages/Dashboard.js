@@ -1,7 +1,7 @@
 import React from 'react';
 import BarGraph from '../BarGraph';
 import AreaGraph from '../AreaGraph';
-//import RadialGraph from '../RadialGraph';//
+import PieGraph from '../PieGraph';
 
 
 class Dashboard extends React.Component {
@@ -20,11 +20,7 @@ class Dashboard extends React.Component {
         <div>
           <BarGraph />
           <AreaGraph />
-          
-         
-
-
-          
+          <PieGraph />   
         </div>
       </div>
     )
