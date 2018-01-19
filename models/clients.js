@@ -3,8 +3,10 @@ const Schema = mongoose.Schema;
 // autoincrement
 const autoIncrement = require('mongoose-auto-increment-fix');
 
-const invoiceSchema = new Schema({
-  name: { type: String, required: true },
+const clientSchema = new Schema({
+  firstName: { type: String, required: true },
+  LastName: { type: String, required: true },
+  companyName: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   street: { type: String, required: true },
   city: { type: String, required: true },
@@ -19,18 +21,11 @@ const invoiceSchema = new Schema({
   clientState: { type: String, required: true },
   clientZip: { type: String, required: true },
   clientCountry : { type: String, required: true, default: "United States" },
-  dateOfIssue: { type: Date, default: Date.now },
-  dueDate: { type: Date, default: Date.now },
-  lineDescription: { type: String, required: true },
-  lineRate: { type: String, required: true },
-  lineQty: { type: String, required: true },
-  lineTotal: { type: String, required: true },
-  favorite: { type: Boolean, required: true, default: false},
-  status: {type: String, required: true, default: 'Draft'},
+
 });
 
 // autoincrement plugin
-invoiceSchema.plugin(autoIncrement.plugin, {model:"Invoice", field:"invoiceId"});
-const Invoice = mongoose.model("Invoice", invoiceSchema);
+clientSchema.plugin(autoIncrement.plugin, {model:"Client", field:"clientId"});
+const Clients = mongoose.model("Client", clientSchema);
 
-module.exports = Invoice;
+module.exports = Clients;

@@ -1,28 +1,66 @@
 import React from "react";
+import ClientList from '../ClientList';
 
 class Clients extends React.Component {
-  render () {
+  constructor (props) {
+    super(props);
+
+
+  this.state = {
+    clients: [
+      {
+      name: "",
+      phoneNumber: "",
+      companyName: "Nursing Vendor"
+    },
+      {
+      name: "",
+      phoneNumber: "",
+      companyName: "Food Delivery"
+      },
+      {
+      name: "",
+      phoneNumber: "",
+      companyName: "Art Sales"
+      }
+    ]
+  }
+
+};
+
+
+
+
+
+render () {
     return (
       <div>
         <h1>Clients</h1>
+          <div>
+          <a class="waves-effect waves-light btn-large">Add Client</a>
+          </div>
+          <div>
+          <h2>Clients Invoice Overview </h2>
+          </div>
+
         <p>
-          Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
-          Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu dictum.
-          Ut vel ante eget massa ornare placerat. Etiam nisl orci, finibus sodales
-          volutpat et, hendrerit ut dolor. Suspendisse porta dictum nunc, sed
-          pretium risus rutrum eget. Nam consequat, ligula in faucibus vestibulum,
-          nisi justo laoreet risus, luctus luctus mi lacus sit amet libero. Class
-          aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-          himenaeos. Mauris pretium condimentum tellus eget lobortis. Interdum et
-          malesuada fames ac ante ipsum primis in faucibus. Donec placerat accumsan
-          mi, ut congue neque placerat eu. Donec nec ipsum in velit pellentesque
-          vehicula sit amet at augue. Maecenas aliquam bibendum congue. Pellentesque
-          semper, lectus non ullamcorper iaculis, est ligula suscipit velit, sed
-          bibendum turpis dui in sapien.
+          Draft Invoices: $50
+          Outstanding Invoices: $300
+          Overdue Invoices: $500
+
         </p>
+
+        <div>
+        <ClientList clients = {this.state.clients}>
+
+        </ClientList>
+        </div>
       </div>
     )
   }
-}
+
+};
+
+
 
 export default Clients;

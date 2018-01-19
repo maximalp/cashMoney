@@ -34,6 +34,10 @@ const InvoiceCard = (props) => {
             <text>Invoice: {props.invoices.invoiceId}</text>
             <text>Invoice: {props.invoices._id}</text>
           </div>
+          <div className="col m2 offset-m6">
+            <text>Status: {props.invoices.status}
+            </text>
+          </div>
         </div>
 
 

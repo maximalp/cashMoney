@@ -7,52 +7,20 @@ class ExpenseGenerator extends React.Component {
     super(props);
 
     this.state = {
-      name:"",
-      number: "",
-      street: "",
-      city: "",
-      USstate: "",
-      zip:"",
-      country:"",
-      clientFirstName:"",
-      clientLastName:" ",
-      clientCompanyName:"",
-      clientStreetAddress:"",
-      clientCity:"",
-      clientState:"",
-      clientZip:"",
-      amountDue:"",
-      lineVendor:"",
-      lineDescription:"",
-      lineItem:"",
-      lineQty:"",
-      lineTotal:"",
-      holder:{}
+      category: "",
+      date: "",
+      vendor: "",
+      description:"",
+      total:""
     }
   }
 
   static defaultProps = {
-    name:"Company Name",
-    number: "Number",
-    street: "Street",
-    city: "City",
-    USstate: "State",
-    zip:"Zip-Code",
-    country:"United States",
-    clientFirstName:"Client First Name",
-    clientLastName:"Client Last Name",
-    clientCompanyName:"Client Company Name",
-    clientStreetAddress:"Client Street Address",
-    clientCity:"Client City",
-    clientState:"Client State",
-    clientZip:"Client Zip",
-    amountDue:"Amount Due",
-    lineVendor:"Vendor Name",
-    lineDescription:"Line Description",
-    lineItem:"Items",
-    lineQty:"Quantity",
-    lineTotal:"Total",
-    holder:{}
+    category: "Pick From Below",
+    date: "MMDDYYY",
+    vendor: "Enter Company Name Here",
+    description:"Itemized List",
+    total:"0.00",
   }
 
   handleInputChange = (event) => {
@@ -84,77 +52,26 @@ class ExpenseGenerator extends React.Component {
       <div>
           {/* Header Address */}
           {/* Inject: Hard Coded: US */}
-        <div style={{background:'#dcedc8'}} className="row card">
-          <div className="col m12">
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.name} placeholder={this.props.name} type={"text"} name={"name"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.street} placeholder={this.props.street} type={"text"} name={"street"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.city} placeholder={this.props.city} type={"text"} name={"city"} onChange={this.handleInputChange}/>
-              </div>
-              <div className="col m3">
-                <Input value={this.state.USstate} placeholder={this.props.USstate} type={"text"} name={"USstate"} onChange={this.handleInputChange}/>
-              </div>
-              <div className="col m3">
-                <Input value={this.state.zip} placeholder={this.props.zip} type={"text"} name={"zip"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <label>United States</label> {/* Inject: Hard Coded: US */}
-                <input readOnly={"United States"} type={"text"} value={"United States"} />
-              </div>
-              <div className="col m3">
-                <Input value={this.state.number} placeholder={this.props.number} type={"text"} name={"number"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div style={{background:'#e1f5fe'}} className="row card">
           {/* Billing Section */}
           <section className="col m8">
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientFirstName} placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} onChange={this.handleInputChange}/>
+                <h5>Category</h5>
+                <Input placeholder={this.props.category} value={this.state.category} type={"text"} name={"category"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientLastName} placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} onChange={this.handleInputChange}/>
+                <h5>Vendor</h5>
+                <Input placeholder={this.props.vendor} value={this.state.vendor} type={"text"} name={"vendor"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientCompanyName} placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <Input value={this.state.clientStreetAddress} placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <Input value={this.state.clientZip} placeholder={this.props.clientZip} type={"text"} name={"clientZip"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <input readOnly={"United States"}type={"text"} value={"United States"} />
+                <h5>Itemized List</h5>
+                <Input placeholder={this.props.description} value={this.state.description} type={"text"} name={"description"} onChange={this.handleInputChange}/>
               </div>
             </div>
           </section>
@@ -162,19 +79,19 @@ class ExpenseGenerator extends React.Component {
             <div className="row">
               <div className="col m12">
                 <h5>Date of Issue:</h5>
-                <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, expense number  */}
+                <Input placeholder={this.props.date} value={this.state.date} type={"text"} name={"date"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
                 <h5>Due Date:</h5>
-                <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, expense number  */}
+                <Input placeholder={this.props.date} value={this.state.date} type={"text"} name={"date"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
                 <h5></h5>
-                <h5>Insert here the expense number:001</h5> {/* Inject: Need date, due date, expense number  */}
+                <h5>Expense Number: 001</h5>
               </div>
             </div>
             <div className="row">
@@ -183,34 +100,16 @@ class ExpenseGenerator extends React.Component {
                 <h2><Input value={this.state.amountDue} placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
               </div>
             </div>
+            <button onClick={this.handleCloseModal}>Close Modal</button>
           </section>
 
             {/* Billed to section */}
-            {/* Inject: Need date, due date, expense number  */}
 
 
 
         </div>
           {/* <line item section */}
 
-        <div style={{background:'#ffebee'}} className="row card">
-          <section className="col m8">
-            <h5>Vendor</h5>
-            <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-            <h5>Description</h5>
-            <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-            <h5>Itemized List</h5>
-            <Input placeholder={this.props.lineItem} value={this.state.lineItem} type={"text"} name={"lineItem"} onChange={this.handleInputChange}/>
-            <h5>Qty</h5>
-            <Input placeholder={this.props.lineQty} type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-            <h5>Total</h5>
-            <Input placeholder={this.props.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
-          </section>
-          <div className="col m12">
-            <button onClick={this.handleOnClick}>Add Expense</button>
-            <button onClick={this.showState}>Show State</button>
-          </div>
-        </div>
       </div>
     )
   }

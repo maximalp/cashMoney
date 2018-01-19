@@ -32,7 +32,7 @@ class InvoiceGenerator extends React.Component {
 
   static defaultProps = {
     name:"Company Name",
-    number: "Number",
+    phoneNumber: "Number",
     street: "Street",
     city: "City",
     USstate: "State",
