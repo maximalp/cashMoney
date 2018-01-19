@@ -23,7 +23,7 @@ class BarGraph extends React.Component {
   render(){
     return (
       <div>
-        <h3>{this.state.value}</h3>
+        <h4>{this.state.value}</h4>
         <div>
 	       <BarChart width={600} height={300} data={this.state.barGraphData}
 	       margin={{top: 20, right: 30, left: 20, bottom: 5}}>

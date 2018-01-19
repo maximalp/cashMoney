@@ -20,7 +20,8 @@ class Dashboard extends React.Component {
         <div>
           <BarGraph />
           <AreaGraph />
-          <PieGraph />   
+          <PieGraph />
+         
         </div>
       </div>
     )

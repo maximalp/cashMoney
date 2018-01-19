@@ -31,7 +31,7 @@ class AreaGraph extends React.Component {
   render(){
     return (
       <div>
-        <h3>{this.state.value}</h3>
+        <h4>{this.state.value}</h4>
         <div>
 	       <AreaChart width={600} height={400} data={this.state.areaGraphData}
         margin={{top: 10, right: 30, left: 0, bottom: 0}}>
