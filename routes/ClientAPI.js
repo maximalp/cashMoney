@@ -23,10 +23,13 @@ module.exports = function(app) {
 //Initial Client List---------------------------------
 app.get("/api/clients", function(req, res) {
     Clients.find({})
+    .populate("invoices")
     //.sort({dateOfIssue:-1})
-    .then(dbModel => res.json(dbModel))
+    .then(dbModel => {
+      console.log(dbModel)
+      res.json(dbModel)
+    })
     .catch(err => res.status(422).json(err));
 })
-
 
 };

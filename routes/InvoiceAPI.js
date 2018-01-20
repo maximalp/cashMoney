@@ -1,4 +1,5 @@
 var Invoices = require("../models/invoice");
+var Clients = require("../models/client");
 
 // Includes Routing and Controller for now...
 
@@ -157,13 +158,40 @@ module.exports = function(app) {
 
     Invoices.create(invoiceData)
       .then(function(doc) {
-        console.log(doc);
-        res.json(doc);
+
+        return Clients.findOneAndUpdate({_id: "5a63777f94eabe77e04dc3e9"}, { $push : { invoices: doc._id}}, { new: true});
+
+      })
+      .then(function(dbClients) {
+        res.json(dbClients)
       })
       .catch(function(err) {
         console.log(err.message)
       });
   }),
+
+
+// app.post("/submit", function(req, res) {
+//   // Create a new invoice in the database
+//   db.invoice
+//     .create(req.body)
+//     .then(function(dbinvoice) {
+//       // If a invoice was created successfully, find one Clients (there's only one) and push the new invoice's _id to the Clients's `invoices` array
+//       // { new: true } tells the query that we want it to return the updated Clients -- it returns the original by default
+//       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+//       return db.Clients.findOneAndUpdate({}, { $push: { invoices: dbinvoice._id } }, { new: true });
+//     })
+//     .then(function(dbClients) {
+//       // If the Clients was updated successfully, send it back to the client
+//       res.json(dbClients);
+//     })
+//     .catch(function(err) {
+//       // If an error occurs, send it back to the client
+//       res.json(err);
+//     });
+// });
+  // -----------------------------------------------------
+
 
   app.get("/make", function(req,res) {
     var data = {

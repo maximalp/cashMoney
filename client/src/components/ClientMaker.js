@@ -47,30 +47,48 @@ class ClientMaker extends React.Component {
 
   // Adding a client from form
   handleOnClick = (event) => {
-    let data = {
-      firstName:this.state.firstName,
-      lastName: this.state.lastName,
-      companyName: this.state.companyName,
-      email: this.state.email,
-      phoneNumber: this.state.phoneNumber,
-      street: this.state.street,
-      city: this.state.city,
-      USstate: this.state.USstate,
-      zip:this.state.zip,
-      country:"United States"
-    };
 
-    console.log(data);
+    if (
+      this.state.firstName === "" ||
+      this.state.lastName === "" ||
+      this.state.companyName === "" ||
+      this.state.email === "" ||
+      this.state.phoneNumber === "" ||
+      this.state.street === "" ||
+      this.state.city === "" ||
+      this.state.USstate === "" ||
+      this.state.zip === ""
+      )
+      {
+        alert("Please fill in all fields")
+      }
+      else {
+        let data = {
+          firstName:this.state.firstName,
+          lastName: this.state.lastName,
+          companyName: this.state.companyName,
+          email: this.state.email,
+          phoneNumber: this.state.phoneNumber,
+          street: this.state.street,
+          city: this.state.city,
+          USstate: this.state.USstate,
+          zip:this.state.zip,
+          country:"United States"
+        };
 
-    clientAPI.post(data)
-    .then(res => {
-      let newEntry = res.data;
-      this.setState({holder:newEntry})
+        console.log(data);
 
-      console.log(newEntry);
-      this.props.handleAddClient(newEntry);
-    })
-    .catch(err => console.log(err));
+        clientAPI.post(data)
+        .then(res => {
+          let newEntry = res.data;
+          // this.setState({holder:newEntry})
+
+          // console.log(newEntry);
+          this.props.handleAddClient(newEntry);
+          this.props.closeModal();
+        })
+        .catch(err => console.log(err));
+      }
   }
 
   // Shows state

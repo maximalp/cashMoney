@@ -8,13 +8,13 @@ const clientSchema = new Schema({
   lastName: { type: String, required: true },
   companyName: { type: String, required: true },
   email: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
+  phoneNumber: { type: Number, required: true },
   street: { type: String, required: true },
   city: { type: String, required: true },
   USstate: { type: String, required: true },
-  zip: { type: String, required: true },
+  zip: { type: Number, required: true },
   country : { type: String, required: true, default: "United States" },
-
+  invoices : [{ type: Schema.Types.ObjectId, ref: 'Invoice'}]
 });
 
 // autoincrement plugin

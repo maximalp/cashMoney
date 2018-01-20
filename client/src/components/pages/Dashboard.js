@@ -2,8 +2,7 @@ import React from 'react';
 import BarGraph from '../BarGraph';
 import AreaGraph from '../AreaGraph';
 import PieGraph from '../PieGraph';
-
-
+import moment from 'moment';
 class Dashboard extends React.Component {
   constructor(props){
     super(props);
