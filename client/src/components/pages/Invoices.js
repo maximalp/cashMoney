@@ -97,8 +97,10 @@ class Invoices extends React.Component {
   handleInputChangeEdit = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    const newState = this.state.holderEdit;
+    newState[name] = value;
     this.setState({
-      ['holderEdit'[name]]: value
+      holderEdit: newState
     });
     console.log('HOLDEREDIT',this.state.holderEdit);
   }
@@ -170,7 +172,7 @@ class Invoices extends React.Component {
         console.log('HODL', res.data[0])
         let holderEdit = res.data[0]
         this.setState({holderEdit})
-        console.log('STATE',this.state.holderEdit)
+        console.log('STATE!!!!!!!!!!!!!!',this.state.holderEdit)
       })
       .catch(err => {
         console.log(err)
@@ -198,7 +200,7 @@ class Invoices extends React.Component {
           currentState[indexOfFavorited] = newInvoice;
           // let fInvoices = this.state.favoriteInvoices;
           // fInvoices.push(newInvoice);
-          this.setState({invoices:currentState, favoriteInvoices:res.data.favorite})
+          this.setState({invoices:currentState, favoriteInvoices:res.data.favorite, theChosenOne:[{ _id:'off', invoiceId:"No favorite invoices!"}]})
         }
 
         // is this better? /////////////***

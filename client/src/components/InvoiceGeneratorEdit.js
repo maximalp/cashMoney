@@ -233,7 +233,7 @@ class InvoiceGeneratorEdit extends React.Component {
             <div className="row">
               <div className="col m12">
                 <h5>Amount Due</h5>
-                <h2><Input value={this.props.edit.lineTotal} type={"text"} name={"amountDue"}/></h2>
+                <h2><Input value={this.props.lineTotal} type={"text"} name={"amountDue"}/></h2>
               </div>
             </div>
           </section>

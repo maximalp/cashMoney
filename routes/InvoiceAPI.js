@@ -50,7 +50,7 @@ module.exports = function(app) {
     .then(dbModel =>
       {
         // console.log(dbModel);
-        (dbModel.length > 0) ? res.json(dbModel) : res.json([{invoiceId:"No favorite invoices!", key:1}])
+        (dbModel.length > 0) ? res.json(dbModel) : res.json([{invoiceId:"No favorite invoices!", _id:'off'}])
 
       })
     .catch(err => res.status(422).json(err));
@@ -85,7 +85,7 @@ module.exports = function(app) {
         .then(dbModelFavorite =>
           {
             // console.log(dbModelFavorite);
-            (dbModelFavorite.length > 0) ? res.json({favorite:dbModelFavorite, changed:dbModelChanged}) : res.json({favorite:[{invoiceId:"No favorite invoices!"}], changed:dbModelChanged, key:1})
+            (dbModelFavorite.length > 0) ? res.json({favorite:dbModelFavorite, changed:dbModelChanged}) : res.json({favorite:[{ _id:'off', invoiceId:"No favorite invoices!"}], changed:dbModelChanged, key:1})
 
           })
         .catch(err => res.status(422).json(err));
