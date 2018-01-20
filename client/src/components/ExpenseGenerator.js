@@ -99,9 +99,9 @@ class ExpenseGenerator extends React.Component {
                 <h5>Amount Due</h5>
                 <h2><Input value={this.state.amountDue} placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
               </div>
+              <button className="btn btn-small" onClick={this.handleSuModal}>Submit</button>
             </div>
           </section>
-          <button className="btn btn-small" onClick={this.handleCloseModal}>Submit</button>
 
             {/* Billed to section */}
 
