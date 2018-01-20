@@ -1,5 +1,7 @@
 import React from "react";
 import ClientList from '../ClientList';
+import ClientModal from '../ClientModal';
+
 
 class Clients extends React.Component {
   constructor (props) {
@@ -34,27 +36,31 @@ class Clients extends React.Component {
 
 render () {
     return (
-      <div>
+      <div className="row">
         <h1>Clients</h1>
-          <div>
-          <a class="waves-effect waves-light btn-large">Add Client</a>
-          </div>
-          <div>
-          <h2>Clients Invoice Overview </h2>
+          <div className="col m12">
+            <ClientModal>
+            </ClientModal>
           </div>
 
-        <p>
-          Draft Invoices: $50
-          Outstanding Invoices: $300
-          Overdue Invoices: $500
+          <div className="row">
+          <h3>Clients Invoice Overview </h3>
+          </div>
 
-        </p>
+                <p>
+                  Draft Invoices: $50
+                  Outstanding Invoices: $300
+                  Overdue Invoices: $500
 
-        <div>
+                </p>
+
+        <div className="row">
+        <h3>Clients</h3>
         <ClientList clients = {this.state.clients}>
 
         </ClientList>
         </div>
+
       </div>
     )
   }

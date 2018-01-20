@@ -8,7 +8,7 @@ const ClientList = (props) => {
 
         <li className="col m12">
           <div className="card">
-          <h2>{client.companyName}</h2>
+          <h5>{client.companyName}</h5>
           </div>
         </li>
       )
