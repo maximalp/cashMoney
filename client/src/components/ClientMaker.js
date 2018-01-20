@@ -66,7 +66,9 @@ class ClientMaker extends React.Component {
     .then(res => {
       let newEntry = res.data;
       this.setState({holder:newEntry})
+
       console.log(newEntry);
+      this.props.handleAddClient(newEntry);
     })
     .catch(err => console.log(err));
   }

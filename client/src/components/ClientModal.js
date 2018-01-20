@@ -37,7 +37,8 @@ class ClientModal extends React.Component {
              <h4>New Client Entry:</h4>
              <div className="row">
                <div className="col m8 offset-m2">
-                 <ClientMaker/>
+                 <ClientMaker
+                 handleAddClient={this.props.handleAddClient}/>
                </div>
              </div>
            </div>
