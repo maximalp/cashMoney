@@ -1,4 +1,4 @@
-var Clients = require("../models/clients");
+var Clients = require("../models/client");
 
 
 

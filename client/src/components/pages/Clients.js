@@ -1,5 +1,7 @@
 import React from "react";
 import ClientList from '../ClientList';
+import ClientModal from '../ClientModal';
+import clientAPI from '../utils/clientAPI';
 
 class Clients extends React.Component {
   constructor (props) {
@@ -7,54 +9,72 @@ class Clients extends React.Component {
 
 
   this.state = {
-    clients: [
-      {
-      name: "",
-      phoneNumber: "",
-      companyName: "Nursing Vendor"
-    },
-      {
-      name: "",
-      phoneNumber: "",
-      companyName: "Food Delivery"
-      },
-      {
-      name: "",
-      phoneNumber: "",
-      companyName: "Art Sales"
-      }
-    ]
+    clients: []
   }
 
 };
 
+// calling client object from database when client component loads
+componentDidMount() {
+  let query = '/api/clients';
+  clientAPI.get(query)
+    .then(res => {
+      let clients = res.data;
+
+      console.log("all clients response from database", clients);
+      this.setState({
+        clients:clients
+      })
+      console.log("state",this.state)
+    })
+    .catch(err => console.log(err));
+}
+
+// refreshing client list through state when adding client
+handleAddClient = (client) =>
+{
+  let clients = this.state.clients;
+  clients.push(client);
+  console.log("new clients from handle click" + clients);
+  this.setState({
+
+  clients:clients
+
+  })
+};
 
 
 
 
 render () {
     return (
-      <div>
+      <div className="row">
         <h1>Clients</h1>
-          <div>
-          <a class="waves-effect waves-light btn-large">Add Client</a>
+          <div className="col m12">
+            <ClientModal
+              handleAddClient={this.handleAddClient}>
+
+            </ClientModal>
           </div>
-          <div>
-          <h2>Clients Invoice Overview </h2>
+
+          <div className="row">
+          <h3>Clients Invoice Overview </h3>
           </div>
 
-        <p>
-          Draft Invoices: $50
-          Outstanding Invoices: $300
-          Overdue Invoices: $500
+                <p>
+                  Draft Invoices: $50
+                  Outstanding Invoices: $300
+                  Overdue Invoices: $500
 
-        </p>
+                </p>
 
-        <div>
+        <div className="row">
+        <h3>Clients</h3>
         <ClientList clients = {this.state.clients}>
 
         </ClientList>
         </div>
+
       </div>
     )
   }

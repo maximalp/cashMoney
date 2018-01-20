@@ -8,7 +8,8 @@ const ClientList = (props) => {
 
         <li className="col m12">
           <div className="card">
-          <h2>{client.companyName}</h2>
+          <h5>Client Company: {client.companyName}</h5>
+          <h5>Email: {client.email}</h5>
           </div>
         </li>
       )
@@ -16,7 +17,9 @@ const ClientList = (props) => {
 
     return (
       <ul className="row">
+        <div className="col m12">
         {clients}
+      </div>
       </ul>
     )
   };

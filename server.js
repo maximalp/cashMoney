@@ -39,13 +39,14 @@ autoIncrement.initialize(db);
 // Models
 const Invoice = require("./models/invoice");
 const Expense = require("./models/expense");
-
+const Clients = require("./models/client");
 
 
 // Routes => Controller
 require('./routes/InvoiceAPI.js')(app);
 require('./routes/ExpenseAPI.js')(app);
 require('./routes/DashboardAPI.js')(app);
+require('./routes/ClientAPI.js')(app);
 
 
 
