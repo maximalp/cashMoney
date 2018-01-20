@@ -8,7 +8,7 @@ const InvoiceCardListFeature = (props) => {
       <div className="row" style={{background:'pink'}}>
         <div className="col m12">
           <InvoiceSorter switches={props.switches}/>
-          <InvoiceCardList onClick={props.handleOnClickChip} invoices={props.invoice}/>
+          <InvoiceCardList inputChange={props.inputChange} edit={props.edit} handleOnClickEdit={props.handleOnClickEdit} onClick={props.handleOnClickChip} invoices={props.invoice}/>
         </div>
       </div>
     )

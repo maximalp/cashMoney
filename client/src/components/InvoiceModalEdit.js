@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import ExpenseGenerator from './ExpenseGenerator';
+import InvoiceGeneratorEdit from './InvoiceGeneratorEdit';
 
-class ExpenseModal extends React.Component {
+class InvoiceModalEdit extends React.Component {
   constructor () {
     super();
     this.state = {
@@ -13,8 +13,11 @@ class ExpenseModal extends React.Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  handleOpenModal () {
+  handleOpenModal (event) {
     this.setState({ showModal: true });
+    console.log(event.target.id)
+    this.props.handleOnClickEdit(event.target.id);
+
   }
 
   handleCloseModal () {
@@ -24,18 +27,19 @@ class ExpenseModal extends React.Component {
   render () {
     return (
       <div className="row">
-        <button className="btn btn-large" onClick={this.handleOpenModal}>Add and Expense Report</button>
+        <h1>Edit</h1>
+        <button id={this.props.id} className="chip col m12" onClick={this.handleOpenModal}>Edit</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
            onRequestClose={this.handleCloseModal}
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
-             <button className="btn btn-small" onClick={this.handleCloseModal}>Close</button>
-             <h1>Create Expense Report:</h1>
+             <button onClick={this.handleCloseModal}>Close Modal</button>
+             <h1>Create Invoice:</h1>
              <div className="row">
-               <div className="col m10 offset-m1">
-                 <ExpenseGenerator/>
+               <div className="col m8 offset-m2">
+                 <InvoiceGeneratorEdit inputChange={this.props.inputChange} edit={this.props.edit} />
                </div>
 
              </div>
@@ -47,7 +51,7 @@ class ExpenseModal extends React.Component {
   }
 }
 
-export default ExpenseModal;
+export default InvoiceModalEdit;
 
 const props = {};
 //

@@ -5,7 +5,7 @@ const InvoiceCardList = (props) => {
   console.log(props)
   let invoices = props.invoices.map((invoice) => {
     return (
-      <InvoiceCard key={invoice._id} onClick={props.onClick} invoices={invoice}/>
+      <InvoiceCard inputChange={props.inputChange} edit={props.edit} key={invoice._id} handleOnClickEdit={props.handleOnClickEdit} onClick={props.onClick} invoices={invoice}/>
     )
   })
   return(
