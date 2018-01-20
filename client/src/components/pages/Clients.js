@@ -9,7 +9,9 @@ class Clients extends React.Component {
 
 
   this.state = {
-    clients: []
+    clients: [],
+    draftAmount: 0,
+    sentAmount: 0
   }
 
 };
@@ -19,13 +21,66 @@ componentDidMount() {
   let query = '/api/clients';
   clientAPI.get(query)
     .then(res => {
-      let clients = res.data;
+      let clients = res.data.invoices;
+      console.log("DRAFT", res.data.draft)
+      console.log("SENT", res.data.sent)
 
-      console.log("all clients response from database", clients);
-      this.setState({
-        clients:clients
+      let draft = res.data.draft;
+      let draftAmount = draft.map((draft) => {
+        return draft.lineTotal
       })
-      console.log("state",this.state)
+      let draftTotal = draftAmount.reduce((sum, amount) => {
+        return sum + amount;
+      }, 0)
+
+      let sent = res.data.sent;
+      let sentAmount = sent.map((sent) => {
+        return sent.lineTotal
+      })
+      let sentTotal = sentAmount.reduce((sum, amount) => {
+        return sum + amount;
+      }, 0)
+
+      // console.log("what I get back from DB", clients)
+      // let invoices = clients.map((client) => {
+      //   return client.invoices
+      // })
+      // console.log("after clients.map", invoices)
+
+      // let idontknow = invoices.map((array) => {
+      //   let sent = array.filter((client) => {
+      //     return client.status === 'Sent'
+      //   })
+      //   let outstanding = array.filter((client) => {
+      //     return client.status === 'Outstanding'
+      //   })
+      // })
+
+      // // console.log("all clients response from database", clients);
+
+      // let sent = invoices.filter((client) => {
+      //   return client.status === 'Sent'
+      // })
+
+      // let sentAmount = sent.reduce((sum, amount) => {
+      //   return sum + amount;
+      // }, 0)
+
+
+      // let outstanding = invoices.filter((client) => {
+      //   return client.status === 'Outstanding'
+      // })
+
+      // let outstandingAmount = outstanding.reduce((sum, amount) => {
+      //   return sum + amount;
+      // }, 0)
+
+      this.setState({
+        clients,
+        sentAmount:sentTotal,
+        draftAmount: draftTotal
+      })
+      // console.log("state",this.state)
     })
     .catch(err => console.log(err));
 }
@@ -57,22 +112,28 @@ render () {
             </ClientModal>
           </div>
 
-          <div className="row">
-          <h3>Clients Invoice Overview </h3>
+          <div className="col m12">
+            <div className="row">
+                 <div className="col m6">
+                    <h1>Draft Amount: ${this.state.draftAmount}</h1>
+                  </div>
+                  <div className="col m6">
+                    <h1>Sent Amount: ${this.state.sentAmount}</h1>
+                    
+                  </div>
+              
+            </div>
+     
+
+
+
           </div>
 
-                <p>
-                  Draft Invoices: $50
-                  Outstanding Invoices: $300
-                  Overdue Invoices: $500
+        <div className="col m12">
+          <h3>Clients</h3>
+          <ClientList clients = {this.state.clients}>
 
-                </p>
-
-        <div className="row">
-        <h3>Clients</h3>
-        <ClientList clients = {this.state.clients}>
-
-        </ClientList>
+          </ClientList>
         </div>
 
       </div>
