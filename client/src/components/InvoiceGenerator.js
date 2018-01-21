@@ -31,7 +31,8 @@ class InvoiceGenerator extends React.Component {
       holder:{},
       dropDownOptions: ['Select an option'],
       selected: "",
-      startDate: moment()
+      startDate: moment(),
+      id: ""
     }
   }
 
@@ -93,8 +94,9 @@ class InvoiceGenerator extends React.Component {
     };
 
     console.log(data);
+    let param = this.state.id;
 
-    API.post(data)
+    API.post(param, data)
     .then(res => {
       let newEntry = res.data;
       this.setState({holder:newEntry})
@@ -118,12 +120,12 @@ class InvoiceGenerator extends React.Component {
   console.log(this.props.dropDownOptions.indexOf(option.label))
   let index = this.props.dropDownOptions.indexOf(option.label);
   let fillInfo = this.props.clientsInfo[index];
-  // console.log(fillInfo)
-  this.fillInfo(fillInfo);
+  let id = this.props.clientsId[index];
+  this.fillInfo(fillInfo, id);
 }
 
-  fillInfo = (info) => {
-    console.log(info)
+  fillInfo = (info, id) => {
+    console.log(info, id)
     this.setState({
       clientFirstName:info.firstName,
       clientLastName:info.lastName,
@@ -132,6 +134,7 @@ class InvoiceGenerator extends React.Component {
       clientCity:info.city,
       clientState:info.USstate,
       clientZip:info.zip,
+      id:id,
     })
   }
 

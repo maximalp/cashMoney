@@ -9,7 +9,8 @@ class InvoiceModal extends React.Component {
     this.state = {
       showModal: false,
       clientsInfo: [],
-      options: []
+      options: [],
+      id:[]
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -24,7 +25,10 @@ class InvoiceModal extends React.Component {
       let companyNameArray = res.data.clients.map(clientInformation => {
         return clientInformation.companyName
       })
-      this.setState({clientsInfo:res.data.clients, options: companyNameArray})
+      let companyIdArray = res.data.clients.map(clientInformation => {
+        return clientInformation._id
+      })
+      this.setState({clientsInfo:res.data.clients, options: companyNameArray, id: companyIdArray})
     })
     .then(err => {
       console.log(err)
@@ -50,7 +54,7 @@ class InvoiceModal extends React.Component {
              <h1>Create Invoice:</h1>
              <div className="row">
                <div className="col m8 offset-m2">
-                 <InvoiceGenerator close={this.handleCloseModal} dropDownOptions={this.state.options} clientsInfo={this.state.clientsInfo}/>
+                 <InvoiceGenerator close={this.handleCloseModal} dropDownOptions={this.state.options} clientsInfo={this.state.clientsInfo} clientsId={this.state.id}/>
                </div>
 
              </div>

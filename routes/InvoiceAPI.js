@@ -163,14 +163,14 @@ module.exports = function(app) {
   // }),
 
   // Create new invoice-------------------------------
-  app.post('/api/invoices', function(req,res) {
+  app.post('/api/invoices/:id', function(req,res) {
     console.log(req.body);
     const invoiceData = req.body;
 
     Invoices.create(invoiceData)
       .then(function(doc) {
 
-        return Clients.findOneAndUpdate({_id: "5a63777f94eabe77e04dc3e9"}, { $push : { invoices: doc._id}}, { new: true});
+        return Clients.findOneAndUpdate({_id: req.params.id}, { $push : { invoices: doc._id}}, { new: true});
 
       })
       .then(function(dbClients) {
