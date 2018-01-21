@@ -1,19 +1,21 @@
 import React from 'react';
 import Input from './Input';
 import API from './utils/API';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
+// const defaultOption = dropDownOptions[0];
+
 
 class InvoiceGenerator extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      name:"",
-      phoneNumber: "",
-      street: "",
-      city: "",
-      USstate: "",
-      zip:"",
-      country:"United States",
       clientFirstName:"",
       clientLastName:"",
       clientCompanyName:"",
@@ -26,18 +28,23 @@ class InvoiceGenerator extends React.Component {
       lineRate:"",
       lineQty:"",
       lineTotal:"",
-      holder:{}
+      holder:{},
+      dropDownOptions: ['Select an option'],
+      selected: "",
+      startDate: moment()
     }
   }
 
+  // componentDidMount() {
+  //   let clientArray = this.props.clientsInfo
+  //   console.log('clientArray', clientArray)
+  //
+  //   // console.log(companyNameArray)
+  //   //
+  //   // this.setState({dropDownOptions:companyNameArray})
+  // }
+
   static defaultProps = {
-    name:"Company Name",
-    phoneNumber: "Number",
-    street: "Street",
-    city: "City",
-    USstate: "State",
-    zip:"zip-code",
-    country:"United States",
     clientFirstName:"Client First Name",
     clientLastName:"Client Last Name",
     clientCompanyName:"Client Company Name",
@@ -53,6 +60,12 @@ class InvoiceGenerator extends React.Component {
     holder:{}
   }
 
+  handleCalendarChange = (date) => {
+    this.setState({
+      startDate:date
+    });
+  }
+
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -64,13 +77,6 @@ class InvoiceGenerator extends React.Component {
   // Adds Invoice
   handleOnClick = (event) => {
     let data = {
-      name:this.state.name,
-      phoneNumber: this.state.phoneNumber,
-      street: this.state.street,
-      city: this.state.city,
-      USstate: this.state.USstate,
-      zip:this.state.zip,
-      country:"United States",
       clientFirstName:this.state.clientFirstName,
       clientLastName:this.state.clientLastName,
       clientCompanyName:this.state.clientCompanyName,
@@ -82,6 +88,8 @@ class InvoiceGenerator extends React.Component {
       lineRate:this.state.lineRate,
       lineQty:this.state.lineQty,
       lineTotal:this.state.lineTotal,
+      dateOfIssue: moment().toDate(),
+      dueDate: this.state.startDate,
     };
 
     console.log(data);
@@ -91,8 +99,12 @@ class InvoiceGenerator extends React.Component {
       let newEntry = res.data;
       this.setState({holder:newEntry})
       console.log(newEntry);
+      this.props.close();
     })
-    .catch(err => console.log(err));
+    .catch(err => alert(err));
+
+
+
   }
 
   // Shows state
@@ -100,84 +112,92 @@ class InvoiceGenerator extends React.Component {
     console.log(this.state);
   }
 
+  _onSelect = (option) => {
+  console.log('You selected ', option.label)
+  this.setState({selected: option})
+  console.log(this.props.dropDownOptions.indexOf(option.label))
+  let index = this.props.dropDownOptions.indexOf(option.label);
+  let fillInfo = this.props.clientsInfo[index];
+  // console.log(fillInfo)
+  this.fillInfo(fillInfo);
+}
+
+  fillInfo = (info) => {
+    console.log(info)
+    this.setState({
+      clientFirstName:info.firstName,
+      clientLastName:info.lastName,
+      clientCompanyName:info.companyName,
+      clientStreetAddress:info.street,
+      clientCity:info.city,
+      clientState:info.USstate,
+      clientZip:info.zip,
+    })
+  }
+
+
 
 
   render() {
+    // const defaultOption = this.state.selected
+    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
+
     return (
       <div>
           {/* Header Address */}
           {/* Inject: Hard Coded: US */}
-        <div style={{background:'#dcedc8'}} className="row card">
+        <div className="row card" style={{background:'green'}}>
           <div className="col m12">
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.firstname} placeholder={this.props.clientFirstName} type={"text"} name={"name"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.street} placeholder={this.props.street} type={"text"} name={"street"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <Input value={this.state.city} placeholder={this.props.city} type={"text"} name={"city"} onChange={this.handleInputChange}/>
-              </div>
-              <div className="col m3">
-                <Input value={this.state.USstate} placeholder={this.props.USstate} type={"text"} name={"USstate"} onChange={this.handleInputChange}/>
-              </div>
-              <div className="col m3">
-                <Input value={this.state.zip} placeholder={this.props.zip} type={"text"} name={"zip"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m3">
-                <label>United States</label> {/* Inject: Hard Coded: US */}
-                <input readOnly={"United States"} type={"text"} value={"United States"} />
-              </div>
-              <div className="col m3">
-                <Input value={this.state.phoneNumber} placeholder={this.props.phoneNumber} type={"text"} name={"phoneNumber"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
+            <h5>Date of Issue:</h5>
+            <h5>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h5> {/* Inject: Need date, due date, invoice number  */}
+          </div>
+          <div className="col m12">
+            <h5>Due Date:</h5>
+            <DatePicker
+              selected={this.state.startDate}
+              onChange={this.handleCalendarChange}
+            />; {/* Inject: Need date, due date, invoice number  */}
           </div>
         </div>
 
+
+        <Dropdown options={this.props.dropDownOptions} onChange={this._onSelect} value={this.state.dropDownOptions[0]} placeholder="Select an option" />
         <div style={{background:'#e1f5fe'}} className="row card">
           {/* Billing Section */}
           <section className="col m8">
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientFirstName} placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientFirstName} placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientLastName} placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientLastName} placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientCompanyName} placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientCompanyName} placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientStreetAddress} placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientStreetAddress} placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientCity} placeholder={this.props.clientCity} type={"text"} name={"clientCity"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientCity} placeholder={this.props.clientCity} type={"text"} name={"clientCity"} />
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <Input value={this.state.clientZip} placeholder={this.props.clientZip} type={"text"} name={"clientZip"} onChange={this.handleInputChange}/>
+                <Input value={this.state.clientZip} placeholder={this.props.clientZip} type={"text"} name={"clientZip"} />
               </div>
             </div>
             <div className="row">
@@ -187,24 +207,8 @@ class InvoiceGenerator extends React.Component {
             </div>
           </section>
           <section className="col m4">
-            <div className="row">
-              <div className="col m12">
-                <h5>Date of Issue:</h5>
-                <h5>Insert here today's date: 1/14/2018</h5> {/* Inject: Need date, due date, invoice number  */}
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <h5>Due Date:</h5>
-                <h5>Insert here the due date: 1/28/2018</h5> {/* Inject: Need date, due date, invoice number  */}
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <h5></h5>
-                <h5>Insert here the invoice number:001</h5> {/* Inject: Need date, due date, invoice number  */}
-              </div>
-            </div>
+
+
             <div className="row">
               <div className="col m12">
                 <h5>Amount Due</h5>

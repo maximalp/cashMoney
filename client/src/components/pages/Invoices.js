@@ -109,9 +109,15 @@ class Invoices extends React.Component {
     let query = '/api/pullInvoices';
     API.get(query)
       .then(res => {
-        let invoices = res.data;
-        console.log(invoices);
-        this.setState({invoice:invoices})
+        let invoices = res.data.all;
+        let favorite = res.data.favorite
+        console.log("invoices", invoices);
+        this.setState({
+          invoice:invoices,
+          favoriteInvoices:favorite,
+          theChosenOne:favorite[0]
+        })
+        console.log("state",this.state)
       })
       .catch(err => console.log(err));
   }
@@ -219,13 +225,13 @@ class Invoices extends React.Component {
     return (
       <div className="row">
         <div className="col m12">
-          <InvoiceModal>
+          <InvoiceModal pullInvoices={this.pullInvoices}>
           </InvoiceModal>
         </div>
         <div className="col m12">
           <div className="row">
             <div className="col m12">
-              <h3>Favorite Invoices</h3>
+              <h3>Recent Invoices</h3>
               <InvoiceFavoriteFeature theChosenOne={this.state.theChosenOne} favoriteInvoices={this.state.favoriteInvoices} handleOnClickFaveTabs={this.handleOnClickFaveTabs} invoice={this.state.invoice}/>
               {/* <button onClick={this.handleOnClickState}>Show State</button>
               <button onClick={this.handleOnClickCreate}>Create dummy invoice</button> */}

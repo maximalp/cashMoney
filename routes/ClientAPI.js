@@ -28,13 +28,14 @@ app.get("/api/clients", function(req, res) {
     .then(dbModelAll => {
       // res.json({invoices: dbModelAll});
 
-      Invoices.find({status:'Draft'})
-      .then(dbModelDraft => {
-        // res.json({invoices:dbModelAll, draft: dbModelDraft})
-        Invoices.find({status:'Sent'})
-        .then((dbModelSent, draftTotalSum) => {
+      Invoices.find({status:'Sent'})
+      .then(dbModelSent => {
+        console.log(dbModelSent)
+        // res.json({invoices:dbModelAll, draft: dbModelSent})
+        Invoices.find({status:'Paid'})
+        .then((dbModelPaid) => {
 
-          res.json({invoices:dbModelAll, draft: dbModelDraft, sent:dbModelSent})
+          res.json({invoices:dbModelAll, sent: dbModelSent, paid:dbModelPaid})
 
         })
         .catch(err => res.status(422).json(err));

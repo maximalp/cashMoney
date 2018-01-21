@@ -57,6 +57,17 @@ module.exports = function(app) {
     .catch(err => res.status(422).json(err));
   }),
 
+ //pull for client list
+  app.get("/api/invoices/dropdown", function(req, res) {
+    Clients.find({})
+    .then(dbModel =>
+      {
+        // console.log(dbModel);
+        (dbModel.length > 0) ? res.json({clients:dbModel}) : res.json({client:{companyName:"Please add client in client page"}})
+
+      })
+    .catch(err => res.status(422).json(err));
+  }),
   //Individual Invoice-----------------------------------------
   app.get("/api/invoice/:id", function(req, res) {
     Invoices.find({_id:req.params.id})

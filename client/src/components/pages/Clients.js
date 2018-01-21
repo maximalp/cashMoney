@@ -10,8 +10,8 @@ class Clients extends React.Component {
 
   this.state = {
     clients: [],
-    draftAmount: 0,
-    sentAmount: 0
+    sentAmount: 0,
+    paidAmount: 0
   }
 
 };
@@ -22,22 +22,23 @@ componentDidMount() {
   clientAPI.get(query)
     .then(res => {
       let clients = res.data.invoices;
-      console.log("DRAFT", res.data.draft)
+      console.log("CLIENTS", clients);
       console.log("SENT", res.data.sent)
-
-      let draft = res.data.draft;
-      let draftAmount = draft.map((draft) => {
-        return draft.lineTotal
-      })
-      let draftTotal = draftAmount.reduce((sum, amount) => {
-        return sum + amount;
-      }, 0)
+      console.log("paid", res.data.paid)
 
       let sent = res.data.sent;
       let sentAmount = sent.map((sent) => {
         return sent.lineTotal
       })
       let sentTotal = sentAmount.reduce((sum, amount) => {
+        return sum + amount;
+      }, 0)
+
+      let paid = res.data.paid;
+      let paidAmount = paid.map((paid) => {
+        return paid.lineTotal
+      })
+      let paidTotal = paidAmount.reduce((sum, amount) => {
         return sum + amount;
       }, 0)
 
@@ -48,7 +49,7 @@ componentDidMount() {
       // console.log("after clients.map", invoices)
 
       // let idontknow = invoices.map((array) => {
-      //   let sent = array.filter((client) => {
+      //   let paid = array.filter((client) => {
       //     return client.status === 'Sent'
       //   })
       //   let outstanding = array.filter((client) => {
@@ -58,11 +59,11 @@ componentDidMount() {
 
       // // console.log("all clients response from database", clients);
 
-      // let sent = invoices.filter((client) => {
+      // let paid = invoices.filter((client) => {
       //   return client.status === 'Sent'
       // })
 
-      // let sentAmount = sent.reduce((sum, amount) => {
+      // let paidAmount = paid.reduce((sum, amount) => {
       //   return sum + amount;
       // }, 0)
 
@@ -77,8 +78,8 @@ componentDidMount() {
 
       this.setState({
         clients,
-        sentAmount:sentTotal,
-        draftAmount: draftTotal
+        paidAmount:paidTotal,
+        sentAmount: sentTotal
       })
       // console.log("state",this.state)
     })
@@ -115,15 +116,15 @@ render () {
           <div className="col m12">
             <div className="row">
                  <div className="col m6">
-                    <h1>Draft Amount: ${this.state.draftAmount}</h1>
+                    <h1>Sent Amount: ${this.state.sentAmount}</h1>
                   </div>
                   <div className="col m6">
-                    <h1>Sent Amount: ${this.state.sentAmount}</h1>
-                    
+                    <h1>Paid Amount: ${this.state.paidAmount}</h1>
+
                   </div>
-              
+
             </div>
-     
+
 
 
 

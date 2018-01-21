@@ -12,7 +12,7 @@ const InvoiceCard = (props) => {
           <div className="col m1">
             <div className="row">
               <div className='col m12'>
-                <button style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Favorite</button>
+                <button style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Shortlist</button>
 
               </div>
             </div>

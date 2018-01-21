@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import InvoiceGenerator from './InvoiceGenerator';
+import API from './utils/API';
 
 class InvoiceModal extends React.Component {
   constructor () {
     super();
     this.state = {
-      showModal: false
+      showModal: false,
+      clientsInfo: [],
+      options: []
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -15,10 +18,22 @@ class InvoiceModal extends React.Component {
 
   handleOpenModal () {
     this.setState({ showModal: true });
+    API.get('/api/invoices/dropdown')
+    .then(res => {
+      console.log('clients info', res.data.clients)
+      let companyNameArray = res.data.clients.map(clientInformation => {
+        return clientInformation.companyName
+      })
+      this.setState({clientsInfo:res.data.clients, options: companyNameArray})
+    })
+    .then(err => {
+      console.log(err)
+    })
   }
 
   handleCloseModal () {
     this.setState({ showModal: false });
+    this.props.pullInvoices();
   }
 
   render () {
@@ -35,7 +50,7 @@ class InvoiceModal extends React.Component {
              <h1>Create Invoice:</h1>
              <div className="row">
                <div className="col m8 offset-m2">
-                 <InvoiceGenerator/>
+                 <InvoiceGenerator close={this.handleCloseModal} dropDownOptions={this.state.options} clientsInfo={this.state.clientsInfo}/>
                </div>
 
              </div>

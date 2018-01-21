@@ -4,13 +4,6 @@ const Schema = mongoose.Schema;
 const autoIncrement = require('mongoose-auto-increment-fix');
 
 const invoiceSchema = new Schema({
-  name: { type: String, required: true },
-  phoneNumber: { type: Number, required: true },
-  street: { type: String, required: true },
-  city: { type: String, required: true },
-  USstate: { type: String, required: true },
-  zip: { type: Number, required: true },
-  country : { type: String, required: true, default: "United States" },
   clientFirstName: { type: String, required: true },
   clientLastName: { type: String, required: true },
   clientCompanyName: { type: String, required: true },
@@ -25,8 +18,8 @@ const invoiceSchema = new Schema({
   lineRate: { type: Number, required: true },
   lineQty: { type: Number, required: true },
   lineTotal: { type: Number, required: true },
-  favorite: { type: Boolean, required: true, default: false},
-  status: {type: String, required: true, default: 'Draft'}
+  favorite: { type: Boolean, required: true, default: true},
+  status: {type: String, required: true, default: 'Sent'}
 });
 
 // autoincrement plugin
