@@ -16,6 +16,16 @@ class Clients extends React.Component {
 
 };
 
+sortClientList = (clients) =>
+{
+clients.sort((client1, client2) =>
+
+client1.companyName.localeCompare(client2.companyName))
+
+};
+
+
+
 // calling client object from database when client component loads
 componentDidMount() {
   let query = '/api/clients';
@@ -75,15 +85,17 @@ componentDidMount() {
       // let outstandingAmount = outstanding.reduce((sum, amount) => {
       //   return sum + amount;
       // }, 0)
-
+      this.sortClientList(clients);
       this.setState({
         clients,
-        paidAmount:paidTotal,
+        paidAmount: paidTotal,
         sentAmount: sentTotal
       })
       // console.log("state",this.state)
     })
     .catch(err => console.log(err));
+
+
 }
 
 // refreshing client list through state when adding client
@@ -92,6 +104,9 @@ handleAddClient = (client) =>
   let clients = this.state.clients;
   clients.push(client);
   console.log("new clients from handle click" + clients);
+
+  this.sortClientList(clients);
+
   this.setState({
 
   clients:clients
@@ -126,7 +141,8 @@ render () {
 
         <div className="col m12">
           <h3>Clients</h3>
-          <ClientList clients = {this.state.clients}>
+          <ClientList
+            clients = {this.state.clients}>
 
           </ClientList>
         </div>
