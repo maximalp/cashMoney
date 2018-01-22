@@ -35,11 +35,49 @@ module.exports = function(app) {
 
             let profit = [{name: 'Profit', profit:profitTotal}]
 
+            let categoryArray = dbModelExpense.map(expense => {
+              return expense.category
+            })
 
-            res.json({invoice:invoiceAmounts, expense: dbModelExpense, profit:profit})
+            // dbModelExpense = all the expense objects
+
+            let uniqueCategoryObject = new Set(categoryArray);
+            let uniqueCategoryArray = Array.from(uniqueCategoryObject);
+            console.log(uniqueCategoryArray)
+
+            let totalExpensesArray = [];
+
+            for (let i = 0; i < uniqueCategoryArray.length; i++) {
+              let category0 = uniqueCategoryArray[i];
+              let amount = 0;
+
+              for (let a = 0; a < dbModelExpense.length; a++) {
+
+                if (category0 == dbModelExpense[a].category) {
+                  console.log(dbModelExpense[a].category)
+                  console.log('total', dbModelExpense[a].total)
+                  let individualAmount = dbModelExpense[a].total;
+                  amount += individualAmount;
+                  console.log('amount', amount);
+                }
+              }
+              totalExpensesArray.push(amount);
+            }
+
+
+            res.json({invoice:invoiceAmounts, expenseCategory: uniqueCategoryArray, expenseTotal:totalExpensesArray, profit:profit})
           })
 
-      })
+          // Expenses.aggregate(
+          //     { $group: {
+          //         _id:'$_id',
+          //         total: { $sum: "$total" },
+          //     }}
+          // ).then(dbModelAgg => {
+          //   console.log('AGG', dbModelAgg)
+          // })
+
+        })
       .catch(err => {
         res.status(422).json(err);
       })

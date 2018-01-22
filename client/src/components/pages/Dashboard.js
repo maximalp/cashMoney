@@ -6,7 +6,7 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import API from '../utils/API';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine} from 'recharts';
+import {PieChart, Pie, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine} from 'recharts';
 
 const data = [
       {name: 'Total Invoices', uv: -4000}
@@ -27,7 +27,8 @@ class Dashboard extends React.Component {
       endDatePie: moment(),
       barGraphData:[],
       profitBarGraphData:[],
-      maxProfitBarGraphData:0
+      maxProfitBarGraphData:0,
+      pieGraphData:[]
     }
   }
 
@@ -42,10 +43,23 @@ class Dashboard extends React.Component {
       let profitBarGraphData = res.data.profit
       let maxProfitBarGraphData = Math.abs(profitBarGraphData[0].profit)
       console.log('MAX', maxProfitBarGraphData)
+
+      let categoriesArray = res.data.expenseCategory;
+      let categoriesValuesArray = res.data.expenseTotal
+      let pieGraphData = []
+
+      for (let i = 0; i < categoriesArray.length; i++) {
+        let data = {name: categoriesArray[i], value: categoriesValuesArray[i]}
+        pieGraphData.push(data)
+
+      }
+
+
       this.setState({
         barGraphData,
         profitBarGraphData,
-        maxProfitBarGraphData
+        maxProfitBarGraphData,
+        pieGraphData
       })
       console.log('profitBarGraphData', profitBarGraphData[0].profit)
     })
@@ -112,10 +126,10 @@ class Dashboard extends React.Component {
 
           <div className="row">
             <div className="col m6">
-              <DatePicker
+              {/* <DatePicker
                 selected={this.state.startDateBar}
                 onChange={this.handleCalendarChangeStartBar}
-              />
+              /> */}
               {/* Profits */}
               <BarChart width={500} height={500} data={this.state.profitBarGraphData}
                     margin={{top: 20, right: 30, left: 20, bottom: 5}}>
@@ -129,48 +143,34 @@ class Dashboard extends React.Component {
               </BarChart>
             </div>
             <div className="col m6">
-              <DatePicker
+              {/* <DatePicker
                 selected={this.state.endDateBar}
                 onChange={this.handleCalendarChangeEndBar}
-              />
+              /> */}
             </div>
           </div>
 
 
         </div>
+
         <div className="col m12">
-          {/* <AreaGraph /> */}
+          <PieChart width={600} height={500}>
+            <Pie isAnimationActive={false} data={this.state.pieGraphData} cx={300} cy={300} outerRadius={170} fill="#8884d8" label/>
+
+            <Tooltip/>
+          </PieChart>
           <div className="row">
             <div className="col m6">
-              <DatePicker
-                selected={this.state.startDateArea}
-                onChange={this.handleCalendarChangeStartArea}
-              />
-            </div>
-            <div className="col m6">
-              <DatePicker
-                selected={this.state.endDateArea}
-                onChange={this.handleCalendarChangeEndArea}
-              />
-            </div>
-          </div>
-
-
-        </div>
-        <div className="col m12">
-          {/* <PieGraph /> */}
-          <div className="row">
-            <div className="col m6">
-              <DatePicker
+              {/* <DatePicker
                 selected={this.state.startDatePie}
                 onChange={this.handleCalendarChangeStartPie}
-              />
+              /> */}
             </div>
             <div className="col m6">
-              <DatePicker
+              {/* <DatePicker
                 selected={this.state.endDatePie}
                 onChange={this.handleCalendarChangeEndPie}
-              />
+              /> */}
             </div>
           </div>
 
