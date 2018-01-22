@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import InvoiceGenerator from './InvoiceGenerator';
+import InvoiceGeneratorView from './InvoiceGeneratorView';
 import API from './utils/API';
 
-class InvoiceModal extends React.Component {
+class InvoiceModalView extends React.Component {
   constructor () {
     super();
     this.state = {
       showModal: false,
-      clientsInfo: [],
-      options: [],
-      id:[]
+      clientsInfo: []
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -18,17 +16,14 @@ class InvoiceModal extends React.Component {
   }
 
   handleOpenModal () {
+    console.log(this.props.id)
+    let id = this.props.id
     this.setState({ showModal: true });
-    API.get('/api/invoices/dropdown')
+    API.get('/api/invoice/'+id)
     .then(res => {
-      console.log('clients info', res.data.clients)
-      let companyNameArray = res.data.clients.map(clientInformation => {
-        return clientInformation.companyName
-      })
-      let companyIdArray = res.data.clients.map(clientInformation => {
-        return clientInformation._id
-      })
-      this.setState({clientsInfo:res.data.clients, options: companyNameArray, id: companyIdArray})
+      console.log('clients info', res.data)
+      this.setState({clientsInfo:res.data[0]})
+      console.log(this.state)
     })
     .then(err => {
       console.log(err)
@@ -37,13 +32,26 @@ class InvoiceModal extends React.Component {
 
   handleCloseModal () {
     this.setState({ showModal: false });
-    this.props.pullInvoices();
+  }
+
+  handleOnClick = () => {
+    let id = this.props.id
+    API.putStatus('/api/invoice/'+id)
+      .then(res => {
+        console.log('FAVORITE', res.data)
+        this.handleCloseModal();
+        this.props.viewPull();
+
+      })
+      .then(err => {
+        console.log(err)
+      })
   }
 
   render () {
     return (
       <div className="row">
-        <button className="col m4" onClick={this.handleOpenModal}>Create Invoice</button>
+        <button className="col m12 chip" onClick={this.handleOpenModal}>Details</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
@@ -51,10 +59,10 @@ class InvoiceModal extends React.Component {
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
              <button onClick={this.handleCloseModal}>Close Modal</button>
-             <h1>Create Invoice:</h1>
              <div className="row">
                <div className="col m8 offset-m2">
-                 <InvoiceGenerator close={this.handleCloseModal} dropDownOptions={this.state.options} clientsInfo={this.state.clientsInfo} clientsId={this.state.id}/>
+                 <button onClick={this.handleOnClick}>Mark as Paid</button>
+                 <InvoiceGeneratorView clientsInfo={this.state.clientsInfo} />
                </div>
 
              </div>
@@ -66,7 +74,7 @@ class InvoiceModal extends React.Component {
   }
 }
 
-export default InvoiceModal;
+export default InvoiceModalView;
 
 const props = {};
 //

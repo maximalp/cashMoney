@@ -10,6 +10,8 @@ class Invoices extends React.Component {
     super(props);
 
     this.state = {
+      invoiceTotalSent: 0,
+      invoiceTotalPaid: 0,
       name: "",
       phoneNumber: "",
       street: "",
@@ -53,20 +55,20 @@ class Invoices extends React.Component {
   }
 
   componentDidMount() {
-    let query = '/api/pullInvoices';
-    API.get(query)
+    this.pullInvoices();
+  }
+
+  handleOnClickFavoritePaid = (event) => {
+    let id = event.target.id
+    API.putStatus('/api/invoice/'+id)
       .then(res => {
-        let invoices = res.data.all;
-        let favorite = res.data.favorite
-        console.log("invoices", invoices);
-        this.setState({
-          invoice:invoices,
-          favoriteInvoices:favorite,
-          theChosenOne:favorite[0]
-        })
-        console.log("state",this.state)
+        console.log('FAVORITE', res.data)
+        this.pullInvoices();
+
       })
-      .catch(err => console.log(err));
+      .then(err => {
+        console.log(err)
+      })
   }
 
   handleOnClickFaveTabs = (event) => {
@@ -110,17 +112,48 @@ class Invoices extends React.Component {
     API.get(query)
       .then(res => {
         let invoices = res.data.all;
-        let favorite = res.data.favorite
+        let favorite = res.data.favorite;
+        let invoicesSent = invoices.filter((invoice) => {
+          return invoice.status === 'Sent'
+        })
+        let invoicesPaid = invoices.filter((invoice) => {
+          return invoice.status === 'Paid'
+        })
+        console.log('INVOICES!!!!!!!!!', invoices)
+        let invoiceTotalSent = invoicesSent.reduce((sum, invoice) => {
+            return sum + invoice.lineTotal;
+        }, 0);
+        let invoiceTotalPaid = invoicesPaid.reduce((sum, invoice) => {
+            return sum + invoice.lineTotal;
+        }, 0);
+        console.log('invoiceTotalPaid', invoiceTotalPaid)
+        console.log('invoiceTotalPaid', invoiceTotalSent)
+
         console.log("invoices", invoices);
         this.setState({
           invoice:invoices,
           favoriteInvoices:favorite,
-          theChosenOne:favorite[0]
+          theChosenOne:favorite[0],
+          invoiceTotalSent,
+          invoiceTotalPaid
         })
         console.log("state",this.state)
       })
       .catch(err => console.log(err));
   }
+
+  // simplePullInvoices = () => {
+  //   let query = '/api/pullInvoicesSimple';
+  //   API.get(query)
+  //     .then(res => {
+  //       let invoices = res.data
+  //       this.setState({
+  //         invoice:invoices
+  //       })
+  //       console.log("state",this.state)
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   favoriteSetState = (invoices) => {
     this.setState({
@@ -230,9 +263,17 @@ class Invoices extends React.Component {
         </div>
         <div className="col m12">
           <div className="row">
+            <div className="col m6"><h1>Total Sent: ${this.state.invoiceTotalSent}</h1></div>
+            <div className="col m6"><h1>Total Paid: ${this.state.invoiceTotalPaid}</h1></div>
+
+          </div>
+          <h1></h1>
+        </div>
+        <div className="col m12">
+          <div className="row">
             <div className="col m12">
-              <h3>Recent Invoices</h3>
-              <InvoiceFavoriteFeature theChosenOne={this.state.theChosenOne} favoriteInvoices={this.state.favoriteInvoices} handleOnClickFaveTabs={this.handleOnClickFaveTabs} invoice={this.state.invoice}/>
+              <h3>Invoice Shortlist</h3>
+              <InvoiceFavoriteFeature onClick={this.handleOnClickFavoritePaid} theChosenOne={this.state.theChosenOne} favoriteInvoices={this.state.favoriteInvoices} handleOnClickFaveTabs={this.handleOnClickFaveTabs} invoice={this.state.invoice}/>
               {/* <button onClick={this.handleOnClickState}>Show State</button>
               <button onClick={this.handleOnClickCreate}>Create dummy invoice</button> */}
             </div>

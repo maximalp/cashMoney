@@ -13,6 +13,9 @@ export default {
   put: function(data) {
     return axios.put('/api/invoice/favorite', data);
   },
+  putStatus: function(query) {
+    return axios.put(query);
+  },
   // Gets all expenses
   getExpenses: function() {
     return axios.get("/api/expenses");

@@ -27,6 +27,18 @@ module.exports = function(app) {
         AmountOrStatus: {switch:true, field:'lineTotal'}
   }
 
+  app.get("/api/pullInvoicesSimple", function(req, res) {
+      Invoices.find({})
+      .sort({dateOfIssue:-1})
+      .then(dbModelAll => {
+
+        res.json(dbModelAll)
+
+      })
+      .catch(err => res.status(422).json(err));
+  }),
+
+
   //Initial Pull for Invoices----------------------------------
   app.get("/api/pullInvoices", function(req, res) {
       Invoices.find({})
@@ -109,7 +121,27 @@ module.exports = function(app) {
     })
 
 
-  })
+  }),
+
+
+  // Updates invoice status from 'Sent' to 'Paid'
+  app.put('/api/invoice/:id', function(req,res) {
+    let id = req.params.id;
+    // Finds invoice by Id, flips boolean, saves, sends back as json
+    Invoices.findById(id)
+    .then(dbModelChanged => {
+      dbModelChanged.status = 'Paid';
+      dbModelChanged.save(function(err) {
+        if(err) {
+          console.log('error');
+        }
+        res.json(dbModelChanged)
+      })
+      .catch(err => res.status(422).json(err));
+    })
+
+
+  }),
 
   // Refactored Sort Function----------------------------------
   app.get("/api/invoice/filter/:command", function(req,res) {

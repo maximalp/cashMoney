@@ -9,10 +9,13 @@ const InvoiceFavoriteCard = (props) => {
         <div style={{height:'500px', 'background':'#64b5f6'}} className="card col m12">
           <div className="row">
             <div className="col m12">
+              { (invoice._id && invoice.status === 'Sent') ? (<button onClick={props.onClick} id={invoice._id}>Mark as Paid</button>) :
+              (<div></div>) }
               <h4>Invoice Number:{invoice.invoiceId}</h4>
               <h5>Company:{invoice.clientCompanyName}</h5>
               <h5>Date Issued:{invoice.dateOfIssue}</h5>
               <h5>Date Due:{invoice.dateOfIssue}</h5>
+              <h5>{invoice._id}</h5>
             </div>
             <div className="col m12">
 
@@ -24,8 +27,7 @@ const InvoiceFavoriteCard = (props) => {
             <div className="col m12">
 
               <h4>Status:</h4>
-              <h5 style={[{'background':'red'}]}>{invoice.status}</h5>
-
+              <h5>{invoice.status}</h5>
             </div>
           </div>
         </div>

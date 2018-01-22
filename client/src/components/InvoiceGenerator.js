@@ -159,7 +159,7 @@ class InvoiceGenerator extends React.Component {
             <DatePicker
               selected={this.state.startDate}
               onChange={this.handleCalendarChange}
-            />; {/* Inject: Need date, due date, invoice number  */}
+            /> {/* Inject: Need date, due date, invoice number  */}
           </div>
         </div>
 

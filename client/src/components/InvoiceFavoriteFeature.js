@@ -8,7 +8,7 @@ const InvoiceFavoriteFeature = (props) => {
       <div>
         <div className="row">
           <div className="col m8">
-            <InvoiceFavoriteCard theChosenOne={props.theChosenOne}/>
+            <InvoiceFavoriteCard onClick={props.onClick} theChosenOne={props.theChosenOne}/>
           </div>
           <div className="col m4">
             {/* <ul className="tabs row tabs-fixed-width">

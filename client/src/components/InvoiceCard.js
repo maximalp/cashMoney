@@ -1,5 +1,5 @@
 import React from 'react';
-import InvoiceModalEdit from './InvoiceModalEdit';
+import InvoiceModalView from './InvoiceModalView';
 
 const InvoiceCard = (props) => {
 
@@ -19,7 +19,7 @@ const InvoiceCard = (props) => {
 
             <div className="row">
               <div className='col m12'>
-                <InvoiceModalEdit inputChange={props.inputChange} edit={props.edit} handleOnClickEdit={props.handleOnClickEdit} id={props.invoices._id} />
+                <InvoiceModalView viewPull={props.viewPull} id={props.invoices._id} />
               </div>
 
             </div>
