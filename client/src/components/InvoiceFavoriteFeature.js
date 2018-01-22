@@ -15,7 +15,7 @@ const InvoiceFavoriteFeature = (props) => {
               <InvoiceFavoriteTabs invoice={this.props.invoice} onClick={this.handleOnClick} style={{"background":"pink"}}/>
               <li onClick={this.change} style={{"background":"pink"}} className="tab col">button</li>
             </ul> */}
-            <InvoiceFavoriteTabs className="row" invoice={props.favoriteInvoices} onClick={props.handleOnClickFaveTabs} style={{"background":"pink"}}/>
+            <InvoiceFavoriteTabs className="row" invoice={props.favoriteInvoices} onClick={props.handleOnClickFaveTabs} style={{"background":"#64b5f6"}}/>
             {/* <ul>
               <li></li>
             </ul> */}

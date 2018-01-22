@@ -3,16 +3,28 @@ import React from 'react';
 const ExpenseCardList = (props) => {
   let expenses = props.expense.map((expense) => {
     return (
-<div className="row">
-  <div className="col s6 offset-s6">
-    <div className="collection">
-      <li className="collection-item" style={{height:'80px'}}>
-          <h2>{expense.field1}</h2>
-      </li>
-    </div>
-  </div>
-</div>
-    )
+            <li className="card col m12">
+                <div className="row">
+                  <div className="col m12">
+                    <h2>Date: {expense.date}</h2>
+                  </div>
+                  <div className="col m6">
+                    <h2>Category:{expense.category}</h2>
+                    <h3>Vendor:{expense.vendor}</h3>
+                  </div>
+                  <div className="col m6">
+                    <h2>Total:${expense.total}</h2>
+                    <h3>Description:{expense.description}</h3>
+
+                  </div>
+
+
+                </div>
+
+
+
+            </li>
+          )
   })
   return(
     <ul className="row">

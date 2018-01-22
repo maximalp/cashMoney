@@ -1,6 +1,9 @@
 import React from 'react';
 import Input from './Input';
 import API from './utils/API';
+import moment from 'moment';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class ExpenseGenerator extends React.Component {
   constructor (props) {
@@ -11,7 +14,9 @@ class ExpenseGenerator extends React.Component {
       date: "",
       vendor: "",
       description:"",
-      total:""
+      amountDue:"",
+      holder:{},
+      startDate: moment(),
     }
   }
 
@@ -23,6 +28,12 @@ class ExpenseGenerator extends React.Component {
     total:"0.00",
   }
 
+  handleCalendarChange = (date) => {
+    this.setState({
+      startDate:date
+    });
+  }
+
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -31,30 +42,58 @@ class ExpenseGenerator extends React.Component {
     });
   }
 
+  // Adding a client from form
   handleOnClick = (event) => {
-    let query = '/make';
-    API.get(query)
-    .then(res => {
-      let newEntry = res.data;
-      this.setState({holder:newEntry})
-    })
-    .catch(err => console.log(err));
+
+    if (
+      this.state.category=== "" ||
+      this.state.vendor === "" ||
+      this.state.description === "" ||
+      this.state.amountDue === ""
+      )
+      {
+        alert("Please fill in all fields")
+      }
+      else {
+        let data = {
+          category:this.state.category,
+          date: moment().toDate(),
+          vendor: this.state.vendor,
+          description: this.state.description,
+          total: this.state.amountDue
+        };
+
+        console.log(data);
+
+        API.postExpense(data)
+        .then(res => {
+          let newEntry = res.data;
+          // this.setState({holder:newEntry})
+
+          // console.log(newEntry);
+          this.props.closeModal();
+        })
+        .catch(err => console.log(err));
+      }
   }
 
+  // Shows state
   showState = (event) => {
     console.log(this.state);
   }
 
 
 
+
   render() {
+
     return (
       <div>
           {/* Header Address */}
           {/* Inject: Hard Coded: US */}
 
         <div style={{background:'#e1f5fe'}} className="row card">
-          {/* Billing Section */}
+          {/* Expense Section */}
           <section className="col m8">
             <div className="row">
               <div className="col m12">
@@ -79,19 +118,7 @@ class ExpenseGenerator extends React.Component {
             <div className="row">
               <div className="col m12">
                 <h5>Date of Issue:</h5>
-                <Input placeholder={this.props.date} value={this.state.date} type={"text"} name={"date"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <h5>Due Date:</h5>
-                <Input placeholder={this.props.date} value={this.state.date} type={"text"} name={"date"} onChange={this.handleInputChange}/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m12">
-                <h5></h5>
-                <h5>Expense Number: 001</h5>
+                <h5>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h5>
               </div>
             </div>
             <div className="row">
@@ -99,11 +126,10 @@ class ExpenseGenerator extends React.Component {
                 <h5>Amount Due</h5>
                 <h2><Input value={this.state.amountDue} placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
               </div>
-              <button className="btn btn-small" onClick={this.handleSuModal}>Submit</button>
+              <button className="btn btn-small" onClick={this.handleOnClick}>Submit</button>
             </div>
           </section>
 
-            {/* Billed to section */}
 
 
 

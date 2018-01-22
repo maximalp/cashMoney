@@ -29,7 +29,7 @@ const ClientList = (props) => {
           <div className="card">
           <h5>Client Company: {client.companyName}</h5>
           <h5>Email: {client.email}</h5>
-          <h5>Total: {total} </h5>
+          <h5>Total: ${total} </h5>
 
           </div>
         </li>
