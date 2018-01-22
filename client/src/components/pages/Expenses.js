@@ -9,72 +9,77 @@ class Expenses extends React.Component {
     super(props);
 
     this.state = {
+      expense:[],
       category: "",
       date: "",
       vendor: "",
       description:"",
       total:"",
-      expense:[
-        {
-          field1: "Gas",
-          field2: "",
-          field3: "AutoZone",
-          field4: "Filled the tank",
-          field5:"$25.00"
-        },
-        {
-          field1: "Gas",
-          field2: "",
-          field3: "AutoZone",
-          field4: "Filled the tank",
-          field5:"$28.00"
-        },
-        {
-          field1: "Labor",
-          field2: "",
-          field3: "AutoZone",
-          field5: "Filled the tank",
-          field6:"$26.00"
-        },
-        {
-          field1: "Food",
-          field2: "",
-          field3: "AutoZone",
-          field4: "Filled the tank",
-          field5:"$25.00"
-        },
-        {
-          field1: "Gas",
-          field2: "",
-          field3: "AutoZone",
-          field4: "Filled the tank",
-          field5:"$24.00"
-        },
-        ]
     }
   }
 
-  handleInputChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
-  }
+componentDidMount() {
+  this.loadExpenses();
+}
+loadExpenses = () => {
+    API.getExpenses()
+      .then(res =>
+        this.setState({ expenses: res.data, category: "", date: "", vendor: "", description:"", total:"" })
+      )
+      .catch(err => console.log(err));
+  };
 
-  handleOnClickCreate = (event) => {
-    let query = '/make';
-    API.get(query)
-    .then(res => {
-      let newEntry = res.data;
-      this.setState({holder:newEntry})
-    })
-    .catch(err => console.log(err));
-  }
+handleInputChange = (event) => {
+  const name = event.target.name;
+  const value = event.target.value;
+  this.setState({
+    [name]: value
+  });
+}
 
-  handleOnClick = (event) => {
-    console.log(this.state);
-  }
+deleteExpense = id => {
+    API.deleteExpense(id)
+      .then(res => this.loadExpenses())
+      .catch(err => console.log(err));
+  };
+
+handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState(
+      {[name]: value}
+    )
+  };
+
+handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.category && this.state.total) {
+      API.saveExpense({
+        category: this.state.category,
+        vendor: this.state.vendor,
+        description: this.state.description,
+        total: this.state.total
+      })
+        .then(res => {
+          // this.loadExpenses()}
+          console.log(res)
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
+  // handleOnClickCreate = (event) => {
+  //   let query = '/make';
+  //   API.get(query)
+  //   .then(res => {
+  //     let newEntry = res.data;
+  //     this.setState({holder:newEntry})
+  //   })
+  //   .catch(err => console.log(err));
+  // }
+  //
+  // handleOnClick = (event) => {
+  //   console.log(this.state);
+  // }
 
   render () {
     return (

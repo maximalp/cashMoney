@@ -11,7 +11,8 @@ class ExpenseGenerator extends React.Component {
       date: "",
       vendor: "",
       description:"",
-      total:""
+      total:"",
+      holder:{}
     }
   }
 
@@ -31,19 +32,48 @@ class ExpenseGenerator extends React.Component {
     });
   }
 
+  // Adding a client from form
   handleOnClick = (event) => {
-    let query = '/make';
-    API.get(query)
-    .then(res => {
-      let newEntry = res.data;
-      this.setState({holder:newEntry})
-    })
-    .catch(err => console.log(err));
+
+    if (
+      this.state.Category=== "" ||
+      this.state.date === "" ||
+      this.state.vendor === "" ||
+      this.state.description === "" ||
+      this.state.total === ""
+      )
+      {
+        alert("Please fill in all fields")
+      }
+      else {
+        let data = {
+          category:this.state.category,
+          date: this.state.date,
+          vendor: this.state.vendor,
+          description: this.state.description,
+          total: this.state.total
+        };
+
+        console.log(data);
+
+        API.post(data)
+        .then(res => {
+          let newEntry = res.data;
+          // this.setState({holder:newEntry})
+
+          // console.log(newEntry);
+          this.props.handleAddExpense(newEntry);
+          this.props.closeModal();
+        })
+        .catch(err => console.log(err));
+      }
   }
 
+  // Shows state
   showState = (event) => {
     console.log(this.state);
   }
+
 
 
 
@@ -54,7 +84,7 @@ class ExpenseGenerator extends React.Component {
           {/* Inject: Hard Coded: US */}
 
         <div style={{background:'#e1f5fe'}} className="row card">
-          {/* Billing Section */}
+          {/* Expense Section */}
           <section className="col m8">
             <div className="row">
               <div className="col m12">
@@ -103,7 +133,6 @@ class ExpenseGenerator extends React.Component {
             </div>
           </section>
 
-            {/* Billed to section */}
 
 
 
