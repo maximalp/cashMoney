@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ClientProfile from './ClientProfile';
 
 const ClientList = (props) => {
 
@@ -17,6 +17,8 @@ const ClientList = (props) => {
     // }, 0);
 
 
+
+
     const clients = props.clients.map((client) => {
       const total = client.invoices.reduce((sum, invoice) => {
         return sum + invoice.lineTotal;
@@ -29,8 +31,10 @@ const ClientList = (props) => {
           <div className="card">
           <h5>Client Company: {client.companyName}</h5>
           <h5>Email: {client.email}</h5>
-          <h5>Total: ${total} </h5>
+          <h5>Outstanding Invoice Total: ${total} </h5>
 
+          <ClientProfile
+            client = {client}/>
           </div>
         </li>
       )
