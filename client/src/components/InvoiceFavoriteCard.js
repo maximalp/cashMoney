@@ -6,7 +6,7 @@ const InvoiceFavoriteCard = (props) => {
     console.log("favoritecardProps Key", invoice.key)
     return(
       <div className="row"> {(invoice.key === undefined) ?
-        <div style={{height:'500px', 'background':'pink'}} className="card col m12">
+        <div style={{height:'500px', 'background':'#64b5f6'}} className="card col m12">
           <div className="row">
             <div className="col m12">
               <h4>Invoice Number:{invoice.invoiceId}</h4>
@@ -30,7 +30,7 @@ const InvoiceFavoriteCard = (props) => {
           </div>
         </div>
         :
-          <div className="card col m12" style={{height:'500px', background:'pink'}}>
+          <div className="card col m12" style={{height:'500px', background:'#64b5f6'}}>
             <h1>No favorite invoices to preview</h1>
           </div>
         }

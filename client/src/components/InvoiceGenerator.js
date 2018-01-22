@@ -88,7 +88,7 @@ class InvoiceGenerator extends React.Component {
       lineDescription:this.state.lineDescription,
       lineRate:this.state.lineRate,
       lineQty:this.state.lineQty,
-      lineTotal:this.state.lineTotal,
+      lineTotal:this.state.lineRate*this.state.lineQty,
       dateOfIssue: moment().toDate(),
       dueDate: this.state.startDate,
     };
@@ -209,16 +209,7 @@ class InvoiceGenerator extends React.Component {
               </div>
             </div>
           </section>
-          <section className="col m4">
 
-
-            <div className="row">
-              <div className="col m12">
-                <h5>Amount Due</h5>
-                <h2><Input value={this.state.lineTotal} type={"text"} name={"amountDue"}/></h2>
-              </div>
-            </div>
-          </section>
 
             {/* Billed to section */}
             {/* Inject: Need date, due date, invoice number  */}
@@ -233,7 +224,7 @@ class InvoiceGenerator extends React.Component {
             <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
             <Input placeholder={this.props.lineRate} value={this.state.lineRate} type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
             <Input placeholder={this.props.lineQty} value={this.state.lineQty}type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineTotal} value={this.state.lineTotal} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
+            <Input placeholder={this.props.lineTotal} value={this.state.lineRate*this.state.lineQty} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
           </section>
           <div className="col m12">
             <button onClick={this.handleOnClick}>Add Invoice</button>

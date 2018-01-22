@@ -19,6 +19,7 @@ class ExpenseModal extends React.Component {
 
   handleCloseModal () {
     this.setState({ showModal: false });
+    this.props.reload();
   }
 
   render () {
@@ -35,7 +36,7 @@ class ExpenseModal extends React.Component {
              <h1>Create Expense Report:</h1>
              <div className="row">
                <div className="col m10 offset-m1">
-                 <ExpenseGenerator/>
+                 <ExpenseGenerator closeModal={this.handleCloseModal} />
                </div>
 
              </div>

@@ -7,6 +7,9 @@ export default {
   post: function(param, data) {
     return axios.post("/api/invoices/"+param, data);
   },
+  postExpense: function(data) {
+    return axios.post("/api/expenses/", data);
+  },
   put: function(data) {
     return axios.put('/api/invoice/favorite', data);
   },

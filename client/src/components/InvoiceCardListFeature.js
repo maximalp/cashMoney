@@ -5,7 +5,7 @@ import API from './utils/API';
 
 const InvoiceCardListFeature = (props) => {
     return (
-      <div className="row" style={{background:'pink'}}>
+      <div className="row" style={{background:'#64b5f6'}}>
         <div className="col m12">
           <InvoiceSorter switches={props.switches}/>
           <InvoiceCardList inputChange={props.inputChange} edit={props.edit} handleOnClickEdit={props.handleOnClickEdit} onClick={props.handleOnClickChip} invoices={props.invoice}/>

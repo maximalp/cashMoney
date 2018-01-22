@@ -15,16 +15,24 @@ class Expenses extends React.Component {
       vendor: "",
       description:"",
       total:"",
+      expenseTotal:0
     }
   }
 
 componentDidMount() {
   this.loadExpenses();
 }
+
 loadExpenses = () => {
     API.getExpenses()
-      .then(res =>
-        this.setState({ expenses: res.data, category: "", date: "", vendor: "", description:"", total:"" })
+      .then(res => {
+        let expense = res.data
+        let expenseTotal = expense.reduce((sum, expense) => {
+          return sum + expense.total;
+        }, 0)
+        this.setState({ expense, expenseTotal })
+        console.log('NEW STATE')
+        }
       )
       .catch(err => console.log(err));
   };
@@ -84,16 +92,13 @@ handleFormSubmit = event => {
   render () {
     return (
       <div className="row">
-        <div className="col m12">
-          <ExpenseModal>
+        <div className="col m12" style={{background:'#ef9a9a'}}>
+          <h1>Total Expenses:{this.state.expenseTotal}</h1>
+          <ExpenseModal reload={this.loadExpenses}>
           </ExpenseModal>
         </div>
 
-          <div className="row">
-          <div className="col s6 offset-s6">
-          <h1>Recent:</h1>
-          </div>
-        </div>
+
           <ExpenseCardListFeature expense={this.state.expense}/>
         {/* <p>
           Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.

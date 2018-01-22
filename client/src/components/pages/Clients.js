@@ -105,30 +105,24 @@ handleAddClient = (client) =>
 render () {
     return (
       <div className="row">
-        <h1>Clients</h1>
-          <div className="col m12">
-            <ClientModal
-              handleAddClient={this.handleAddClient}>
+        <div className="col m12 card" style={{background:'#006064'}}>
 
-            </ClientModal>
-          </div>
+          <h1>Clients</h1>
+          <ClientModal
+            handleAddClient={this.handleAddClient}>
 
-          <div className="col m12">
-            <div className="row">
-                 <div className="col m6">
-                    <h1>Sent Amount: ${this.state.sentAmount}</h1>
-                  </div>
-                  <div className="col m6">
-                    <h1>Paid Amount: ${this.state.paidAmount}</h1>
+          </ClientModal>
+          <div className="row">
+               <div className="col m6">
+                  <h1>Sent Amount: ${this.state.sentAmount}</h1>
+                </div>
+                <div className="col m6">
+                  <h1>Paid Amount: ${this.state.paidAmount}</h1>
 
-                  </div>
-
-            </div>
-
-
-
+                </div>
 
           </div>
+        </div>
 
         <div className="col m12">
           <h3>Clients</h3>

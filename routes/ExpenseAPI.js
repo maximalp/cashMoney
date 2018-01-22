@@ -9,7 +9,7 @@ module.exports = function(app) {
     console.log(req.body)
       Expenses
         .create(expenseData)
-        .then(dbModel => console.log(res.json(dbModel)))
+        .then(dbModel => res.json(dbModel))
         .catch(err => console.log(err));
   }),
   app.get("/api/expenses", function(req,res) {
