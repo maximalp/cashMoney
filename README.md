@@ -4,7 +4,6 @@
 
 ### The cashMoney Finance App was built using REACT. This application has the capabilities a typical accountant might need while away from the office. This application could also serve as a useful tool to those who provide services and do not always have pen, paper, or an office to track the lifecycle of an invoice or keep monitor expenses. 
 
-
 #### The cashMoney App is: 
 ##### * Simple to use
 ##### * Light and scalable 
