@@ -32,9 +32,9 @@ componentDidMount() {
   clientAPI.get(query)
     .then(res => {
       let clients = res.data.invoices;
-      console.log("CLIENTS", clients);
-      console.log("SENT", res.data.sent)
-      console.log("paid", res.data.paid)
+    //  console.log("CLIENTS", clients);
+      //console.log("SENT", res.data.sent)
+      //console.log("paid", res.data.paid)
 
       let sent = res.data.sent;
       let sentAmount = sent.map((sent) => {
@@ -119,24 +119,35 @@ handleAddClient = (client) =>
 
 render () {
     return (
+
+<div>
+
       <div className="row">
-        <div className="col m12 card" style={{background:'white'}}>
-
-          <h1>Clients</h1>
-            <ClientModal
-              handleAddClient={this.handleAddClient}>
-            </ClientModal>
-          <div className="row">
-               <div className="col m6">
-                  <h3>Sent Amount: ${this.state.sentAmount}</h3>
-                </div>
-                <div className="col m6">
-                  <h3>Paid Amount: ${this.state.paidAmount}</h3>
-
-                </div>
-
+        <div className="col m12 section">
+          <div className="row z-depth-3">
+            <div className="col m4" style={{'height':'200px'}}>
+              <h1>${this.state.sentAmount}</h1>
+              <h5>Total Invoices Sent</h5>
+            </div>
+            <div className="col m4" style={{'height':'200px'}}>
+              <h1>${this.state.paidAmount}</h1>
+              <h5>Total Invoices Paid</h5>
+            </div>
+            <div className="col m4" style={{'height':'200px'}}>
+              <br></br>
+              <br></br>
+              <br></br>
+              <ClientModal handleAddClient={this.handleAddClient}>
+              </ClientModal>
+            </div>
           </div>
         </div>
+      </div>
+
+
+
+      <div className="row">
+      
 
         <div className="col m12">
           <h3>Clients</h3>
@@ -145,6 +156,8 @@ render () {
 
           </ClientList>
         </div>
+
+      </div>
 
       </div>
     )

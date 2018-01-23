@@ -30,7 +30,7 @@ app.get("/api/clients", function(req, res) {
 
       Invoices.find({status:'Sent'})
       .then(dbModelSent => {
-        console.log(dbModelSent)
+        //console.log(dbModelSent)
         // res.json({invoices:dbModelAll, draft: dbModelSent})
         Invoices.find({status:'Paid'})
         .then((dbModelPaid) => {

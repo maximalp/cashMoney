@@ -171,10 +171,11 @@ class ClientMaker extends React.Component {
               <a className="waves-light btn" onClick={this.handleOnClick}>Add Client</a>
             </div>
 
+            {/* SHOW STATE BUTTON
             <div className="col m6">
               <button className="waves-light btn" onClick={this.showState}>Show State</button>
             </div>
-
+            */}
         </div>
 
 

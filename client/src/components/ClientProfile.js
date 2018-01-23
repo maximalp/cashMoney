@@ -23,15 +23,31 @@ class ClientProfile extends React.Component {
 
 
 // OPTIONAL PENDING FOR MORE ONCLICK FUNCTION
-  handleOnClickClinentView = (client) =>
+  handleOnClickClinentView = () =>
   {
 
 
   };
 
+//seeClientProps = (clientProp) =>
+//  {
+//  console.log("hello this is my client in clientProfle" + clientProp);
+//  };
+
+//componentDidMount() {
+
+//this.seeClientProps("hello this is my client in clientProfle" + this.props.client);
+
+//};
+
+
+
   // pale blue background color option: #e1f5fe
 
+  // const invoices = props.clients.invoices.map((invoice) => {});
+
   render () {
+    console.log('hello this is my client in clientProfle' + this.props.client.lineDescription);
     return (
       <div>
           <button className="waves-light btn" onClick={this.handleOpenModal}>View Client</button>
@@ -69,15 +85,20 @@ class ClientProfile extends React.Component {
                </div>
              </div>
 
+
+
+             {/*  INVOICE AREA
              <div style={{background:'#e1f5fe'}} className="row card">
                <div className="col m12">
                <h3>Invoices</h3>
+                 <ul>
+                     <li>
+                     <h5>Line Item: {this.props.client.lineDescription}</h5>
+                    </li>
+                 </ul>
              </div>
-
-
-
-
              </div>
+             */}
             </ReactModal>
 
     </div> // END DIV CONTAINER FOR EVERYTHING
