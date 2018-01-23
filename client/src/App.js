@@ -21,7 +21,7 @@ class App extends Component {
           <Router>
             <div>
               {/* These create physical listings */}
-              <div className="col m12">
+              <div style={{background:'#009688', 'list-style-type':'none', 'margin': '0' }} className="col m12 z-depth-3">
                 <Navpills />
               </div>
 

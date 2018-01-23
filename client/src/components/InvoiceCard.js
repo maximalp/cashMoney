@@ -6,55 +6,43 @@ const InvoiceCard = (props) => {
   console.log(props.invoices._id)
 
   return (
-    <li key={props.invoices._id}>
-      <div className="col m12 card">
+    <tr key={props.invoices._id} >
+      <div className="col m12 card z-depth-3">
         <div className="row">
-          <div className="col m1">
-            <div className="row">
-              <div className='col m12'>
-                <button style={(props.invoices.favorite) ? {background:"yellow"} : {background:""}} onClick={props.onClick} className="chip" id={props.invoices._id}>Shortlist</button>
-
-              </div>
-            </div>
-
-            <div className="row">
-              <div className='col m12'>
-                <InvoiceModalView viewPull={props.viewPull} id={props.invoices._id} />
-              </div>
-
-            </div>
-            {/* <div className="chip">Edit</div> */}
-
-          </div>
-
-          <div className="col m3">
-            <h6>{props.invoices.clientCompanyName}</h6>
-          </div>
-          <div className="col m3">
-            <h6>{props.invoices.dateOfIssue}</h6>
-          </div>
-          <div className="col m3">
-            <h6>{props.invoices.dueDate}</h6>
+          <div className="col m2">
+            <td>Invoice: {props.invoices.invoiceId}</td>
           </div>
           <div className="col m2">
-            <h6>{props.invoices.lineTotal}</h6>
+            <td>Company:{props.invoices.clientCompanyName}</td>
           </div>
-
+          <div className="col m2">
+            <td>Date:{props.invoices.dateOfIssue}</td>
+          </div>
+          <div className="col m2">
+            <td>Date:{props.invoices.dueDate}</td>
+          </div>
+          <div className="col m2">
+            <td>Total: ${props.invoices.lineTotal}</td>
+          </div>
+          <div className="col m2">
+            <td>Status: {props.invoices.status}
+            </td>
+          </div>
         </div>
-        <div className="row">
-          <div className="col m3 offset-m1">
-            <text>Invoice: {props.invoices.invoiceId}</text>
-            <text>Invoice: {props.invoices._id}</text>
+        <div className="row card-action">
+          <div className="col m2">
+            {(props.invoices.favorite) ?
+            <a style={{background:"#0288d1"}} onClick={props.onClick} className="btn" id={props.invoices._id}>+</a>
+            :
+            <a style={{background:"#232d4b"}} onClick={props.onClick} className="btn" id={props.invoices._id}>+</a>
+            }
           </div>
-          <div className="col m2 offset-m6">
-            <text>Status: {props.invoices.status}
-            </text>
+          <div className="col m2">
+            <InvoiceModalView viewPull={props.viewPull} id={props.invoices._id} />
           </div>
         </div>
-
-
       </div>
-    </li>
+    </tr>
   )
 }
 

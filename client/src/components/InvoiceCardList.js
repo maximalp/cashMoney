@@ -9,10 +9,10 @@ const InvoiceCardList = (props) => {
     )
   })
   return(
-    <ul className="row">
+    <tbody className="row">
       {invoices}
       <h4>1-{invoices.length} of {invoices.length}</h4>
-    </ul>
+    </tbody>
   )
 }
 

@@ -2,28 +2,28 @@ import React from 'react';
 
 const InvoiceSorter = (props) => {
   return (
-    <div className="row">
-      <div className="col m3">
-        <button name="clientCompanyNameOrinvoiceId" onClick={props.switches}>
-          Client / Invoice Number
+    <thead className="row">
+      <tr className="col m2">
+        <button style={{background:'#232d4b', border:'black'}} name="clientCompanyNameOrinvoiceId" className="z-depth-2 waves-light btn" onClick={props.switches}>
+          Number
         </button>
-      </div>
-      <div className="col m3">
-        <button name="issuedDateDesc" onClick={props.switches}>
+      </tr>
+      <tr className="col m2 offset-m2">
+        <button style={{background:'#232d4b', border:'black'}} name="issuedDateDesc" className="z-depth-2 waves-light btn" onClick={props.switches}>
           Issued Date
         </button>
-      </div>
-      <div className="col m3">
-        <button name="dueDateDesc" onClick={props.switches}>
+      </tr>
+      <tr className="col m2">
+        <button style={{background:'#232d4b', border:'black'}} name="dueDateDesc" className="z-depth-2 waves-light btn" onClick={props.switches}>
           Due Date
         </button>
-      </div>
-      <div className="col m3">
-        <button name="AmountOrStatus" onClick={props.switches}>
-          Amount / Status
+      </tr>
+      <tr className="col m2 offset-m2">
+        <button style={{background:'#232d4b', border:'black'}} name="AmountOrStatus" className="z-depth-2 waves-light btn" onClick={props.switches}>
+          Amount
         </button>
-      </div>
-    </div>
+      </tr>
+    </thead>
   )
 }
 

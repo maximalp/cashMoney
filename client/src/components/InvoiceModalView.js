@@ -51,7 +51,7 @@ class InvoiceModalView extends React.Component {
   render () {
     return (
       <div className="row">
-        <button className="col m12 chip" onClick={this.handleOpenModal}>Details</button>
+        <button style={{background:'#232d4b'}} className="col waves-light btn" onClick={this.handleOpenModal}>Details</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"

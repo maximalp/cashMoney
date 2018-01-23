@@ -6,25 +6,24 @@ const InvoiceFavoriteCard = (props) => {
     console.log("favoritecardProps Key", invoice.key)
     return(
       <div className="row"> {(invoice.key === undefined) ?
-        <div style={{height:'500px', 'background':'#64b5f6'}} className="card col m12">
+        <div style={{height:'400px', 'background':'white', 'margin-top':'15px'}} className="card col m12 z-depth-3">
           <div className="row">
-            <div className="col m12">
+            <div className="left-align col m12">
               { (invoice._id && invoice.status === 'Sent') ? (<button onClick={props.onClick} id={invoice._id}>Mark as Paid</button>) :
               (<div></div>) }
               <h4>Invoice Number:{invoice.invoiceId}</h4>
-              <h5>Company:{invoice.clientCompanyName}</h5>
-              <h5>Date Issued:{invoice.dateOfIssue}</h5>
-              <h5>Date Due:{invoice.dateOfIssue}</h5>
-              <h5>{invoice._id}</h5>
+              <h6>Company:{invoice.clientCompanyName}</h6>
+              <h6>Date Issued:{invoice.dateOfIssue}</h6>
+              <h6>Date Due:{invoice.dateOfIssue}</h6>
             </div>
-            <div className="col m12">
+            <div className="col m12 left-align">
 
               <h4>Amounts:</h4>
-              <h5>Invoice Amount:{invoice.lineTotal}</h5>
-              <h5>Invoice Description: {invoice.lineDescription}</h5>
+              <h6>Invoice Amount:{invoice.lineTotal}</h6>
+              <h6>Invoice Description: {invoice.lineDescription}</h6>
 
             </div>
-            <div className="col m12">
+            <div className="left-align col m12">
 
               <h4>Status:</h4>
               <h5>{invoice.status}</h5>

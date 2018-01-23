@@ -10,6 +10,7 @@ class Invoices extends React.Component {
     super(props);
 
     this.state = {
+      favoriteFeatureVisible:false,
       invoiceTotalSent: 0,
       invoiceTotalPaid: 0,
       name: "",
@@ -56,6 +57,12 @@ class Invoices extends React.Component {
 
   componentDidMount() {
     this.pullInvoices();
+  }
+
+  handleOnClickShowHide = (event) => {
+    this.setState({
+      childVisible: !this.state.childVisible
+    })
   }
 
   handleOnClickFavoritePaid = (event) => {
@@ -257,34 +264,48 @@ class Invoices extends React.Component {
   render () {
     return (
       <div className="row">
-        <div className="col m12">
-          <InvoiceModal pullInvoices={this.pullInvoices}>
-          </InvoiceModal>
-        </div>
-        <div className="col m12">
-          <div className="row">
-            <div className="col m6"><h1>Total Sent: ${this.state.invoiceTotalSent}</h1></div>
-            <div className="col m6"><h1>Total Paid: ${this.state.invoiceTotalPaid}</h1></div>
-
+        <div className="col m12 section">
+          <div className="row z-depth-3">
+            <div className="col m4" style={{'height':'200px'}}>
+              <h1>${this.state.invoiceTotalSent}</h1>
+              <h5>Total Sent</h5>
+            </div>
+            <div className="col m4" style={{'height':'200px'}}>
+              <h1>${this.state.invoiceTotalPaid}</h1>
+              <h5>Total Paid</h5>
+            </div>
+            <div className="col m4" style={{'height':'200px'}}>
+              <br></br>
+              <br></br>
+              <br></br>
+              <InvoiceModal pullInvoices={this.pullInvoices}>
+              </InvoiceModal>
+            </div>
           </div>
-          <h1></h1>
         </div>
-        <div className="col m12">
+        <div className="col m12 section">
           <div className="row">
             <div className="col m12">
-              <h3>Invoice Shortlist</h3>
-              <InvoiceFavoriteFeature onClick={this.handleOnClickFavoritePaid} theChosenOne={this.state.theChosenOne} favoriteInvoices={this.state.favoriteInvoices} handleOnClickFaveTabs={this.handleOnClickFaveTabs} invoice={this.state.invoice}/>
-              {/* <button onClick={this.handleOnClickState}>Show State</button>
-              <button onClick={this.handleOnClickCreate}>Create dummy invoice</button> */}
+              <button style={{background:'#0288d1'}} className="col m12 waves-light btn z-depth-3" onClick={this.handleOnClickShowHide}>Show Invoice Shortlist</button>
+              {
+                this.state.childVisible ?
+                <InvoiceFavoriteFeature className="z-depth-5 col m12" onClick={this.handleOnClickFavoritePaid} theChosenOne={this.state.theChosenOne} favoriteInvoices={this.state.favoriteInvoices} handleOnClickFaveTabs={this.handleOnClickFaveTabs} invoice={this.state.invoice}/>
+                :
+                null
+              }
             </div>
+
+
           </div>
           {/* <div className="row">
             <div className="col m3">
               <h5>All Invoices</h5>
             </div>
           </div> */}
+          <br></br>
+          <br></br>
           <div className="row">
-            <div className="col m12">
+            <div className="col m12 z-depth-5">
               <InvoiceCardListFeature inputChange={this.handleInputChangeEdit} edit={this.state.holderEdit} handleOnClickEdit={this.handleOnClickEdit} handleOnClickChip={this.handleOnClickChip} pullInvoices={this.pullInvoices} faveState={this.favoriteSetState} onClick={this.pullInvoices} switches={this.handleOnClickSearchSwitches} invoice={this.state.invoice}/>
             </div>
           </div>
