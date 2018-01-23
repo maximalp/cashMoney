@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
         <div className="left-align col m6">
           <h4>Revenue</h4>
           {/* Invoices */}
-          <BarChart className="z-depth-3" width={500} height={500} data={this.state.barGraphData}
+          <BarChart className="z-depth-3" width={450} height={500} data={this.state.barGraphData}
                 margin={{top: 20, right: 30, left: 20, bottom: 5}}>
            <XAxis dataKey="name"/>
            <YAxis/>
@@ -124,10 +124,12 @@ class Dashboard extends React.Component {
         <div className="col m6 left-align">
           <h4>Expenses</h4>
           <PieChart className="z-depth-3" width={600} height={500}>
+            <Legend verticalAlign="top" />
             <Pie isAnimationActive={false} data={this.state.pieGraphData} cx={300} cy={300} outerRadius={170} fill="#c91044" label/>
 
             <Tooltip/>
-            <Legend />
+            <br></br>
+
           </PieChart>
         </div>
 
