@@ -10,7 +10,7 @@
 ##### * Reflects invoice lifecycle through UI
 ##### * Presents Billing visually 
 
-## App = 
+### App: 
 ##### * Dashboard
 ##### * Invoices 
 ##### * Clients 
