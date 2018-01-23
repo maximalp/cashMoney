@@ -58,11 +58,16 @@ class InvoiceModalView extends React.Component {
            onRequestClose={this.handleCloseModal}
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
-             <button onClick={this.handleCloseModal}>Close Modal</button>
+             <button className="btn" onClick={this.handleCloseModal}>Close Modal</button>
              <div className="row">
                <div className="col m8 offset-m2">
-                 <button onClick={this.handleOnClick}>Mark as Paid</button>
-                 <InvoiceGeneratorView clientsInfo={this.state.clientsInfo} />
+                 {
+                   (this.props.status === 'Sent') ?
+                   <button className="btn" onClick={this.handleOnClick}>Mark as Paid</button>
+                   :
+                   null
+                 }
+                 <InvoiceGeneratorView status={this.props.status} clientsInfo={this.state.clientsInfo} />
                </div>
 
              </div>

@@ -9,7 +9,7 @@ const InvoiceFavoriteCard = (props) => {
         <div style={{height:'400px', 'background':'white', 'margin-top':'15px'}} className="card col m12 z-depth-3">
           <div className="row">
             <div className="left-align col m12">
-              { (invoice._id && invoice.status === 'Sent') ? (<button onClick={props.onClick} id={invoice._id}>Mark as Paid</button>) :
+              { (invoice._id && invoice.status === 'Sent') ? (<button className="btn" onClick={props.onClick} id={invoice._id}>Mark as Paid</button>) :
               (<div></div>) }
               <h4>Invoice Number:{invoice.invoiceId}</h4>
               <h6>Company:{invoice.clientCompanyName}</h6>

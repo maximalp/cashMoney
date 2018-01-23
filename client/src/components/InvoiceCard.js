@@ -37,8 +37,9 @@ const InvoiceCard = (props) => {
             <a style={{background:"#232d4b"}} onClick={props.onClick} className="btn" id={props.invoices._id}>+</a>
             }
           </div>
+
           <div className="col m2">
-            <InvoiceModalView viewPull={props.viewPull} id={props.invoices._id} />
+            <InvoiceModalView status={props.invoices.status} viewPull={props.viewPull} id={props.invoices._id} />
           </div>
         </div>
       </div>
