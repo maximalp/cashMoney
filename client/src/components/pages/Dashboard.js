@@ -104,9 +104,11 @@ class Dashboard extends React.Component {
     // let maxHeight = Math.abs(this.state.profitBarGraphData[0].profit);
 
     return (
+      
       <div className="row">
         <h1>{this.state.value}</h1>
         <div className="col m12">
+        <div class="z-depth-5">
           <div className='row'>
             <div className="col m12">
               {/* Invoices */}
@@ -118,12 +120,15 @@ class Dashboard extends React.Component {
                <Tooltip/>
                <ReferenceLine y={0} stroke='#000' />
                <Legend />
-               <Bar dataKey="sent" stackId="a" fill="#8884d8" />
+               <Bar dataKey="sent" stackId="a" fill="#d0e079" />
                <Bar dataKey='paid' stackId="a" fill="#82ca9d" />
               </BarChart>
             </div>
           </div>
+          </div>
+          
 
+          <div class="z-depth-5">
           <div className="row">
             <div className="col m6">
               {/* <DatePicker
@@ -152,15 +157,20 @@ class Dashboard extends React.Component {
 
 
         </div>
+        </div>
 
+        
         <div className="col m12">
+        <div class="z-depth-5">
           <PieChart width={600} height={500}>
-            <Pie isAnimationActive={false} data={this.state.pieGraphData} cx={300} cy={300} outerRadius={170} fill="#8884d8" label/>
+            <Pie isAnimationActive={false} data={this.state.pieGraphData} cx={300} cy={300} outerRadius={170} fill="#c91044" label/>
 
             <Tooltip/>
           </PieChart>
+
           <div className="row">
             <div className="col m6">
+
               {/* <DatePicker
                 selected={this.state.startDatePie}
                 onChange={this.handleCalendarChangeStartPie}
@@ -187,6 +197,7 @@ class Dashboard extends React.Component {
 
         </div>
       </div>
+       </div>
     )
   }
 }
