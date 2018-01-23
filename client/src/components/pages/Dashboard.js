@@ -116,7 +116,7 @@ class Dashboard extends React.Component {
            <CartesianGrid strokeDasharray="3 3"/>
            <Tooltip/>
            <ReferenceLine y={0} stroke='#000' />
-           <Legend />
+           <Legend verticalAlign="top" />
            <Bar dataKey="sent" stackId="a" fill="#d0e079" />
            <Bar dataKey='paid' stackId="a" fill="#82ca9d" />
           </BarChart>
@@ -135,14 +135,14 @@ class Dashboard extends React.Component {
 
         <div className="col m12 left-align">
           <h4>Net Income</h4>
-          <BarChart className="z-depth-3" width={500} height={500} data={this.state.profitBarGraphData}
+          <BarChart className="z-depth-3" width={450} height={500} data={this.state.profitBarGraphData}
                 margin={{top: 20, right: 30, left: 20, bottom: 5}}>
            <XAxis dataKey="name"/>
            <YAxis domain={['auto', this.state.maxProfitBarGraphData ]} />
            <CartesianGrid strokeDasharray="3 3"/>
            <ReferenceLine y={0} stroke='#000' />
            <Tooltip/>
-           <Legend />
+           <Legend verticalAlign="top" />
            <Bar dataKey="profit" stackId="a" fill="#8884d8" />
           </BarChart>
         </div>
