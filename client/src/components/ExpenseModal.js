@@ -25,7 +25,7 @@ class ExpenseModal extends React.Component {
   render () {
     return (
       <div className="row">
-        <button className="btn btn-large" onClick={this.handleOpenModal}>Add and Expense Report</button>
+        <button className="btn btn-large" onClick={this.handleOpenModal}>Add Expense</button>
         <ReactModal
            isOpen={this.state.showModal}
            contentLabel="onRequestClose Example"
@@ -33,7 +33,6 @@ class ExpenseModal extends React.Component {
            shouldCloseOnOverlayClick={false} >
            <div className="col m12">
              <button className="btn btn-small" onClick={this.handleCloseModal}>Close</button>
-             <h1>Create Expense Report:</h1>
              <div className="row">
                <div className="col m10 offset-m1">
                  <ExpenseGenerator closeModal={this.handleCloseModal} />

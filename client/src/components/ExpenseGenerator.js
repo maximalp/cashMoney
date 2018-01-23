@@ -89,24 +89,26 @@ class ExpenseGenerator extends React.Component {
           {/* Header Address */}
           {/* Inject: Hard Coded: US */}
 
-        <div style={{background:'#e1f5fe'}} className="row card">
+        <div className="row card z-depth-5">
+          <div style={{background:'#f44336', height:'10px'}} class=""></div>
+
           {/* Expense Section */}
           <section className="col m8">
             <div className="row">
               <div className="col m12">
-                <h5>Category</h5>
+                <h5><u>Category</u></h5>
                 <Input placeholder={this.props.category} value={this.state.category} type={"text"} name={"category"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <h5>Vendor</h5>
+                <h5><u>Vendor</u></h5>
                 <Input placeholder={this.props.vendor} value={this.state.vendor} type={"text"} name={"vendor"} onChange={this.handleInputChange}/>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <h5>Itemized List</h5>
+                <h5><u>Itemized List</u></h5>
                 <Input placeholder={this.props.description} value={this.state.description} type={"text"} name={"description"} onChange={this.handleInputChange}/>
               </div>
             </div>
@@ -114,13 +116,13 @@ class ExpenseGenerator extends React.Component {
           <section className="col m4">
             <div className="row">
               <div className="col m12">
-                <h5>Date of Issue:</h5>
+                <h5><u>Date of Issue:</u></h5>
                 <h5>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h5>
               </div>
             </div>
             <div className="row">
               <div className="col m12">
-                <h5>Amount Due</h5>
+                <h5><u>Amount Due</u></h5>
                 <h2><Input value={this.state.amountDue} placeholder={this.props.amountDue} type={"text"} name={"amountDue"} onChange={this.handleInputChange}/></h2>
               </div>
               <button className="btn btn-small" onClick={this.handleOnClick}>Submit</button>

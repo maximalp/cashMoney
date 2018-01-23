@@ -104,100 +104,48 @@ class Dashboard extends React.Component {
     // let maxHeight = Math.abs(this.state.profitBarGraphData[0].profit);
 
     return (
-      
+
       <div className="row">
-        <h1>{this.state.value}</h1>
-        <div className="col m12">
-        <div class="z-depth-5">
-          <div className='row'>
-            <div className="col m12">
-              {/* Invoices */}
-              <BarChart width={500} height={500} data={this.state.barGraphData}
-                    margin={{top: 20, right: 30, left: 20, bottom: 5}}>
-               <XAxis dataKey="name"/>
-               <YAxis/>
-               <CartesianGrid strokeDasharray="3 3"/>
-               <Tooltip/>
-               <ReferenceLine y={0} stroke='#000' />
-               <Legend />
-               <Bar dataKey="sent" stackId="a" fill="#d0e079" />
-               <Bar dataKey='paid' stackId="a" fill="#82ca9d" />
-              </BarChart>
-            </div>
-          </div>
-          </div>
-          
-
-          <div class="z-depth-5">
-          <div className="row">
-            <div className="col m6">
-              {/* <DatePicker
-                selected={this.state.startDateBar}
-                onChange={this.handleCalendarChangeStartBar}
-              /> */}
-              {/* Profits */}
-              <BarChart width={500} height={500} data={this.state.profitBarGraphData}
-                    margin={{top: 20, right: 30, left: 20, bottom: 5}}>
-               <XAxis dataKey="name"/>
-               <YAxis domain={['auto', this.state.maxProfitBarGraphData ]} />
-               <CartesianGrid strokeDasharray="3 3"/>
-               <ReferenceLine y={0} stroke='#000' />
-               <Tooltip/>
-               <Legend />
-               <Bar dataKey="profit" stackId="a" fill="#8884d8" />
-              </BarChart>
-            </div>
-            <div className="col m6">
-              {/* <DatePicker
-                selected={this.state.endDateBar}
-                onChange={this.handleCalendarChangeEndBar}
-              /> */}
-            </div>
-          </div>
-
-
+        <div className="left-align col m6">
+          <h4>Revenue</h4>
+          {/* Invoices */}
+          <BarChart className="z-depth-3" width={500} height={500} data={this.state.barGraphData}
+                margin={{top: 20, right: 30, left: 20, bottom: 5}}>
+           <XAxis dataKey="name"/>
+           <YAxis/>
+           <CartesianGrid strokeDasharray="3 3"/>
+           <Tooltip/>
+           <ReferenceLine y={0} stroke='#000' />
+           <Legend />
+           <Bar dataKey="sent" stackId="a" fill="#d0e079" />
+           <Bar dataKey='paid' stackId="a" fill="#82ca9d" />
+          </BarChart>
         </div>
-        </div>
-
-        
-        <div className="col m12">
-        <div class="z-depth-5">
-          <PieChart width={600} height={500}>
+        <div className="col m6 left-align">
+          <h4>Expenses</h4>
+          <PieChart className="z-depth-3" width={600} height={500}>
             <Pie isAnimationActive={false} data={this.state.pieGraphData} cx={300} cy={300} outerRadius={170} fill="#c91044" label/>
 
             <Tooltip/>
+            <Legend />
           </PieChart>
-
-          <div className="row">
-            <div className="col m6">
-
-              {/* <DatePicker
-                selected={this.state.startDatePie}
-                onChange={this.handleCalendarChangeStartPie}
-              /> */}
-            </div>
-            <div className="col m6">
-              {/* <DatePicker
-                selected={this.state.endDatePie}
-                onChange={this.handleCalendarChangeEndPie}
-              /> */}
-            </div>
-          </div>
-
-
         </div>
 
-
-        <div>
-
-
-
-
-
-
+        <div className="col m12 left-align">
+          <h4>Net Income</h4>
+          <BarChart className="z-depth-3" width={500} height={500} data={this.state.profitBarGraphData}
+                margin={{top: 20, right: 30, left: 20, bottom: 5}}>
+           <XAxis dataKey="name"/>
+           <YAxis domain={['auto', this.state.maxProfitBarGraphData ]} />
+           <CartesianGrid strokeDasharray="3 3"/>
+           <ReferenceLine y={0} stroke='#000' />
+           <Tooltip/>
+           <Legend />
+           <Bar dataKey="profit" stackId="a" fill="#8884d8" />
+          </BarChart>
         </div>
       </div>
-       </div>
+
     )
   }
 }

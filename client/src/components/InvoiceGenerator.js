@@ -146,98 +146,52 @@ class InvoiceGenerator extends React.Component {
     const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
 
     return (
-      <div>
-          {/* Header Address */}
-          {/* Inject: Hard Coded: US */}
-        <div className="row">
-          <div className="col m6">
-            <h5>Date of Issue:</h5>
-            <h6>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h6> {/* Inject: Need date, due date, invoice number  */}
-          </div>
-          <div className="col m6">
-            <h5>Due Date:</h5>
-            <DatePicker
-              selected={this.state.startDate}
-              onChange={this.handleCalendarChange}
-            /> {/* Inject: Need date, due date, invoice number  */}
-          </div>
+      <div className="row z-depth-5">
+        <div className="col m6">
+          <h5><u>Date of Issue:</u></h5>
+          <h6>{moment().format('MMMM Do YYYY, h:mm:ss a')}</h6> {/* Inject: Need date, due date, invoice number  */}
         </div>
-
-
-        <div style={{background:'#e1f5fe'}} className="row">
-          <div className="col m6">
-            <h5>Client Info:</h5>
-            <Input value={this.state.clientFirstName} placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} />
-            <Input value={this.state.clientLastName} placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} />
-            <Input value={this.state.clientCompanyName} placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} />
-            <Input value={this.state.clientStreetAddress} placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} />
-            <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} />
-            <Input value={this.state.clientCity} placeholder={this.props.clientCity} type={"text"} name={"clientCity"} />
-            <Input value={this.state.clientZip} placeholder={this.props.clientZip} type={"text"} name={"clientZip"} />
-            <input readOnly={"United States"} type={"text"} value={"United States"} />
-          </div>
-          <div className="col m6">
-            <h5>Pick Client:</h5>
-            <Dropdown options={this.props.dropDownOptions} onChange={this._onSelect} value={this.state.dropDownOptions[0]} placeholder="Select an option" />
-
-          </div>
-
-
-
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-          <div className="col m4">
-          </div>
-
-
-
-            {/* Billed to section */}
-            {/* Inject: Need date, due date, invoice number  */}
-
-
-
+        <div className="col m6">
+          <h5><u>Due Date:</u></h5>
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleCalendarChange}
+          /> {/* Inject: Need date, due date, invoice number  */}
         </div>
-          {/* <line item section */}
+        <div className="col m6">
+          <h5><u>Client Info:</u></h5>
+          <Input value={this.state.clientFirstName} placeholder={this.props.clientFirstName} type={"text"} name={"clientFirstName"} />
+          <Input value={this.state.clientLastName} placeholder={this.props.clientLastName} type={"text"} name={"clientLastName"} />
+          <Input value={this.state.clientCompanyName} placeholder={this.props.clientCompanyName} type={"text"} name={"clientCompanyName"} />
+          <Input value={this.state.clientStreetAddress} placeholder={this.props.clientStreetAddress} type={"text"} name={"clientStreetAddress"} />
+          <Input value={this.state.clientState} placeholder={this.props.clientState} type={"text"} name={"clientState"} />
+          <Input value={this.state.clientCity} placeholder={this.props.clientCity} type={"text"} name={"clientCity"} />
+          <Input value={this.state.clientZip} placeholder={this.props.clientZip} type={"text"} name={"clientZip"} />
+          <input readOnly={"United States"} type={"text"} value={"United States"} />
+        </div>
+        <div className="col m6">
+          <h5><u>Pick Client:</u></h5>
+          <Dropdown options={this.props.dropDownOptions} onChange={this._onSelect} value={this.state.dropDownOptions[0]} placeholder="Select an option" />
+        </div>
+        <section className="col m8">
+          <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
 
-        <div style={{background:'#ffebee'}} className="row">
-          <section className="col m12">
-            <Input placeholder={this.props.lineDescription} value={this.state.lineDescription} type={"text"} name={"lineDescription"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineRate} value={this.state.lineRate} type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineQty} value={this.state.lineQty}type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
-            <Input placeholder={this.props.lineTotal} value={this.state.lineRate*this.state.lineQty} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
-          </section>
-          <div className="col m12">
-            <button onClick={this.handleOnClick}>Add Invoice</button>
-            <button onClick={this.showState}>Show State</button>
-          </div>
+        </section>
+        <section className="col m5">
+          <Input placeholder={this.props.lineRate} value={this.state.lineRate} type={"text"} name={"lineRate"} onChange={this.handleInputChange}/>
+
+        </section>
+        <section className="col m5">
+          <Input placeholder={this.props.lineQty} value={this.state.lineQty} type={"text"} name={"lineQty"} onChange={this.handleInputChange}/>
+        </section>
+        <section className="col m5">
+          <h5><u>Total:</u></h5>
+          <Input placeholder={this.props.lineTotal} value={this.state.lineRate*this.state.lineQty} type={"text"} name={"lineTotal"} onChange={this.handleInputChange}/>
+        </section>
+
+        <div className="col m12">
+          <button className="btn" onClick={this.handleOnClick}>Add Invoice</button>
+          <br></br>
         </div>
       </div>
     )

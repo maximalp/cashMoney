@@ -92,14 +92,30 @@ handleFormSubmit = event => {
   render () {
     return (
       <div className="row">
-        <div className="col m12 z-depth-2" style={{marginBottom: 15}}>
-          <h1>Total Expenses:{this.state.expenseTotal}</h1>
-          <ExpenseModal reload={this.loadExpenses}>
-          </ExpenseModal>
+        <div className="col m12 z-depth-3">
+          <div className="col offset-m3 m3" style={{'height':'200px'}}>
+            <h1>${this.state.expenseTotal}</h1>
+            <h5>Total Expenses</h5>
+
+          </div>
+          <div className="col m3" style={{'height':'200px'}}>
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <ExpenseModal reload={this.loadExpenses}>
+            </ExpenseModal>
+          </div>
+
+        </div>
+        <div className="col m12">
+          <ExpenseCardListFeature expense={this.state.expense}/>
+
         </div>
 
 
-          <ExpenseCardListFeature expense={this.state.expense}/>
+
+
         {/* <p>
           Donec a volutpat quam. Curabitur nec varius justo, sed rutrum ligula.
           Curabitur pellentesque turpis sit amet eros iaculis, a mollis arcu dictum.

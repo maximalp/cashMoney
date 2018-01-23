@@ -55,7 +55,7 @@ class InvoiceModal extends React.Component {
            contentLabel="onRequestClose Example"
            onRequestClose={this.handleCloseModal}
            shouldCloseOnOverlayClick={false} >
-           <div className="col m12">
+           <div className="col m12" >
              <button className="btn" onClick={this.handleCloseModal}>Close Modal</button>
              <div className="row">
                <div className="col m8 offset-m2">
