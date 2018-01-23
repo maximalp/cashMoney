@@ -92,7 +92,7 @@ handleFormSubmit = event => {
   render () {
     return (
       <div className="row">
-        <div className="col m12" style={{background:'#ef9a9a'}}>
+        <div className="col m12 z-depth-2" style={{marginBottom: 15}}>
           <h1>Total Expenses:{this.state.expenseTotal}</h1>
           <ExpenseModal reload={this.loadExpenses}>
           </ExpenseModal>

@@ -21,7 +21,7 @@ class ExpenseGenerator extends React.Component {
   }
 
   static defaultProps = {
-    category: "Pick From Below",
+    category: "Car, Advertising, Education/Training, Meals, Other",
     date: "MMDDYYY",
     vendor: "Enter Company Name Here",
     description:"Itemized List",
@@ -81,9 +81,6 @@ class ExpenseGenerator extends React.Component {
   showState = (event) => {
     console.log(this.state);
   }
-
-
-
 
   render() {
 
