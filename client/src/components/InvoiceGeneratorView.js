@@ -13,91 +13,56 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const InvoiceGeneratorView = props => {
     return (
-      <div>
-          {/* Header Address */}
-          {/* Inject: Hard Coded: US */}
-        <div className="row card" style={{background:'green'}}>
+      <div className="row z-depth-5">
           <div className="col m6">
-            <h5>Date of Issue:</h5>
-            <h5>{props.clientsInfo.dateOfIssue}</h5> {/* Inject: Need date, due date, invoice number  */}
+            <h5><u>Date of Issue: </u></h5>
+            <h6>{props.clientsInfo.dateOfIssue}</h6> {/* Inject: Need date, due date, invoice number  */}
           </div>
           <div className="col m6">
-            <h5>Due Date:</h5>
-            <h5>{props.clientsInfo.dueDate}</h5> {/* Inject: Need date, due date, invoice number  */}
+            <h5><u>Due Date: </u></h5>
+            <h6>{props.clientsInfo.dueDate}</h6> {/* Inject: Need date, due date, invoice number  */}
           </div>
-        </div>
+          <div className="col m12">
+            <h5><u>Client Info:</u></h5>
+          </div>
 
-        <div style={{background:'#e1f5fe'}} className="row card">
-          {/* Billing Section */}
-          <section className="col m8">
-            <div className="row">
-              <div className="col m6">
-                <h5>First Name</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientFirstName} type={"text"} />
-              </div>
-            </div>
-              <div className="col m6">
-                <h5>Last Name</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientLastName} type={"text"} />
-              </div>
+          <div className="col m6">
 
+            <h6><u>First Name: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientFirstName} type={"text"} />
+            <h6><u>Last Name: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientLastName} type={"text"} />
+            <h6><u>Company Name: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientCompanyName} type={"text"} />
+          </div>
+          <div className="col m6">
+            <h6><u>Address: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientStreetAddress} type={"text"}/>
+            <h6><u>State: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientState} type={"text"}/>
+            <h6><u>City: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientCity} type={"text"}/>
+            <h6><u>Zip: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.clientZip} type={"text"} />
+          </div>
+          <div className="col m12">
+            <h5><u>Line Info:</u></h5>
+          </div>
 
-              <div className="col m6">
-                <h5>Company Name</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientCompanyName} type={"text"} />
-              </div>
-
-
-              <div className="col m6">
-                <h5>Address</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientStreetAddress} type={"text"}/>
-              </div>
-
-
-              <div className="col m6">
-                <h5>State</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientState} type={"text"}/>
-              </div>
-
-
-              <div className="col m6">
-                <h5>City</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientCity} type={"text"}/>
-              </div>
-
-
-              <div className="col m6">
-                <h5>Zip</h5>
-                <input readOnly="readOnly" value={props.clientsInfo.clientZip} type={"text"} />
-              </div>
-
-          </section>
-
-
-            {/* Billed to section */}
-            {/* Inject: Need date, due date, invoice number  */}
-
-
-
-        </div>
-          {/* <line item section */}
-
-        <div style={{background:'#ffebee'}} className="row card">
-          <section className="col m8">
-            <h5>Line Description</h5>
+          <section className="col m6">
+            <h6><u>Line Description: </u></h6>
             <input readOnly="readOnly" value={props.clientsInfo.lineDescription} type={"text"} />
-            <h5>Line Rate</h5>
+            <h6><u>Line Rate: </u></h6>
             <input readOnly="readOnly" value={props.clientsInfo.lineRate} type={"text"} />
-            <h5>Line Quantity</h5>
+            <h6><u>Line Quantity: </u></h6>
             <input readOnly="readOnly" value={props.clientsInfo.lineQty} type={"text"}/>
-            <h5>Total</h5>
-            <input readOnly="readOnly" value={props.clientsInfo.lineRate*props.clientsInfo.lineQty}  />
           </section>
-          <div className="col m6">
-            <button onClick={this.handleOnClick}>Add Invoice</button>
-            <button onClick={this.showState}>Show State</button>
-          </div>
-        </div>
+          <section className="col m6">
+            <h6><u>Total: </u></h6>
+            <input readOnly="readOnly" value={props.clientsInfo.lineRate*props.clientsInfo.lineQty}  />
+            <h6><u>Status: </u></h6>
+            <input readOnly="readOnly" value={props.status}  />
+          </section>
       </div>
     )
 
